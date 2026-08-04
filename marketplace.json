@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "okf-agent-graph-marketplace",
+  "owner": {
+    "name": "Rick Hightower",
+    "url": "https://github.com/RichardHightower"
+  },
+  "plugins": [
+    {
+      "name": "okf-agent-graph",
+      "source": "./",
+      "description": "OKF Agent Graph Engineering Runtime (AGER)",
+      "version": "0.3.0"
+    }
+  ]
+}

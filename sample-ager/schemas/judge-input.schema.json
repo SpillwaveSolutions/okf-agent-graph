@@ -1,0 +1,9 @@
+{
+  "$id": "ager.sample.judge_input",
+  "type": "object",
+  "required": ["candidate"],
+  "properties": {
+    "candidate": { "type": "object" },
+    "rubric_id": { "type": "string" }
+  }
+}

@@ -1,0 +1,6 @@
+.DS_Store
+*.pyc
+__pycache__/
+.okf-cache/
+*.html
+.work/todo.local.jsonl
