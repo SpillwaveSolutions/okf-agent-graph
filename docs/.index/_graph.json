@@ -1,0 +1,104 @@
+{
+ "edges": [
+  {
+   "from": "item/01KZ9N0WV145FC2EE07CVSEW42",
+   "to": "item/01KZ9N0WTCXZ9SVGDJBPA0TZ3K",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KZ9N0WV1NMBQKSQH2PR9WZAQ",
+   "to": "item/01KZ9N0WTCXZ9SVGDJBPA0TZ3K",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KZ9N0WV1PP6RX6B0X47N9KXT",
+   "to": "item/01KZ9N0WTCXZ9SVGDJBPA0TZ3K",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KZ9N0WV1VQNG0XQE3ZSNNM1B",
+   "to": "item/01KZ9N0WTCXZ9SVGDJBPA0TZ3K",
+   "type": "belongs-to"
+  },
+  {
+   "from": "item/01KZ9N0WV254KNHPZKZ8KFETSG",
+   "to": "item/01KZ9N0WTCXZ9SVGDJBPA0TZ3K",
+   "type": "belongs-to"
+  },
+  {
+   "from": "plan/2026-08-05-v0-4-0-quality-foundation",
+   "to": "item/01KZ9N0WTCXZ9SVGDJBPA0TZ3K",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-08-05-v0-4-0-quality-foundation",
+   "to": "item/01KZ9N0WV145FC2EE07CVSEW42",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-08-05-v0-4-0-quality-foundation",
+   "to": "item/01KZ9N0WV1NMBQKSQH2PR9WZAQ",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-08-05-v0-4-0-quality-foundation",
+   "to": "item/01KZ9N0WV1PP6RX6B0X47N9KXT",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-08-05-v0-4-0-quality-foundation",
+   "to": "item/01KZ9N0WV1VQNG0XQE3ZSNNM1B",
+   "type": "produces"
+  },
+  {
+   "from": "plan/2026-08-05-v0-4-0-quality-foundation",
+   "to": "item/01KZ9N0WV254KNHPZKZ8KFETSG",
+   "type": "produces"
+  }
+ ],
+ "nodes": {
+  "item/01KZ9N0WTCXZ9SVGDJBPA0TZ3K": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "v0.4.0 Quality Foundation"
+  },
+  "item/01KZ9N0WV145FC2EE07CVSEW42": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Add tests, CI, and strict sample validation"
+  },
+  "item/01KZ9N0WV1NMBQKSQH2PR9WZAQ": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Build a complete deterministic AGER scaffold generator"
+  },
+  "item/01KZ9N0WV1PP6RX6B0X47N9KXT": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Add standard-library AGER domain validation"
+  },
+  "item/01KZ9N0WV1VQNG0XQE3ZSNNM1B": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Initialize WikiTicket SDD and capture the v0.4.0 release plan"
+  },
+  "item/01KZ9N0WV254KNHPZKZ8KFETSG": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Add native Codex packaging and v0.4.0 documentation"
+  },
+  "plan/2026-08-05-v0-4-0-quality-foundation": {
+   "doc_type": "plan",
+   "source": "docs/plans/2026-08-05-v0-4-0-quality-foundation.md",
+   "title": "v0.4.0 Quality Foundation",
+   "truth_state": "current"
+  },
+  "roadmap": {
+   "doc_type": "roadmap",
+   "source": "docs/roadmap.md",
+   "title": "Roadmap",
+   "truth_state": "current"
+  }
+ },
+ "version": 1
+}

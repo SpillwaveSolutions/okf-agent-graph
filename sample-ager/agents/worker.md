@@ -9,7 +9,7 @@ can_spawn: false
 ager_version: "0.3.0"
 input_schema: /schemas/task.schema.json
 output_schema: /schemas/findings.schema.json
-instructions: /prompts/worker.md
+instructions: /prompts/worker.txt
 max_turns: 12
 timeout_ms: 180000
 tools:

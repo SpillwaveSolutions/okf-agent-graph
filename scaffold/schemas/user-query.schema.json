@@ -1,0 +1,9 @@
+{
+  "$id": "ager.sample.user_query",
+  "type": "object",
+  "required": ["query"],
+  "properties": {
+    "query": { "type": "string" },
+    "constraints": { "type": "array", "items": { "type": "string" } }
+  }
+}

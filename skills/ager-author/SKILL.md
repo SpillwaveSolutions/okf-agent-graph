@@ -39,7 +39,7 @@ Use **okf-author** patterns from okf-graph-eng for general OKF rules; this skill
 ## Steps
 
 1. Identify concept type and target path under the bundle.
-2. Copy nearest template from `templates/` or `sample-ager/`.
+2. Copy the nearest concept from the canonical `../../scaffold/` tree or `sample-ager/`.
 3. Fill required fields; add typed `links`.
 4. Update parent catalog `index.md`.
 5. Append `log.md` entry.
@@ -49,4 +49,4 @@ Use **okf-author** patterns from okf-graph-eng for general OKF rules; this skill
 
 - `references/typed-edges.md`
 - `references/loop-controls.md`
-- `../ager-init-graph/templates/`
+- `../../scaffold/`

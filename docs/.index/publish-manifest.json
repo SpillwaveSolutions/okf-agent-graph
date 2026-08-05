@@ -1,0 +1,144 @@
+{
+ "git_hash": "89ddccb",
+ "pages": [
+  {
+   "frozen": false,
+   "page_name": "Home",
+   "render": "as-is",
+   "render_hash": "7a6e118df66d",
+   "source": "docs/.index/rendered/home.md",
+   "title": "Home",
+   "truth_state": "current",
+   "wiki_key": "home"
+  },
+  {
+   "frozen": false,
+   "page_name": "Index-Decisions",
+   "render": "as-is",
+   "render_hash": "c295ff2b1bb1",
+   "source": "docs/.index/rendered/decisions.md",
+   "title": "Decisions Index",
+   "truth_state": "current",
+   "wiki_key": "index/decisions"
+  },
+  {
+   "frozen": false,
+   "page_name": "Index-Releases",
+   "render": "as-is",
+   "render_hash": "f45668ba0034",
+   "source": "docs/.index/rendered/releases.md",
+   "title": "Releases Index",
+   "truth_state": "current",
+   "wiki_key": "index/releases"
+  },
+  {
+   "frozen": false,
+   "page_name": "Index-Status",
+   "render": "as-is",
+   "render_hash": "b8bcebbbbe23",
+   "source": "docs/.index/rendered/status.md",
+   "title": "Status Archive",
+   "truth_state": "current",
+   "wiki_key": "index/status"
+  },
+  {
+   "frozen": false,
+   "page_name": "Index-Traceability",
+   "render": "as-is",
+   "render_hash": "b5c3c7203755",
+   "source": "docs/.index/rendered/traceability.md",
+   "title": "Traceability Index",
+   "truth_state": "current",
+   "wiki_key": "index/traceability"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9N0WTCXZ9SVGDJBPA0TZ3K",
+   "render": "as-is",
+   "render_hash": "f3d93c0916b8",
+   "source": "docs/.index/rendered/tickets/01KZ9N0WTCXZ9SVGDJBPA0TZ3K.md",
+   "title": "v0.4.0 Quality Foundation",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9N0WTCXZ9SVGDJBPA0TZ3K"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9N0WV145FC2EE07CVSEW42",
+   "render": "as-is",
+   "render_hash": "ff10adde5366",
+   "source": "docs/.index/rendered/tickets/01KZ9N0WV145FC2EE07CVSEW42.md",
+   "title": "Add tests, CI, and strict sample validation",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9N0WV145FC2EE07CVSEW42"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9N0WV1NMBQKSQH2PR9WZAQ",
+   "render": "as-is",
+   "render_hash": "6dcc5c82674a",
+   "source": "docs/.index/rendered/tickets/01KZ9N0WV1NMBQKSQH2PR9WZAQ.md",
+   "title": "Build a complete deterministic AGER scaffold generator",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9N0WV1NMBQKSQH2PR9WZAQ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9N0WV1PP6RX6B0X47N9KXT",
+   "render": "as-is",
+   "render_hash": "db6f5057b258",
+   "source": "docs/.index/rendered/tickets/01KZ9N0WV1PP6RX6B0X47N9KXT.md",
+   "title": "Add standard-library AGER domain validation",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9N0WV1PP6RX6B0X47N9KXT"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9N0WV1VQNG0XQE3ZSNNM1B",
+   "render": "as-is",
+   "render_hash": "3c19468f4cef",
+   "source": "docs/.index/rendered/tickets/01KZ9N0WV1VQNG0XQE3ZSNNM1B.md",
+   "title": "Initialize WikiTicket SDD and capture the v0.4.0 release plan",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9N0WV1VQNG0XQE3ZSNNM1B"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9N0WV254KNHPZKZ8KFETSG",
+   "render": "as-is",
+   "render_hash": "16ee0faddf49",
+   "source": "docs/.index/rendered/tickets/01KZ9N0WV254KNHPZKZ8KFETSG.md",
+   "title": "Add native Codex packaging and v0.4.0 documentation",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9N0WV254KNHPZKZ8KFETSG"
+  },
+  {
+   "banner": "> **Current** \u2014 completed plan; plans are frozen once written, a changed design gets a new plan.",
+   "frozen": true,
+   "page_name": "Plan-v0-4-0-quality-foundation",
+   "render": "doc+banner",
+   "render_hash": "cdeab985dbc1",
+   "source": "docs/plans/2026-08-05-v0-4-0-quality-foundation.md",
+   "source_hash": "0a8962a7ea44",
+   "title": "v0.4.0 Quality Foundation",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-08-05-v0-4-0-quality-foundation"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-05T19:20:28Z. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
+   "page_name": "Roadmap",
+   "render": "doc+banner",
+   "render_hash": "e26739e0e454",
+   "source": "docs/roadmap.md",
+   "source_hash": "65538697716e",
+   "title": "Roadmap",
+   "truth_state": "current",
+   "wiki_key": "roadmap"
+  }
+ ],
+ "sidebar": {
+  "render_hash": "bf90917cf238",
+  "source": "docs/.index/rendered/_Sidebar.md"
+ },
+ "version": 1
+}

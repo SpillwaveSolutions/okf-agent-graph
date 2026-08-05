@@ -1,0 +1,8 @@
+{
+  "$id": "ager.sample.synth_input",
+  "type": "object",
+  "required": ["results"],
+  "properties": {
+    "results": { "type": "array" }
+  }
+}

@@ -1,0 +1,29 @@
+name: quality
+
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout AGER plugin
+        uses: actions/checkout@v4
+        with:
+          path: okf-agent-graph
+      - name: Checkout pinned OKF dependency
+        uses: actions/checkout@v4
+        with:
+          repository: SpillwaveSolutions/okf-plugin
+          ref: v0.3.2
+          path: okf-plugin
+      - name: Unit and integration tests
+        working-directory: okf-agent-graph
+        env:
+          OKF_GRAPH: ${{ github.workspace }}/okf-plugin/scripts/okf-graph.py
+        run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - name: AGER sample is strict-valid
+        working-directory: okf-agent-graph
+        run: python3 scripts/ager-validate.py sample-ager --strict
+      - name: OKF sample is strict-valid
+        working-directory: okf-agent-graph
+        run: python3 ../okf-plugin/scripts/okf-graph.py validate sample-ager --strict

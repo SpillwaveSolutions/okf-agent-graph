@@ -20,7 +20,15 @@ Scaffold a multi-agent **loop engineering** OKF bundle (AGER v0.3).
 ## Steps
 
 1. Confirm target directory (default `.okf/` or `agent-graph/` at repo root).
-2. Create structure:
+2. Run the deterministic generator from the plugin root:
+
+```bash
+python3 <plugin-root>/scripts/ager-init.py <bundle> --title "<graph title>"
+```
+
+The command refuses an existing destination, renders into a temporary directory,
+runs strict AGER validation, and installs the bundle atomically.
+3. The generated structure is:
 
 ```
 <bundle>/
@@ -37,19 +45,13 @@ Scaffold a multi-agent **loop engineering** OKF bundle (AGER v0.3).
 └── schemas/
 ```
 
-3. Root `index.md`: `okf_version: "0.2"`, `ager_version: "0.3.0"`, dual purpose description.
-4. Seed from templates in this skill:
-   - OrchestratorAgent, WorkerAgent, JudgeAgent, SynthesizerAgent
-   - LoopPolicy (all 5 control axes)
-   - ScratchPad (lineage: full)
-   - FailurePolicy + RetryPolicy
-   - One Tool with block rules
-   - Optional Trigger (ticket_event if wiki_ticket present)
-5. Absolute links only: `[Lead](/agents/orchestrator.md)`.
-6. Validate:
+4. Customize the illustrative research graph without deleting required contracts.
+5. Root `index.md` keeps `okf_version: "0.2"` and `ager_version: "0.3.0"`.
+6. Absolute links only: `[Lead](/agents/lead-researcher.md)`.
+7. Validate:
    - AGER structural checks (required fields per type)
    - `okf validate` / `okf-graph.py validate` from **okf-plugin**
-7. Report paths + any errors.
+8. Report paths + any errors.
 
 ## Rules
 
@@ -58,16 +60,10 @@ Scaffold a multi-agent **loop engineering** OKF bundle (AGER v0.3).
 - Prefer `record_output_to: { key, mode: append }` on workers/judges.
 - Link FailurePolicy via `on_failure` / `failure_policy` field.
 
-## Templates
+## Canonical scaffold
 
-- `templates/orchestrator.md`
-- `templates/worker.md`
-- `templates/judge.md`
-- `templates/loop-policy.md`
-- `templates/scratchpad.md`
-- `templates/failure-policy.md`
-- `templates/tool.md`
-- `templates/index-root.md`
+The complete source tree lives at `<plugin-root>/scaffold/`. Do not recreate a
+second template tree under this skill; tests keep the generated scaffold valid.
 
 ## Done when
 

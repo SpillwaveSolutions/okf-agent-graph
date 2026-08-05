@@ -1,6 +1,7 @@
 ---
 type: Trigger
 title: On WikiTicket plan capture
+ager_version: "0.3.0"
 kind: ticket_event
 graph: /runtime/agent-graph.md
 filter:

@@ -1,11 +1,11 @@
 # okf-agent-graph
 
-**OKF Agent Graph Engineering Runtime (AGER)** — a Claude Code / Grok Build plugin for authoring **multi-agent loop graphs** as OKF (Markdown + YAML).
+**OKF Agent Graph Engineering Runtime (AGER)** — a Claude Code, Codex, and Grok Build plugin for authoring **multi-agent loop graphs** as OKF (Markdown + YAML).
 
 | | |
 |---|---|
 | **Plugin name** | `okf-agent-graph` |
-| **Version** | 0.3.0 |
+| **Version** | 0.4.0 |
 | **Depends on** | [`okf-plugin`](https://github.com/SpillwaveSolutions/okf-plugin) → plugin **`okf-graph-eng`** |
 | **Related** | [`wiki_ticket_sdd`](https://github.com/SpillwaveSolutions/wiki_ticket_sdd) (ticket triggers / worklog) |
 | **License** | MIT |
@@ -39,6 +39,15 @@ claude plugin marketplace add SpillwaveSolutions/okf-agent-graph
 claude plugin install okf-agent-graph@okf-agent-graph-marketplace
 ```
 
+For Codex, add the same repository marketplace, open `/plugins`, install
+`okf-agent-graph`, and start a new session:
+
+```bash
+codex plugin marketplace add SpillwaveSolutions/okf-agent-graph
+codex
+# /plugins
+```
+
 Grok Build loads Claude-compatible plugins with zero extra config.
 
 ### Dependency contract
@@ -56,16 +65,24 @@ See [docs/DEPENDENCIES.md](./docs/DEPENDENCIES.md).
 ## Quick start
 
 1. Ensure `okf-graph-eng` is installed  
-2. `/ager-init` — scaffold an AGER bundle (or `.okf/` with agent-graph layout)  
-3. `/ager-author` — add Orchestrator, Workers, Judge, LoopPolicy, Tools  
-4. `/ager-validate` — AGER rules + delegate to okf validate  
+2. `/ager-init` or `$ager-init-graph` — scaffold an AGER bundle
+3. `/ager-author` or `$ager-author` — add Orchestrator, Workers, Judge, LoopPolicy, Tools
+4. `/ager-validate` or `$ager-validate` — AGER rules + delegate to okf validate
 5. Optional: `/ager-compile` — emit adapter notes / stubs for a target framework  
+
+The scripts are also directly callable:
+
+```bash
+python3 scripts/ager-init.py agent-graph --title "My agent graph"
+python3 scripts/ager-validate.py agent-graph --strict
+```
 
 Sample self-describing graph:
 
 ```bash
 # Requires okf-plugin scripts on path or clone sibling
-python3 ../okf-plugin/scripts/okf-graph.py validate sample-ager
+python3 scripts/ager-validate.py sample-ager --strict
+python3 ../okf-plugin/scripts/okf-graph.py validate sample-ager --strict
 ```
 
 ## Skills & commands
@@ -76,6 +93,9 @@ python3 ../okf-plugin/scripts/okf-graph.py validate sample-ager
 | `ager-author` | `/ager-author` | Author agents, tools, loop policies, ops concepts |
 | `ager-validate` | `/ager-validate` | AGER conformance + okf validate |
 | `ager-compile` | `/ager-compile` | Framework mapping / stub notes |
+
+Codex invokes the same skills with `$ager-init-graph`, `$ager-author`,
+`$ager-validate`, and `$ager-compile`.
 
 ### Agent
 
