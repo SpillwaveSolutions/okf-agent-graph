@@ -2,6 +2,26 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Make packaging test accept stamped v0.4.0 changelog
+`01KZC6FGY6PWF245YSZYCQDMCS` · status: todo
+- targets: release/v0.4.0
+
+### Correct AGER wiki reference navigation
+`01KZC6EBH099YR5FYVA6E8NJ06` · status: todo
+- targets: release/v0.4.0
+
+### Create and publish the AGER user guide
+`01KZC6CDDYZF5PX9DTS57TA1A5` · status: todo
+- targets: release/v0.4.0
+
+### Create v0.4.0 design documentation and code walkthrough
+`01KZC6CD8NQGHNB6J5856E9XFV` · status: todo
+- targets: release/v0.4.0
+
+### Cut and publish v0.4.0 release
+`01KZC5SHYF36HDGMQHF3SK2QAB` · status: todo
+- targets: release/v0.4.0
+
 ### Add native Codex packaging and v0.4.0 documentation
 `01KZ9N0WV254KNHPZKZ8KFETSG` · status: done
 - belongs-to: v0.4.0 Quality Foundation

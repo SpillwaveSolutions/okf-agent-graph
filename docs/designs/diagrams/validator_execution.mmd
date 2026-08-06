@@ -1,0 +1,19 @@
+sequenceDiagram
+    autonumber
+    actor User as 👤 User or CI
+    participant CLI as ⚙️ ager-validate.py
+    participant Parser as 📄 Document parser
+    participant Rules as ✅ AGER rule checks
+    participant FS as 🗂️ Bundle filesystem
+
+    User->>CLI: validate bundle [--strict]
+    CLI->>FS: Find Markdown documents
+    loop Each document
+        CLI->>Parser: Parse YAML frontmatter
+        Parser-->>CLI: Document fields and sections
+        CLI->>Rules: Check type-specific invariants
+        Rules->>FS: Resolve absolute bundle references
+        FS-->>Rules: File or JSON-schema result
+        Rules-->>CLI: Errors and warnings
+    end
+    CLI-->>User: JSON result and exit status

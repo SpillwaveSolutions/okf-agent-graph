@@ -1,3 +1,10 @@
+---
+doc_type: guide
+slug: AGER_SPEC
+title: AGER Specification v0.3.0
+truth_state: current
+wiki_key: spec
+---
 # AGER Specification v0.3.0
 
 **OKF Agent Graph Engineering Runtime** — portable multi-agent loop config as OKF.

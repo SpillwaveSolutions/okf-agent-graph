@@ -8,6 +8,7 @@
 | **Version** | 0.4.0 |
 | **Depends on** | [`okf-plugin`](https://github.com/SpillwaveSolutions/okf-plugin) → plugin **`okf-graph-eng`** |
 | **Related** | [`wiki_ticket_sdd`](https://github.com/SpillwaveSolutions/wiki_ticket_sdd) (ticket triggers / worklog) |
+| **Docs** | [User guide](./docs/user_guide/user-guide.md) · [AGER spec](./docs/AGER_SPEC.md) · [Design doc](./docs/designs/current_design_doc.md) · [Code walkthrough](./docs/designs/current_code_walkthrough.md) |
 | **License** | MIT |
 
 ## Why this plugin

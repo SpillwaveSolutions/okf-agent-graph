@@ -72,6 +72,8 @@ def page_name(rec):
     url = rec.get("wiki") or ""
     if "/wiki/" in url:
         return url.rsplit("/", 1)[1]
+    if rec.get("wiki_key") == "spec":
+        return "AGER-Specification"
     t, stem = rec["doc_type"], os.path.splitext(
         os.path.basename(rec["source"]))[0]
     if t == "plan":
@@ -219,7 +221,7 @@ def render_home(records, has_graph=False):
     lines += [
         "## What is this project?",
         "[[User-Guide]] · [[Design-Doc]] · [[Code-Walkthrough]] · "
-        "[[Worklog-Spec]]",
+        "[[AGER-Specification]]",
         "",
         "## What are we working on now?",
         "[[Roadmap]]%s" % status_link,
@@ -266,7 +268,7 @@ def render_sidebar(records, has_graph=False):
     lines += ["- [[Index-Status]]", "- [[Index-Decisions]]"]
     lines += ["", "### Reference", "",
               "- [[User-Guide]] · [[CLI-Reference]] · [[Plugin-Guide]]",
-              "- [[Worklog-Spec]]"]
+              "- [[AGER-Specification]]"]
     if has_graph:
         lines.append("- [[Index-Traceability]]")
     return "\n".join(lines) + "\n"

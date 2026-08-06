@@ -181,7 +181,8 @@ def classify(path):
     if p.startswith("docs/adr/"):
         return "adr"
     if p.startswith("docs/user_guide/") or p in ("docs/wiki-home.md",
-                                                 "docs/worklog-spec.md"):
+                                                 "docs/worklog-spec.md",
+                                                 "docs/AGER_SPEC.md"):
         return "guide"
     return None
 
@@ -215,7 +216,7 @@ def derive_canonical_key(path):
         # Home page key buys nothing and risks links.
         if p == "docs/wiki-home.md":
             return "home"
-        if p == "docs/worklog-spec.md":
+        if p in ("docs/worklog-spec.md", "docs/AGER_SPEC.md"):
             return "spec"
         return "guide/" + stem
     return None
@@ -270,7 +271,7 @@ def doc_paths():
     pats = ("docs/plans/*.md", "docs/roadmap.md", "docs/roadmap/*.md",
             "docs/status/*.md", "docs/designs/*.md", "docs/adr/*.md",
             "docs/user_guide/*.md", "docs/wiki-home.md",
-            "docs/worklog-spec.md")
+            "docs/worklog-spec.md", "docs/AGER_SPEC.md")
     out = []
     for pat in pats:
         out.extend(glob.glob(pat))

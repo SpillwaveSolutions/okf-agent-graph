@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.4.0 — unreleased
+## 0.4.0 — 2026-08-06
 
 - Add a complete canonical scaffold and atomic `ager-init.py` generator.
 - Add dependency-free AGER structural validation with strict CI checks.

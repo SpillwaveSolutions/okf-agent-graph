@@ -26,6 +26,31 @@
    "type": "belongs-to"
   },
   {
+   "from": "item/01KZC5SHYF36HDGMQHF3SK2QAB",
+   "to": "release/v0.4.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZC6CD8NQGHNB6J5856E9XFV",
+   "to": "release/v0.4.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZC6CDDYZF5PX9DTS57TA1A5",
+   "to": "release/v0.4.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZC6EBH099YR5FYVA6E8NJ06",
+   "to": "release/v0.4.0",
+   "type": "targets"
+  },
+  {
+   "from": "item/01KZC6FGY6PWF245YSZYCQDMCS",
+   "to": "release/v0.4.0",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-08-05-v0-4-0-quality-foundation",
    "to": "item/01KZ9N0WTCXZ9SVGDJBPA0TZ3K",
    "type": "produces"
@@ -54,9 +79,55 @@
    "from": "plan/2026-08-05-v0-4-0-quality-foundation",
    "to": "item/01KZ9N0WV254KNHPZKZ8KFETSG",
    "type": "produces"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-06_v0.4.0-release",
+   "to": "roadmap",
+   "type": "snapshot-of"
+  },
+  {
+   "from": "roadmap-snapshot/2026-08-06_v0.4.0-release",
+   "to": "release/v0.4.0",
+   "type": "targets"
   }
  ],
  "nodes": {
+  "design/current-code-walkthrough": {
+   "doc_type": "design",
+   "source": "docs/designs/current_code_walkthrough.md",
+   "title": "OKF Agent Graph code walkthrough",
+   "truth_state": "current"
+  },
+  "design/current-design-doc": {
+   "doc_type": "design",
+   "source": "docs/designs/current_design_doc.md",
+   "title": "OKF Agent Graph architecture design",
+   "truth_state": "current"
+  },
+  "guide/cli-reference": {
+   "doc_type": "guide",
+   "source": "docs/user_guide/cli-reference.md",
+   "title": "CLI Reference",
+   "truth_state": "current"
+  },
+  "guide/plugin-guide": {
+   "doc_type": "guide",
+   "source": "docs/user_guide/plugin-guide.md",
+   "title": "Plugin Guide",
+   "truth_state": "current"
+  },
+  "guide/user-guide": {
+   "doc_type": "guide",
+   "source": "docs/user_guide/user-guide.md",
+   "title": "User Guide",
+   "truth_state": "current"
+  },
+  "home": {
+   "doc_type": "guide",
+   "source": "docs/wiki-home.md",
+   "title": "OKF Agent Graph",
+   "truth_state": "current"
+  },
   "item/01KZ9N0WTCXZ9SVGDJBPA0TZ3K": {
    "doc_type": "item",
    "status": "done",
@@ -87,16 +158,56 @@
    "status": "done",
    "title": "Add native Codex packaging and v0.4.0 documentation"
   },
+  "item/01KZC5SHYF36HDGMQHF3SK2QAB": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Cut and publish v0.4.0 release"
+  },
+  "item/01KZC6CD8NQGHNB6J5856E9XFV": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Create v0.4.0 design documentation and code walkthrough"
+  },
+  "item/01KZC6CDDYZF5PX9DTS57TA1A5": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Create and publish the AGER user guide"
+  },
+  "item/01KZC6EBH099YR5FYVA6E8NJ06": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Correct AGER wiki reference navigation"
+  },
+  "item/01KZC6FGY6PWF245YSZYCQDMCS": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Make packaging test accept stamped v0.4.0 changelog"
+  },
   "plan/2026-08-05-v0-4-0-quality-foundation": {
    "doc_type": "plan",
    "source": "docs/plans/2026-08-05-v0-4-0-quality-foundation.md",
    "title": "v0.4.0 Quality Foundation",
    "truth_state": "current"
   },
+  "release/v0.4.0": {
+   "doc_type": "release"
+  },
   "roadmap": {
    "doc_type": "roadmap",
    "source": "docs/roadmap.md",
    "title": "Roadmap",
+   "truth_state": "current"
+  },
+  "roadmap-snapshot/2026-08-06_v0.4.0-release": {
+   "doc_type": "roadmap-snapshot",
+   "source": "docs/roadmap/2026-08-06_v0.4.0-release.md",
+   "title": "Roadmap",
+   "truth_state": "snapshot"
+  },
+  "spec": {
+   "doc_type": "guide",
+   "source": "docs/AGER_SPEC.md",
+   "title": "AGER Specification v0.3.0",
    "truth_state": "current"
   }
  },

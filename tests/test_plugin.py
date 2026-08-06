@@ -28,7 +28,11 @@ class PluginPackagingTests(unittest.TestCase):
 
     def test_readme_and_changelog_advertise_release(self) -> None:
         self.assertIn(f"| **Version** | {VERSION} |", (REPO / "README.md").read_text())
-        self.assertIn(f"## {VERSION} — unreleased", (REPO / "CHANGELOG.md").read_text())
+        changelog = (REPO / "CHANGELOG.md").read_text()
+        self.assertRegex(
+            changelog,
+            rf"(?m)^## {re.escape(VERSION)} — (?:unreleased|\d{{4}}-\d{{2}}-\d{{2}})$",
+        )
 
     def test_codex_manifest_paths_resolve(self) -> None:
         manifest = json.loads((REPO / ".codex-plugin/plugin.json").read_text())

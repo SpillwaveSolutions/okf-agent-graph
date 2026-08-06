@@ -6,11 +6,12 @@
 ### History
 
 - [[Index-Releases]]
+- Latest snapshot: [[Roadmap-2026-08-06_v0.4.0-release]]
 - [[Index-Status]]
 - [[Index-Decisions]]
 
 ### Reference
 
 - [[User-Guide]] · [[CLI-Reference]] · [[Plugin-Guide]]
-- [[Worklog-Spec]]
+- [[AGER-Specification]]
 - [[Index-Traceability]]
