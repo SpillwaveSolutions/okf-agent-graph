@@ -1,5 +1,5 @@
 {
- "git_hash": "b9b4641",
+ "git_hash": "a73923e",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "a210390e64aa",
+   "render_hash": "ee87b865a4b9",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -172,6 +172,16 @@
    "wiki_key": "item/01KZC6FGY6PWF245YSZYCQDMCS"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01KZC7HNR6X2DND7W2DM7SD643",
+   "render": "as-is",
+   "render_hash": "746b495be76e",
+   "source": "docs/.index/rendered/tickets/01KZC7HNR6X2DND7W2DM7SD643.md",
+   "title": "Add manual dispatch for release validation workflows",
+   "truth_state": "open",
+   "wiki_key": "item/01KZC7HNR6X2DND7W2DM7SD643"
+  },
+  {
    "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-06T18:54:00Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Code-Walkthrough",
@@ -244,13 +254,13 @@
    "wiki_key": "plan/2026-08-05-v0-4-0-quality-foundation"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-06T18:48:26Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-06T19:07:05Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "1428da173f6e",
+   "render_hash": "9031010510ef",
    "source": "docs/roadmap.md",
-   "source_hash": "5a3de0616b8f",
+   "source_hash": "fb2c125e7550",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"

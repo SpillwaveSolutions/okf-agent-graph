@@ -51,6 +51,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01KZC7HNR6X2DND7W2DM7SD643",
+   "to": "release/v0.4.0",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-08-05-v0-4-0-quality-foundation",
    "to": "item/01KZ9N0WTCXZ9SVGDJBPA0TZ3K",
    "type": "produces"
@@ -182,6 +187,11 @@
    "doc_type": "item",
    "status": "todo",
    "title": "Make packaging test accept stamped v0.4.0 changelog"
+  },
+  "item/01KZC7HNR6X2DND7W2DM7SD643": {
+   "doc_type": "item",
+   "status": "todo",
+   "title": "Add manual dispatch for release validation workflows"
   },
   "plan/2026-08-05-v0-4-0-quality-foundation": {
    "doc_type": "plan",

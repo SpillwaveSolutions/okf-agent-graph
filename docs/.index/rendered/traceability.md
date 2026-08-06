@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Add manual dispatch for release validation workflows
+`01KZC7HNR6X2DND7W2DM7SD643` · status: todo
+- targets: release/v0.4.0
+
 ### Make packaging test accept stamped v0.4.0 changelog
 `01KZC6FGY6PWF245YSZYCQDMCS` · status: todo
 - targets: release/v0.4.0
