@@ -1,0 +1,10 @@
+{
+  "$id": "ager.sample.findings",
+  "type": "object",
+  "required": ["summary", "findings", "confidence"],
+  "properties": {
+    "summary": { "type": "string" },
+    "findings": { "type": "array" },
+    "confidence": { "type": "number" }
+  }
+}

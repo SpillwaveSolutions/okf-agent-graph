@@ -1,0 +1,298 @@
+{
+ "git_hash": "a73923e",
+ "pages": [
+  {
+   "frozen": false,
+   "page_name": "Home",
+   "render": "as-is",
+   "render_hash": "efcabb40a416",
+   "source": "docs/.index/rendered/home.md",
+   "title": "Home",
+   "truth_state": "current",
+   "wiki_key": "home"
+  },
+  {
+   "frozen": false,
+   "page_name": "Index-Decisions",
+   "render": "as-is",
+   "render_hash": "c295ff2b1bb1",
+   "source": "docs/.index/rendered/decisions.md",
+   "title": "Decisions Index",
+   "truth_state": "current",
+   "wiki_key": "index/decisions"
+  },
+  {
+   "frozen": false,
+   "page_name": "Index-Releases",
+   "render": "as-is",
+   "render_hash": "914dfd3df255",
+   "source": "docs/.index/rendered/releases.md",
+   "title": "Releases Index",
+   "truth_state": "current",
+   "wiki_key": "index/releases"
+  },
+  {
+   "frozen": false,
+   "page_name": "Index-Status",
+   "render": "as-is",
+   "render_hash": "b8bcebbbbe23",
+   "source": "docs/.index/rendered/status.md",
+   "title": "Status Archive",
+   "truth_state": "current",
+   "wiki_key": "index/status"
+  },
+  {
+   "frozen": false,
+   "page_name": "Index-Traceability",
+   "render": "as-is",
+   "render_hash": "ee87b865a4b9",
+   "source": "docs/.index/rendered/traceability.md",
+   "title": "Traceability Index",
+   "truth_state": "current",
+   "wiki_key": "index/traceability"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.4.0",
+   "render": "as-is",
+   "render_hash": "68d092579491",
+   "source": "docs/.index/rendered/releases/v0.4.0.md",
+   "title": "Release v0.4.0",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.4.0"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9N0WTCXZ9SVGDJBPA0TZ3K",
+   "render": "as-is",
+   "render_hash": "f3d93c0916b8",
+   "source": "docs/.index/rendered/tickets/01KZ9N0WTCXZ9SVGDJBPA0TZ3K.md",
+   "title": "v0.4.0 Quality Foundation",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9N0WTCXZ9SVGDJBPA0TZ3K"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9N0WV145FC2EE07CVSEW42",
+   "render": "as-is",
+   "render_hash": "ff10adde5366",
+   "source": "docs/.index/rendered/tickets/01KZ9N0WV145FC2EE07CVSEW42.md",
+   "title": "Add tests, CI, and strict sample validation",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9N0WV145FC2EE07CVSEW42"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9N0WV1NMBQKSQH2PR9WZAQ",
+   "render": "as-is",
+   "render_hash": "6dcc5c82674a",
+   "source": "docs/.index/rendered/tickets/01KZ9N0WV1NMBQKSQH2PR9WZAQ.md",
+   "title": "Build a complete deterministic AGER scaffold generator",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9N0WV1NMBQKSQH2PR9WZAQ"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9N0WV1PP6RX6B0X47N9KXT",
+   "render": "as-is",
+   "render_hash": "db6f5057b258",
+   "source": "docs/.index/rendered/tickets/01KZ9N0WV1PP6RX6B0X47N9KXT.md",
+   "title": "Add standard-library AGER domain validation",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9N0WV1PP6RX6B0X47N9KXT"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9N0WV1VQNG0XQE3ZSNNM1B",
+   "render": "as-is",
+   "render_hash": "3c19468f4cef",
+   "source": "docs/.index/rendered/tickets/01KZ9N0WV1VQNG0XQE3ZSNNM1B.md",
+   "title": "Initialize WikiTicket SDD and capture the v0.4.0 release plan",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9N0WV1VQNG0XQE3ZSNNM1B"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZ9N0WV254KNHPZKZ8KFETSG",
+   "render": "as-is",
+   "render_hash": "16ee0faddf49",
+   "source": "docs/.index/rendered/tickets/01KZ9N0WV254KNHPZKZ8KFETSG.md",
+   "title": "Add native Codex packaging and v0.4.0 documentation",
+   "truth_state": "done",
+   "wiki_key": "item/01KZ9N0WV254KNHPZKZ8KFETSG"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZC5SHYF36HDGMQHF3SK2QAB",
+   "render": "as-is",
+   "render_hash": "9aa7ff22605a",
+   "source": "docs/.index/rendered/tickets/01KZC5SHYF36HDGMQHF3SK2QAB.md",
+   "title": "Cut and publish v0.4.0 release",
+   "truth_state": "open",
+   "wiki_key": "item/01KZC5SHYF36HDGMQHF3SK2QAB"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZC6CD8NQGHNB6J5856E9XFV",
+   "render": "as-is",
+   "render_hash": "48ae1147f574",
+   "source": "docs/.index/rendered/tickets/01KZC6CD8NQGHNB6J5856E9XFV.md",
+   "title": "Create v0.4.0 design documentation and code walkthrough",
+   "truth_state": "open",
+   "wiki_key": "item/01KZC6CD8NQGHNB6J5856E9XFV"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZC6CDDYZF5PX9DTS57TA1A5",
+   "render": "as-is",
+   "render_hash": "c08daa79d0bf",
+   "source": "docs/.index/rendered/tickets/01KZC6CDDYZF5PX9DTS57TA1A5.md",
+   "title": "Create and publish the AGER user guide",
+   "truth_state": "open",
+   "wiki_key": "item/01KZC6CDDYZF5PX9DTS57TA1A5"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZC6EBH099YR5FYVA6E8NJ06",
+   "render": "as-is",
+   "render_hash": "ba7edabeaad5",
+   "source": "docs/.index/rendered/tickets/01KZC6EBH099YR5FYVA6E8NJ06.md",
+   "title": "Correct AGER wiki reference navigation",
+   "truth_state": "open",
+   "wiki_key": "item/01KZC6EBH099YR5FYVA6E8NJ06"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZC6FGY6PWF245YSZYCQDMCS",
+   "render": "as-is",
+   "render_hash": "440f083fc9f0",
+   "source": "docs/.index/rendered/tickets/01KZC6FGY6PWF245YSZYCQDMCS.md",
+   "title": "Make packaging test accept stamped v0.4.0 changelog",
+   "truth_state": "open",
+   "wiki_key": "item/01KZC6FGY6PWF245YSZYCQDMCS"
+  },
+  {
+   "frozen": false,
+   "page_name": "Ticket-01KZC7HNR6X2DND7W2DM7SD643",
+   "render": "as-is",
+   "render_hash": "746b495be76e",
+   "source": "docs/.index/rendered/tickets/01KZC7HNR6X2DND7W2DM7SD643.md",
+   "title": "Add manual dispatch for release validation workflows",
+   "truth_state": "open",
+   "wiki_key": "item/01KZC7HNR6X2DND7W2DM7SD643"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-06T18:54:00Z. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
+   "page_name": "Code-Walkthrough",
+   "render": "doc+banner",
+   "render_hash": "6cd29b7aedd4",
+   "source": "docs/designs/current_code_walkthrough.md",
+   "source_hash": "5956eb6e15a0",
+   "title": "OKF Agent Graph code walkthrough",
+   "truth_state": "current",
+   "wiki_key": "design/current-code-walkthrough"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-06T18:54:00Z. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
+   "page_name": "Design-Doc",
+   "render": "doc+banner",
+   "render_hash": "45000548a765",
+   "source": "docs/designs/current_design_doc.md",
+   "source_hash": "ce3410936184",
+   "title": "OKF Agent Graph architecture design",
+   "truth_state": "current",
+   "wiki_key": "design/current-design-doc"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
+   "page_name": "CLI-Reference",
+   "render": "doc+banner",
+   "render_hash": "7a8ca1d868bd",
+   "source": "docs/user_guide/cli-reference.md",
+   "source_hash": "2be8786b0e80",
+   "title": "CLI Reference",
+   "truth_state": "current",
+   "wiki_key": "guide/cli-reference"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
+   "page_name": "Plugin-Guide",
+   "render": "doc+banner",
+   "render_hash": "90d577fe06a1",
+   "source": "docs/user_guide/plugin-guide.md",
+   "source_hash": "d49f0091f504",
+   "title": "Plugin Guide",
+   "truth_state": "current",
+   "wiki_key": "guide/plugin-guide"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
+   "page_name": "User-Guide",
+   "render": "doc+banner",
+   "render_hash": "328848a5d0bd",
+   "source": "docs/user_guide/user-guide.md",
+   "source_hash": "cd4ca0f8cdfe",
+   "title": "User Guide",
+   "truth_state": "current",
+   "wiki_key": "guide/user-guide"
+  },
+  {
+   "banner": "> **Current** \u2014 completed plan; plans are frozen once written, a changed design gets a new plan.",
+   "frozen": true,
+   "page_name": "Plan-v0-4-0-quality-foundation",
+   "render": "doc+banner",
+   "render_hash": "cdeab985dbc1",
+   "source": "docs/plans/2026-08-05-v0-4-0-quality-foundation.md",
+   "source_hash": "0a8962a7ea44",
+   "title": "v0.4.0 Quality Foundation",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-08-05-v0-4-0-quality-foundation"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-06T19:07:05Z. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
+   "page_name": "Roadmap",
+   "render": "doc+banner",
+   "render_hash": "9031010510ef",
+   "source": "docs/roadmap.md",
+   "source_hash": "fb2c125e7550",
+   "title": "Roadmap",
+   "truth_state": "current",
+   "wiki_key": "roadmap"
+  },
+  {
+   "banner": "> **Snapshot** of release v0.4.0 (2026-08-06) \u2014 frozen record. The current version is [[Roadmap]].",
+   "frozen": true,
+   "page_name": "Roadmap-2026-08-06_v0.4.0-release",
+   "render": "doc+banner",
+   "render_hash": "3d7ad342c7c7",
+   "source": "docs/roadmap/2026-08-06_v0.4.0-release.md",
+   "source_hash": "5a3de0616b8f",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-08-06_v0.4.0-release"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
+   "page_name": "AGER-Specification",
+   "render": "doc+banner",
+   "render_hash": "324c27725079",
+   "source": "docs/AGER_SPEC.md",
+   "source_hash": "e10951ae5d47",
+   "title": "AGER Specification v0.3.0",
+   "truth_state": "current",
+   "wiki_key": "spec"
+  }
+ ],
+ "sidebar": {
+  "render_hash": "a20b8c636fd1",
+  "source": "docs/.index/rendered/_Sidebar.md"
+ },
+ "version": 1
+}

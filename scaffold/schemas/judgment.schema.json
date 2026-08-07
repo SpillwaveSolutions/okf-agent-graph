@@ -1,0 +1,11 @@
+{
+  "$id": "ager.sample.judgment",
+  "type": "object",
+  "required": ["score", "pass", "feedback"],
+  "properties": {
+    "score": { "type": "number" },
+    "pass": { "type": "boolean" },
+    "feedback": { "type": "string" },
+    "revise": { "type": "boolean" }
+  }
+}

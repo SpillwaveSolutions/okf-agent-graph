@@ -1,0 +1,23 @@
+flowchart LR
+    Start([🚀 Start]) --> Destination{Destination absent?}
+    Destination -->|No| Refuse[❌ Refuse overwrite]
+    Destination -->|Yes| Stage[📦 Copy scaffold to temporary directory]
+    Stage --> Render[⚙️ Replace title and timestamp markers]
+    Render --> Strict[✅ Run strict AGER validation]
+    Strict --> Valid{Valid?}
+    Valid -->|No| Cleanup[🧹 Remove staged directory]
+    Valid -->|Yes| Install[💾 Atomically install bundle]
+    Install --> Author[✍️ Author concepts and catalogs]
+    Author --> AGER[✅ Run AGER validation]
+    AGER --> OKF[🔗 Run OKF graph validation]
+    OKF --> Ready([🎉 Bundle ready])
+
+    classDef start fill:#87CEEB,stroke:#145374,stroke-width:2px,color:#000
+    classDef decision fill:#FFD700,stroke:#8A6500,stroke-width:2px,color:#000
+    classDef process fill:#90EE90,stroke:#216E39,stroke-width:2px,color:#000
+    classDef failure fill:#FFB6C1,stroke:#8B1A38,stroke-width:2px,color:#000
+
+    class Start,Ready start
+    class Destination,Valid decision
+    class Stage,Render,Strict,Install,Author,AGER,OKF process
+    class Refuse,Cleanup failure

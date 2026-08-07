@@ -1,0 +1,28 @@
+flowchart TB
+    User([👤 Plugin user]) --> Host[🤖 Claude Code, Codex, or Grok Build]
+    Host --> Skills[📘 AGER skills and command wrappers]
+    Skills --> Init[⚙️ scripts/ager-init.py]
+    Skills --> Author[✍️ AGER authoring workflow]
+    Skills --> Validate[✅ scripts/ager-validate.py]
+    Skills --> Compile[🔌 Framework mapping guidance]
+    Init --> Scaffold[📦 Canonical scaffold]
+    Scaffold --> Bundle[🗂️ User AGER bundle]
+    Author --> Bundle
+    Bundle --> Validate
+    Validate --> Result[📊 JSON validation result]
+    Bundle --> OKF[🔗 okf-graph-eng]
+    OKF --> Result
+    Bundle --> Compile
+    Compile --> Targets[LangGraph, CrewAI, OpenAI, Anthropic, or custom]
+
+    classDef actor fill:#FFE66D,stroke:#8A6500,stroke-width:2px,color:#000
+    classDef host fill:#87CEEB,stroke:#145374,stroke-width:2px,color:#000
+    classDef component fill:#90EE90,stroke:#216E39,stroke-width:2px,color:#000
+    classDef data fill:#E6E6FA,stroke:#514689,stroke-width:2px,color:#000
+    classDef external fill:#FFB6C1,stroke:#8B1A38,stroke-width:2px,color:#000
+
+    class User actor
+    class Host host
+    class Skills,Init,Author,Validate,Compile component
+    class Scaffold,Bundle,Result data
+    class OKF,Targets external

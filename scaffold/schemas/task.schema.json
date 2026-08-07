@@ -1,0 +1,9 @@
+{
+  "$id": "ager.sample.task",
+  "type": "object",
+  "required": ["objective"],
+  "properties": {
+    "objective": { "type": "string" },
+    "facet": { "type": "string" }
+  }
+}

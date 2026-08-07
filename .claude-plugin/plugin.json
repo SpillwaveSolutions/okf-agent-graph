@@ -1,6 +1,6 @@
 {
   "name": "okf-agent-graph",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "OKF Agent Graph Engineering Runtime (AGER) — multi-agent loop schema (orchestrators, judges, tools+rules, LoopControls, ScratchPad KV+lineage, Run/Trigger, failure/retry). Depends on okf-plugin (okf-graph-eng). Claude Code + Grok Build.",
   "author": {
     "name": "Rick Hightower",

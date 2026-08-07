@@ -1,0 +1,123 @@
+{
+ "docs": [
+  {
+   "branch": "agent/v0-4-0-quality-foundation",
+   "canonical_key": "design/current-code-walkthrough",
+   "doc_type": "design",
+   "generated_at": "2026-08-06T18:54:00Z",
+   "git_hash": "b9b4641ba52aaec7f5180dfd8ee7c97518cfd2b7",
+   "roadmap": "docs/roadmap.md",
+   "slug": "current_code_walkthrough",
+   "source": "docs/designs/current_code_walkthrough.md",
+   "title": "OKF Agent Graph code walkthrough",
+   "truth_state": "current",
+   "wiki_key": "design/current-code-walkthrough"
+  },
+  {
+   "branch": "agent/v0-4-0-quality-foundation",
+   "canonical_key": "design/current-design-doc",
+   "doc_type": "design",
+   "generated_at": "2026-08-06T18:54:00Z",
+   "git_hash": "b9b4641ba52aaec7f5180dfd8ee7c97518cfd2b7",
+   "roadmap": "docs/roadmap.md",
+   "slug": "current_design_doc",
+   "source": "docs/designs/current_design_doc.md",
+   "title": "OKF Agent Graph architecture design",
+   "truth_state": "current",
+   "wiki_key": "design/current-design-doc"
+  },
+  {
+   "canonical_key": "guide/cli-reference",
+   "doc_type": "guide",
+   "slug": "cli-reference",
+   "source": "docs/user_guide/cli-reference.md",
+   "title": "CLI Reference",
+   "truth_state": "current",
+   "wiki_key": "guide/cli-reference"
+  },
+  {
+   "canonical_key": "guide/plugin-guide",
+   "doc_type": "guide",
+   "slug": "plugin-guide",
+   "source": "docs/user_guide/plugin-guide.md",
+   "title": "Plugin Guide",
+   "truth_state": "current",
+   "wiki_key": "guide/plugin-guide"
+  },
+  {
+   "canonical_key": "guide/user-guide",
+   "doc_type": "guide",
+   "slug": "user-guide",
+   "source": "docs/user_guide/user-guide.md",
+   "title": "User Guide",
+   "truth_state": "current",
+   "wiki_key": "guide/user-guide"
+  },
+  {
+   "canonical_key": "home",
+   "doc_type": "guide",
+   "slug": "home",
+   "source": "docs/wiki-home.md",
+   "title": "OKF Agent Graph",
+   "truth_state": "current",
+   "wiki_key": "home"
+  },
+  {
+   "canonical_key": "plan/2026-08-05-v0-4-0-quality-foundation",
+   "date": "2026-08-05",
+   "doc_type": "plan",
+   "epic": "01KZ9N0WTCXZ9SVGDJBPA0TZ3K",
+   "git_hash": "89ddccb5b9e318fff0fc699c44c7491d92c85616",
+   "items": [
+    "01KZ9N0WV1VQNG0XQE3ZSNNM1B",
+    "01KZ9N0WV1NMBQKSQH2PR9WZAQ",
+    "01KZ9N0WV1PP6RX6B0X47N9KXT",
+    "01KZ9N0WV145FC2EE07CVSEW42",
+    "01KZ9N0WV254KNHPZKZ8KFETSG"
+   ],
+   "slug": "v0-4-0-quality-foundation",
+   "source": "docs/plans/2026-08-05-v0-4-0-quality-foundation.md",
+   "status": "completed",
+   "title": "v0.4.0 Quality Foundation",
+   "truth_state": "current",
+   "wiki_key": "plan/2026-08-05-v0-4-0-quality-foundation"
+  },
+  {
+   "canonical_key": "roadmap",
+   "doc_type": "roadmap",
+   "generated_at": "2026-08-06T19:07:05Z",
+   "git_hash": "a73923e",
+   "slug": "roadmap",
+   "source": "docs/roadmap.md",
+   "source_hash": "316d6523",
+   "title": "Roadmap",
+   "truth_state": "current",
+   "wiki_key": "roadmap"
+  },
+  {
+   "canonical_key": "roadmap-snapshot/2026-08-06_v0.4.0-release",
+   "date": "2026-08-06",
+   "doc_type": "roadmap-snapshot",
+   "generated_at": "2026-08-06T18:48:26Z",
+   "git_hash": "b9b4641",
+   "name": "v0.4.0-release",
+   "release": "v0.4.0",
+   "slug": "2026-08-06_v0.4.0-release",
+   "source": "docs/roadmap/2026-08-06_v0.4.0-release.md",
+   "source_hash": "6ae1a918",
+   "title": "Roadmap",
+   "truth_state": "snapshot",
+   "wiki_key": "roadmap-snapshot/2026-08-06_v0.4.0-release"
+  },
+  {
+   "canonical_key": "spec",
+   "doc_type": "guide",
+   "slug": "AGER_SPEC",
+   "source": "docs/AGER_SPEC.md",
+   "title": "AGER Specification v0.3.0",
+   "truth_state": "current",
+   "wiki_key": "spec"
+  }
+ ],
+ "version": 1
+}

@@ -6,7 +6,7 @@ role: lead_researcher
 ager_version: "0.3.0"
 input_schema: /schemas/user-query.schema.json
 output_schema: /schemas/final-report.schema.json
-instructions: /prompts/lead.md
+instructions: /prompts/lead.txt
 worker_pool:
   - /agents/worker.md
 judge_pool:

@@ -5,6 +5,15 @@ description: Validate AGER bundle structure and field rules, then delegate link/
 
 # AGER Validate
 
+## Run AGER validation
+
+```bash
+python3 <plugin-root>/scripts/ager-validate.py <bundle> --strict
+```
+
+The command emits JSON and exits non-zero on errors; `--strict` also gates
+warnings. It requires only the Python standard library.
+
 ## Checks (this plugin)
 
 1. Bundle root has `okf_version` and preferably `ager_version: "0.3.0"`.
@@ -18,7 +27,7 @@ description: Validate AGER bundle structure and field rules, then delegate link/
 ## Delegate to okf-graph-eng
 
 ```bash
-okf validate <bundle>
+okf validate <bundle> --strict
 # or
 python3 <okf-plugin>/scripts/okf-graph.py validate <bundle> --strict
 ```

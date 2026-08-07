@@ -1,0 +1,18 @@
+{
+  "$id": "ager.sample.research_state",
+  "type": "object",
+  "required": ["query", "iteration", "status"],
+  "properties": {
+    "query": { "type": "string" },
+    "plan": { "type": "object" },
+    "worker_results": { "type": "array" },
+    "draft_report": { "type": "object" },
+    "judgment": { "type": "object" },
+    "iteration": { "type": "integer" },
+    "cost_usd": { "type": "number" },
+    "elapsed_ms": { "type": "integer" },
+    "status": {
+      "enum": ["planning", "mapping", "reducing", "judging", "done", "exhausted", "failed"]
+    }
+  }
+}
