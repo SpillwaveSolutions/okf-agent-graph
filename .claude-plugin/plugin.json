@@ -1,7 +1,7 @@
 {
   "name": "okf-agent-graph",
-  "version": "0.4.0",
-  "description": "OKF Agent Graph Engineering Runtime (AGER) — multi-agent loop schema (orchestrators, judges, tools+rules, LoopControls, ScratchPad KV+lineage, Run/Trigger, failure/retry). Depends on okf-plugin (okf-graph-eng). Claude Code + Grok Build.",
+  "version": "0.5.0",
+  "description": "OKF Agent Graph Engineering Runtime (AGER) \u2014 author multi-agent loop graphs as OKF and reverse-engineer existing Claude/OpenAI/LangChain/LangGraph/CrewAI/LlamaIndex/MCP/AgentCore codebases into AGER knowledge (AGKC). Depends on okf-plugin (okf-graph-eng).",
   "author": {
     "name": "Rick Hightower",
     "url": "https://github.com/RichardHightower"
@@ -17,6 +17,11 @@
     "ager",
     "orchestrator",
     "claude-code",
-    "grok-build"
+    "grok-build",
+    "reverse-engineering",
+    "agkc",
+    "mcp",
+    "langgraph",
+    "crewai"
   ]
 }

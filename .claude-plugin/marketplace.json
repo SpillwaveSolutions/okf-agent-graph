@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "okf-agent-graph-marketplace",
-  "description": "OKF agent graph engineering (AGER) plugins for Claude Code — depends on SpillwaveSolutions/okf-plugin (okf-graph-eng)",
+  "description": "OKF agent graph engineering (AGER) plugins for Claude Code \u2014 depends on SpillwaveSolutions/okf-plugin (okf-graph-eng)",
   "owner": {
     "name": "Rick Hightower",
     "url": "https://github.com/RichardHightower"
@@ -10,9 +10,11 @@
     {
       "name": "okf-agent-graph",
       "source": "./",
-      "description": "AGER multi-agent loop schema + skills. Requires okf-graph-eng from SpillwaveSolutions/okf-plugin.",
-      "version": "0.4.0",
-      "author": { "name": "Rick Hightower" },
+      "description": "AGER multi-agent loop schema + skills. Requires okf-graph-eng from SpillwaveSolutions/okf-plugin. Includes AGKC reverse engineering of agent codebases.",
+      "version": "0.5.0",
+      "author": {
+        "name": "Rick Hightower"
+      },
       "homepage": "https://github.com/SpillwaveSolutions/okf-agent-graph",
       "repository": "https://github.com/SpillwaveSolutions/okf-agent-graph",
       "license": "MIT",

@@ -1,7 +1,7 @@
 {
   "name": "okf-agent-graph",
-  "version": "0.4.0",
-  "description": "Author, scaffold, validate, and map portable multi-agent loop graphs using the OKF Agent Graph Engineering Runtime.",
+  "version": "0.5.0",
+  "description": "Author, scaffold, validate, map, and reverse-engineer portable multi-agent loop graphs using the OKF Agent Graph Engineering Runtime (AGER / AGKC).",
   "author": {
     "name": "Rick Hightower",
     "url": "https://github.com/RichardHightower"
@@ -19,8 +19,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "OKF Agent Graph",
-    "shortDescription": "Portable multi-agent graph engineering",
-    "longDescription": "Scaffold and validate AGER bundles with explicit agents, loop controls, tools, memory, failure policies, and framework adapter guidance.",
+    "shortDescription": "Portable multi-agent graph engineering + reverse capture",
+    "longDescription": "Scaffold, validate, and reverse-engineer AGER bundles: agents, loop controls, tools, MCP, memory, failure policies, hyperscaler runtimes, and framework adapter guidance.",
     "developerName": "Spillwave Solutions",
     "category": "Developer Tools",
     "capabilities": [
@@ -30,7 +30,8 @@
     "websiteURL": "https://github.com/SpillwaveSolutions/okf-agent-graph",
     "defaultPrompt": [
       "Scaffold and validate an AGER multi-agent graph.",
-      "Review this AGER bundle for unsafe loops and tools.",
+      "Reverse engineer this agent codebase into AGER knowledge.",
+      "Scan for prompts, MCP tools, and loop policies.",
       "Map this AGER graph to framework adapter guidance."
     ],
     "brandColor": "#4F46E5"

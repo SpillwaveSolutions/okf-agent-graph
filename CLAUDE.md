@@ -10,7 +10,8 @@ Always assume **okf-graph-eng** from https://github.com/SpillwaveSolutions/okf-p
 
 - Spec version **0.3.0** — see docs/AGER_SPEC.md
 - Sample bundle: sample-ager/
-- Skills: ager-init-graph, ager-author, ager-validate, ager-compile
+- Skills: ager-init-graph, ager-author, ager-validate, ager-compile, ager-scan, ager-reverse-engineer
+- Reverse engineering docs: docs/REVERSE_ENGINEERING.md
 
 ## Rules
 

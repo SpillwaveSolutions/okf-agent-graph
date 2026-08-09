@@ -10,6 +10,8 @@ Grok Build / multi-agent host conventions (dual-host with Claude plugins).
 ## When editing
 
 - Keep sample-ager valid as OKF
+- Reverse engineering (AGKC): skills ager-scan / ager-reverse-engineer; scripts ager_scan.py, ager_capture.py, ager_reverse_engineer.py
+- Keep fixture tests/fixtures/agent-repo green via tests/test_ager_scan.py
 - Update ager_version when breaking schema
 - Cross-link wiki_ticket_sdd only for Trigger examples
 

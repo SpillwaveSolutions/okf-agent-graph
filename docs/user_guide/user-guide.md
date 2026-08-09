@@ -11,7 +11,7 @@ truth_state: current
 AGER (`okf-agent-graph`) helps you scaffold, author, validate, and map portable
 multi-agent graphs expressed as OKF Markdown and YAML.
 
-Plugin release **0.4.0** implements AGER document schema **0.3.0**. These
+Plugin release **0.5.0** implements AGER document schema **0.3.0**. These
 versions intentionally differ: upgrading the plugin does not change the
 document schema unless `ager_version` changes.
 
@@ -35,7 +35,7 @@ claude plugin install okf-agent-graph@okf-agent-graph-marketplace
 ```
 
 Start a new session after installation. The plugin exposes `/ager-init`,
-`/ager-author`, `/ager-validate`, and `/ager-compile`.
+`/ager-author`, `/ager-validate`, `/ager-compile`, `/ager-scan`, and `/ager-reverse-engineer`.
 
 ### Codex
 
@@ -48,7 +48,7 @@ codex
 ```
 
 Open `/plugins`, install `okf-agent-graph`, and start a new session. Codex uses
-`$ager-init-graph`, `$ager-author`, `$ager-validate`, and `$ager-compile`.
+`$ager-init-graph`, `$ager-author`, `$ager-validate`, `$ager-compile`, `$ager-scan`, and `$ager-reverse-engineer`.
 
 ### Grok Build
 
@@ -148,6 +148,22 @@ okf validate agent-graph --strict
 
 The AGER validator emits JSON and returns a nonzero status for errors. With
 `--strict`, warnings also fail.
+
+
+
+## Reverse engineer an existing agent project
+
+When the system already lives in LangGraph, CrewAI, LlamaIndex, raw Claude/OpenAI
+APIs, Claude Agent SDK, MCP configs, or a hyperscaler agent runtime, use AGKC:
+
+```bash
+python3 scripts/ager_scan.py --root /path/to/project --json -o scan.json
+python3 scripts/ager_reverse_engineer.py --root /path/to/project --out discovered-ager --json
+```
+
+Or invoke `/ager-scan` and `/ager-reverse-engineer`. Review the draft bundle,
+promote concepts with `/ager-author`, then validate. Full guide:
+[[Reverse-Engineering]].
 
 ## Compile adapter guidance
 

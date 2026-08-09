@@ -5,10 +5,10 @@
 | | |
 |---|---|
 | **Plugin name** | `okf-agent-graph` |
-| **Version** | 0.4.0 |
+| **Version** | 0.5.0 |
 | **Depends on** | [`okf-plugin`](https://github.com/SpillwaveSolutions/okf-plugin) → plugin **`okf-graph-eng`** |
 | **Related** | [`wiki_ticket_sdd`](https://github.com/SpillwaveSolutions/wiki_ticket_sdd) (ticket triggers / worklog) |
-| **Docs** | [User guide](./docs/user_guide/user-guide.md) · [AGER spec](./docs/AGER_SPEC.md) · [Design doc](./docs/designs/current_design_doc.md) · [Code walkthrough](./docs/designs/current_code_walkthrough.md) |
+| **Docs** | [User guide](./docs/user_guide/user-guide.md) · [AGER spec](./docs/AGER_SPEC.md) · [Reverse engineering](./docs/REVERSE_ENGINEERING.md) · [Design doc](./docs/designs/current_design_doc.md) · [Code walkthrough](./docs/designs/current_code_walkthrough.md) |
 | **License** | MIT |
 
 ## Why this plugin
@@ -25,6 +25,8 @@
 - KnowledgeBind / RetrievalBinding (OKF / project knowledge)
 
 Use as a **spec** and as **runtime-loadable config** (adapters map to LangGraph, CrewAI, OpenAI Agents, Anthropic patterns).
+
+**Reverse engineering (AGKC):** point the plugin at an existing agent repo — Claude/ChatGPT API, LangChain, LangGraph, CrewAI, LlamaIndex, Claude Agent SDK, Deep Agents, MCP, Bedrock AgentCore, hardened microVMs/containers — and extract prompts, tools/JSON-RPC/MCP schemas, orchestration graphs, loop/harness policies, and runtime isolation into draft AGER knowledge. Same shape as [system-architecture-capture](https://github.com/SpillwaveSolutions/system-architecture-capture) and [data-engineering-knowledge-capture](https://github.com/SpillwaveSolutions/data-engineering-knowledge-capture), for the agent-graph domain.
 
 ## Dependency (required)
 
@@ -76,6 +78,10 @@ The scripts are also directly callable:
 ```bash
 python3 scripts/ager-init.py agent-graph --title "My agent graph"
 python3 scripts/ager-validate.py agent-graph --strict
+
+# Reverse engineer an existing agent project
+python3 scripts/ager_scan.py --root /path/to/agent-project --json -o scan.json
+python3 scripts/ager_reverse_engineer.py --root /path/to/agent-project --out discovered-ager --json
 ```
 
 Sample self-describing graph:
@@ -94,13 +100,16 @@ python3 ../okf-plugin/scripts/okf-graph.py validate sample-ager --strict
 | `ager-author` | `/ager-author` | Author agents, tools, loop policies, ops concepts |
 | `ager-validate` | `/ager-validate` | AGER conformance + okf validate |
 | `ager-compile` | `/ager-compile` | Framework mapping / stub notes |
+| `ager-scan` | `/ager-scan` | Scan code for frameworks, prompts, tools, MCP, loops |
+| `ager-reverse-engineer` | `/ager-reverse-engineer` | AGKC: reverse engineer → draft AGER knowledge |
 
 Codex invokes the same skills with `$ager-init-graph`, `$ager-author`,
-`$ager-validate`, and `$ager-compile`.
+`$ager-validate`, `$ager-compile`, `$ager-scan`, and `$ager-reverse-engineer`.
 
 ### Agent
 
 - **agent-graph-engineer** — designs multi-agent loops using AGER + okf impact/pack
+- **agent-graph-re-orchestrator** — reverse-engineers existing agent codebases into AGER (AGKC)
 
 ## Concept planes (AGER v0.3)
 
