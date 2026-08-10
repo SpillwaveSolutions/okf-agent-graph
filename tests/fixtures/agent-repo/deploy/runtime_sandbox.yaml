@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: agent-worker
+spec:
+  runtimeClassName: kata
+  containers:
+    - name: worker
+      image: agent-worker:latest
+      securityContext:
+        privileged: false
+        readOnlyRootFilesystem: true
+        seccompProfile:
+          type: RuntimeDefault
+      env:
+        - name: AGENT_RUNTIME
+          value: bedrock-agentcore
+        - name: SANDBOX_BACKEND
+          value: firecracker

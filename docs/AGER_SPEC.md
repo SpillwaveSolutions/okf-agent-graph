@@ -113,3 +113,15 @@ links:
 ```
 
 See `sample-ager/` for a complete worked research graph.
+
+## Reverse engineering (AGKC)
+
+AGER is bidirectional:
+
+- **Forward** — author portable multi-agent config (`ager-init` / `ager-author`)
+- **Reverse** — scan brownfield agent code and capture draft concepts (`ager-scan` / `ager-reverse-engineer`)
+
+Reverse capture emits *draft* OKF documents with provenance. Promote into
+normative AGER types (AgentNode, LoopPolicy, Tool, …) before treating them as
+runtime-loadable config. See [REVERSE_ENGINEERING.md](./REVERSE_ENGINEERING.md).
+
