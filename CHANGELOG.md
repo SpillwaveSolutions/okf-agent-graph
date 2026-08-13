@@ -1,6 +1,14 @@
 # Changelog
 
+## 0.5.1 — 2026-08-13
+
+- Register AGER types in `schemas/okf-concepts/registry.json` so a mixed
+  second-brain `okf-graph.py validate` recognizes them (fallback: shared
+  BaseConcept, required `type` + `title` only). Field-depth validation stays
+  in `ager-validate.py`.
+
 ## 0.5.0 — 2026-08-09
+
 
 - Add **AGKC reverse engineering** path: scan existing agent codebases and capture draft AGER knowledge.
 - New scripts: `ager_scan.py`, `ager_capture.py`, `ager_reverse_engineer.py` (stdlib only).

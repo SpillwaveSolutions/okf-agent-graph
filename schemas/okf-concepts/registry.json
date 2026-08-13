@@ -1,0 +1,28 @@
+{
+  "name": "ager-okf-concept-schemas",
+  "version": "1.0.0",
+  "okf_version": "0.2",
+  "plugin": "okf-agent-graph",
+  "base": "okf-plugin/schemas/okf-concepts/BaseConcept.schema.json",
+  "concepts": [
+    "AgentNode",
+    "OrchestratorAgent",
+    "WorkerAgent",
+    "JudgeAgent",
+    "SynthesizerAgent",
+    "RouterAgent",
+    "GuardrailAgent",
+    "HumanGate",
+    "AgentGraph",
+    "LoopPolicy",
+    "KnowledgeBind",
+    "RetrievalBinding",
+    "Tool",
+    "Run",
+    "Trigger"
+  ],
+  "catalog_ownership": {
+    "okf-agent-graph": ["runtime", "ops", "memory", "evaluation", "agents"]
+  },
+  "notes": "AGER types fall back to shared BaseConcept (type+title). Field-depth stays in ager-validate.py."
+}
