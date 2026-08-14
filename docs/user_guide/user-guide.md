@@ -39,8 +39,7 @@ Start a new session after installation. The plugin exposes `/ager-init`,
 
 ### Codex
 
-Make `okf-graph-eng` available using the dependency repository's Codex
-installation guidance, then install this repository:
+Install the AGER plugin normally:
 
 ```bash
 codex plugin marketplace add SpillwaveSolutions/okf-agent-graph
@@ -49,6 +48,9 @@ codex
 
 Open `/plugins`, install `okf-agent-graph`, and start a new session. Codex uses
 `$ager-init-graph`, `$ager-author`, `$ager-validate`, `$ager-compile`, `$ager-scan`, and `$ager-reverse-engineer`.
+The pinned `okf-plugin` v0.3.2 dependency does not ship a Codex manifest. For
+full OKF validation, use an `okf` executable, a sibling `../okf-plugin`
+checkout, or an explicitly supplied path to `okf-graph.py`.
 
 ### Grok Build
 

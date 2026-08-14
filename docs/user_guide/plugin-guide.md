@@ -34,8 +34,10 @@ codex plugin marketplace add SpillwaveSolutions/okf-agent-graph
 codex
 ```
 
-Open `/plugins`, install `okf-agent-graph`, and start a new session. Install the
-`okf-plugin` repository as well when full OKF graph validation is required.
+Open `/plugins`, install `okf-agent-graph`, and start a new session. The pinned
+`okf-plugin` v0.3.2 dependency has no Codex manifest. For full OKF validation,
+use an `okf` executable, a sibling `../okf-plugin` checkout, or an explicitly
+supplied path to `okf-graph.py`.
 
 ### Grok Build
 
@@ -50,13 +52,15 @@ ships `.grok-plugin/marketplace.json` with the dependency relationship declared.
 | `skills/ager-author/` | AGER concept and typed-edge authoring rules |
 | `skills/ager-validate/` | AGER checks plus delegation to OKF validation |
 | `skills/ager-compile/` | Framework crosswalk and adapter-stub guidance |
+| `skills/ager-scan/` | Detect agent frameworks in an existing repo |
+| `skills/ager-reverse-engineer/` | Capture a draft AGER bundle from code |
 | `commands/` | Claude/Grok slash-command wrappers |
 | `scaffold/` | The only canonical template tree |
 | `sample-ager/` | Complete research graph example |
-| `scripts/` | Direct generator and validator CLIs |
+| `scripts/` | Direct generator, validator, and AGKC CLIs |
 
 Claude, Codex, Grok, and root marketplace manifests all advertise plugin
-version `0.4.0`. The document schema stays at `ager_version: "0.3.0"`; plugin
+version `0.5.0`. The document schema stays at `ager_version: "0.3.0"`; plugin
 release versions and schema versions intentionally serve different purposes.
 
 ## Dependency resolution

@@ -4,3 +4,4 @@ __pycache__/
 .okf-cache/
 *.html
 .work/todo.local.jsonl
+.work/wiki-checkout/
