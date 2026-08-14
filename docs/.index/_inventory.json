@@ -1,6 +1,40 @@
 {
  "docs": [
   {
+   "branch": "main",
+   "canonical_key": "design/2026-08-06_v0.4.0-release-code-walkthrough",
+   "date": "2026-08-06",
+   "doc_type": "design",
+   "git_hash": "f86de180e292cdf910c7df0508b52e5a5133d680",
+   "name": "v0.4.0-release",
+   "release": "v0.4.0",
+   "roadmap_snapshot": "docs/roadmap/2026-08-06_v0.4.0-release.md",
+   "slug": "2026-08-06_v0.4.0-release_code_walkthrough",
+   "source": "docs/designs/2026-08-06_v0.4.0-release_code_walkthrough.md",
+   "tag": "v0.4.0",
+   "title": "OKF Agent Graph code walkthrough",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Code-Walkthrough-2026-08-06_v0.4.0-release",
+   "wiki_key": "design/2026-08-06_v0.4.0-release-code-walkthrough"
+  },
+  {
+   "branch": "main",
+   "canonical_key": "design/2026-08-06_v0.4.0-release-design-doc",
+   "date": "2026-08-06",
+   "doc_type": "design",
+   "git_hash": "f86de180e292cdf910c7df0508b52e5a5133d680",
+   "name": "v0.4.0-release",
+   "release": "v0.4.0",
+   "roadmap_snapshot": "docs/roadmap/2026-08-06_v0.4.0-release.md",
+   "slug": "2026-08-06_v0.4.0-release_design_doc",
+   "source": "docs/designs/2026-08-06_v0.4.0-release_design_doc.md",
+   "tag": "v0.4.0",
+   "title": "OKF Agent Graph architecture design",
+   "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Design-Doc-2026-08-06_v0.4.0-release",
+   "wiki_key": "design/2026-08-06_v0.4.0-release-design-doc"
+  },
+  {
    "branch": "agent/v0-4-0-quality-foundation",
    "canonical_key": "design/current-code-walkthrough",
    "doc_type": "design",
@@ -11,6 +45,7 @@
    "source": "docs/designs/current_code_walkthrough.md",
    "title": "OKF Agent Graph code walkthrough",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Code-Walkthrough",
    "wiki_key": "design/current-code-walkthrough"
   },
   {
@@ -24,6 +59,7 @@
    "source": "docs/designs/current_design_doc.md",
    "title": "OKF Agent Graph architecture design",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Design-Doc",
    "wiki_key": "design/current-design-doc"
   },
   {
@@ -33,6 +69,7 @@
    "source": "docs/user_guide/cli-reference.md",
    "title": "CLI Reference",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/CLI-Reference",
    "wiki_key": "guide/cli-reference"
   },
   {
@@ -42,6 +79,7 @@
    "source": "docs/user_guide/plugin-guide.md",
    "title": "Plugin Guide",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Plugin-Guide",
    "wiki_key": "guide/plugin-guide"
   },
   {
@@ -51,6 +89,7 @@
    "source": "docs/user_guide/user-guide.md",
    "title": "User Guide",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/User-Guide",
    "wiki_key": "guide/user-guide"
   },
   {
@@ -60,6 +99,7 @@
    "source": "docs/wiki-home.md",
    "title": "OKF Agent Graph",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Home",
    "wiki_key": "home"
   },
   {
@@ -80,18 +120,20 @@
    "status": "completed",
    "title": "v0.4.0 Quality Foundation",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Plan-v0-4-0-quality-foundation",
    "wiki_key": "plan/2026-08-05-v0-4-0-quality-foundation"
   },
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-08-06T19:07:05Z",
-   "git_hash": "a73923e",
+   "generated_at": "2026-08-07T23:15:24Z",
+   "git_hash": "f86de18",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "316d6523",
+   "source_hash": "905bdbbd",
    "title": "Roadmap",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Roadmap",
    "wiki_key": "roadmap"
   },
   {
@@ -107,6 +149,7 @@
    "source_hash": "6ae1a918",
    "title": "Roadmap",
    "truth_state": "snapshot",
+   "wiki": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Roadmap-2026-08-06_v0.4.0-release",
    "wiki_key": "roadmap-snapshot/2026-08-06_v0.4.0-release"
   },
   {
@@ -116,6 +159,7 @@
    "source": "docs/AGER_SPEC.md",
    "title": "AGER Specification v0.3.0",
    "truth_state": "current",
+   "wiki": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/AGER-Specification",
    "wiki_key": "spec"
   }
  ],

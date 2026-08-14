@@ -1,0 +1,306 @@
+{
+  "design/2026-08-06_v0.4.0-release-code-walkthrough": {
+    "canonical_key": "design/2026-08-06_v0.4.0-release-code-walkthrough",
+    "doc_type": "design",
+    "page_id": "Code-Walkthrough-2026-08-06_v0.4.0-release",
+    "render_hash": "2288530025c9",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/designs/2026-08-06_v0.4.0-release_code_walkthrough.md",
+    "source_hash": "5f8dac392cf9",
+    "truth_state": "snapshot",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Code-Walkthrough-2026-08-06_v0.4.0-release",
+    "wiki_key": "design/2026-08-06_v0.4.0-release-code-walkthrough"
+  },
+  "design/2026-08-06_v0.4.0-release-design-doc": {
+    "canonical_key": "design/2026-08-06_v0.4.0-release-design-doc",
+    "doc_type": "design",
+    "page_id": "Design-Doc-2026-08-06_v0.4.0-release",
+    "render_hash": "0e58ea117fea",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/designs/2026-08-06_v0.4.0-release_design_doc.md",
+    "source_hash": "dcf467dde1a6",
+    "truth_state": "snapshot",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Design-Doc-2026-08-06_v0.4.0-release",
+    "wiki_key": "design/2026-08-06_v0.4.0-release-design-doc"
+  },
+  "design/current-code-walkthrough": {
+    "canonical_key": "design/current-code-walkthrough",
+    "doc_type": "design",
+    "page_id": "Code-Walkthrough",
+    "render_hash": "1a513fe128f5",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/designs/current_code_walkthrough.md",
+    "source_hash": "5f8dac392cf9",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Code-Walkthrough",
+    "wiki_key": "design/current-code-walkthrough"
+  },
+  "design/current-design-doc": {
+    "canonical_key": "design/current-design-doc",
+    "doc_type": "design",
+    "page_id": "Design-Doc",
+    "render_hash": "d6ea3e8236be",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/designs/current_design_doc.md",
+    "source_hash": "dcf467dde1a6",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Design-Doc",
+    "wiki_key": "design/current-design-doc"
+  },
+  "guide/cli-reference": {
+    "canonical_key": "guide/cli-reference",
+    "doc_type": "guide",
+    "page_id": "CLI-Reference",
+    "render_hash": "7a8ca1d868bd",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/user_guide/cli-reference.md",
+    "source_hash": "2be8786b0e80",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/CLI-Reference",
+    "wiki_key": "guide/cli-reference"
+  },
+  "guide/plugin-guide": {
+    "canonical_key": "guide/plugin-guide",
+    "doc_type": "guide",
+    "page_id": "Plugin-Guide",
+    "render_hash": "da78728f39b9",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/user_guide/plugin-guide.md",
+    "source_hash": "37c38aa02577",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Plugin-Guide",
+    "wiki_key": "guide/plugin-guide"
+  },
+  "guide/user-guide": {
+    "canonical_key": "guide/user-guide",
+    "doc_type": "guide",
+    "page_id": "User-Guide",
+    "render_hash": "38021b2288b3",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/user_guide/user-guide.md",
+    "source_hash": "f3c9eb6dca83",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/User-Guide",
+    "wiki_key": "guide/user-guide"
+  },
+  "home": {
+    "canonical_key": "home",
+    "doc_type": "guide",
+    "page_id": "Home",
+    "render_hash": "efcabb40a416",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/.index/rendered/home.md",
+    "source_hash": "efcabb40a416",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Home",
+    "wiki_key": "home"
+  },
+  "index/decisions": {
+    "page_id": "Index-Decisions",
+    "render_hash": "c295ff2b1bb1",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/.index/rendered/decisions.md",
+    "source_hash": "c295ff2b1bb1",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Index-Decisions"
+  },
+  "index/releases": {
+    "page_id": "Index-Releases",
+    "render_hash": "fae145c7d781",
+    "rev": "29abadffbb74c2bcd7625716ebe1ba26be69b47d",
+    "source": "docs/.index/rendered/releases.md",
+    "source_hash": "fae145c7d781",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Index-Releases"
+  },
+  "index/status": {
+    "page_id": "Index-Status",
+    "render_hash": "b8bcebbbbe23",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/.index/rendered/status.md",
+    "source_hash": "b8bcebbbbe23",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Index-Status"
+  },
+  "index/traceability": {
+    "page_id": "Index-Traceability",
+    "render_hash": "9a00960513a3",
+    "rev": "29abadffbb74c2bcd7625716ebe1ba26be69b47d",
+    "source": "docs/.index/rendered/traceability.md",
+    "source_hash": "9a00960513a3",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Index-Traceability"
+  },
+  "item/01KZ9N0WTCXZ9SVGDJBPA0TZ3K": {
+    "page_id": "Ticket-01KZ9N0WTCXZ9SVGDJBPA0TZ3K",
+    "render_hash": "f3d93c0916b8",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/.index/rendered/tickets/01KZ9N0WTCXZ9SVGDJBPA0TZ3K.md",
+    "source_hash": "f3d93c0916b8",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Ticket-01KZ9N0WTCXZ9SVGDJBPA0TZ3K"
+  },
+  "item/01KZ9N0WV145FC2EE07CVSEW42": {
+    "page_id": "Ticket-01KZ9N0WV145FC2EE07CVSEW42",
+    "render_hash": "ff10adde5366",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/.index/rendered/tickets/01KZ9N0WV145FC2EE07CVSEW42.md",
+    "source_hash": "ff10adde5366",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Ticket-01KZ9N0WV145FC2EE07CVSEW42"
+  },
+  "item/01KZ9N0WV1NMBQKSQH2PR9WZAQ": {
+    "page_id": "Ticket-01KZ9N0WV1NMBQKSQH2PR9WZAQ",
+    "render_hash": "6dcc5c82674a",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/.index/rendered/tickets/01KZ9N0WV1NMBQKSQH2PR9WZAQ.md",
+    "source_hash": "6dcc5c82674a",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Ticket-01KZ9N0WV1NMBQKSQH2PR9WZAQ"
+  },
+  "item/01KZ9N0WV1PP6RX6B0X47N9KXT": {
+    "page_id": "Ticket-01KZ9N0WV1PP6RX6B0X47N9KXT",
+    "render_hash": "db6f5057b258",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/.index/rendered/tickets/01KZ9N0WV1PP6RX6B0X47N9KXT.md",
+    "source_hash": "db6f5057b258",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Ticket-01KZ9N0WV1PP6RX6B0X47N9KXT"
+  },
+  "item/01KZ9N0WV1VQNG0XQE3ZSNNM1B": {
+    "page_id": "Ticket-01KZ9N0WV1VQNG0XQE3ZSNNM1B",
+    "render_hash": "3c19468f4cef",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/.index/rendered/tickets/01KZ9N0WV1VQNG0XQE3ZSNNM1B.md",
+    "source_hash": "3c19468f4cef",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Ticket-01KZ9N0WV1VQNG0XQE3ZSNNM1B"
+  },
+  "item/01KZ9N0WV254KNHPZKZ8KFETSG": {
+    "page_id": "Ticket-01KZ9N0WV254KNHPZKZ8KFETSG",
+    "render_hash": "16ee0faddf49",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/.index/rendered/tickets/01KZ9N0WV254KNHPZKZ8KFETSG.md",
+    "source_hash": "16ee0faddf49",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Ticket-01KZ9N0WV254KNHPZKZ8KFETSG"
+  },
+  "item/01KZC5SHYF36HDGMQHF3SK2QAB": {
+    "page_id": "Ticket-01KZC5SHYF36HDGMQHF3SK2QAB",
+    "render_hash": "3694d8c07541",
+    "rev": "29abadffbb74c2bcd7625716ebe1ba26be69b47d",
+    "source": "docs/.index/rendered/tickets/01KZC5SHYF36HDGMQHF3SK2QAB.md",
+    "source_hash": "3694d8c07541",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Ticket-01KZC5SHYF36HDGMQHF3SK2QAB"
+  },
+  "item/01KZC6CD8NQGHNB6J5856E9XFV": {
+    "page_id": "Ticket-01KZC6CD8NQGHNB6J5856E9XFV",
+    "render_hash": "4d8101ed4597",
+    "rev": "29abadffbb74c2bcd7625716ebe1ba26be69b47d",
+    "source": "docs/.index/rendered/tickets/01KZC6CD8NQGHNB6J5856E9XFV.md",
+    "source_hash": "4d8101ed4597",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Ticket-01KZC6CD8NQGHNB6J5856E9XFV"
+  },
+  "item/01KZC6CDDYZF5PX9DTS57TA1A5": {
+    "page_id": "Ticket-01KZC6CDDYZF5PX9DTS57TA1A5",
+    "render_hash": "c4101ce2536a",
+    "rev": "29abadffbb74c2bcd7625716ebe1ba26be69b47d",
+    "source": "docs/.index/rendered/tickets/01KZC6CDDYZF5PX9DTS57TA1A5.md",
+    "source_hash": "c4101ce2536a",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Ticket-01KZC6CDDYZF5PX9DTS57TA1A5"
+  },
+  "item/01KZC6EBH099YR5FYVA6E8NJ06": {
+    "page_id": "Ticket-01KZC6EBH099YR5FYVA6E8NJ06",
+    "render_hash": "fd402112a3b2",
+    "rev": "29abadffbb74c2bcd7625716ebe1ba26be69b47d",
+    "source": "docs/.index/rendered/tickets/01KZC6EBH099YR5FYVA6E8NJ06.md",
+    "source_hash": "fd402112a3b2",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Ticket-01KZC6EBH099YR5FYVA6E8NJ06"
+  },
+  "item/01KZC6FGY6PWF245YSZYCQDMCS": {
+    "page_id": "Ticket-01KZC6FGY6PWF245YSZYCQDMCS",
+    "render_hash": "61f32b7ad250",
+    "rev": "29abadffbb74c2bcd7625716ebe1ba26be69b47d",
+    "source": "docs/.index/rendered/tickets/01KZC6FGY6PWF245YSZYCQDMCS.md",
+    "source_hash": "61f32b7ad250",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Ticket-01KZC6FGY6PWF245YSZYCQDMCS"
+  },
+  "item/01KZC7HNR6X2DND7W2DM7SD643": {
+    "page_id": "Ticket-01KZC7HNR6X2DND7W2DM7SD643",
+    "render_hash": "10f07cf1fe80",
+    "rev": "29abadffbb74c2bcd7625716ebe1ba26be69b47d",
+    "source": "docs/.index/rendered/tickets/01KZC7HNR6X2DND7W2DM7SD643.md",
+    "source_hash": "10f07cf1fe80",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Ticket-01KZC7HNR6X2DND7W2DM7SD643"
+  },
+  "item/01KZEDXHGEJGRRE02PJBEPY2QQ": {
+    "page_id": "Ticket-01KZEDXHGEJGRRE02PJBEPY2QQ",
+    "render_hash": "d041954a2a9a",
+    "rev": "29abadffbb74c2bcd7625716ebe1ba26be69b47d",
+    "source": "docs/.index/rendered/tickets/01KZEDXHGEJGRRE02PJBEPY2QQ.md",
+    "source_hash": "d041954a2a9a",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Ticket-01KZEDXHGEJGRRE02PJBEPY2QQ"
+  },
+  "item/01KZF848RZQBY5H0FH8JCKWKZT": {
+    "page_id": "Ticket-01KZF848RZQBY5H0FH8JCKWKZT",
+    "render_hash": "40c77b22d157",
+    "rev": "29abadffbb74c2bcd7625716ebe1ba26be69b47d",
+    "source": "docs/.index/rendered/tickets/01KZF848RZQBY5H0FH8JCKWKZT.md",
+    "source_hash": "40c77b22d157",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Ticket-01KZF848RZQBY5H0FH8JCKWKZT"
+  },
+  "plan/2026-08-05-v0-4-0-quality-foundation": {
+    "canonical_key": "plan/2026-08-05-v0-4-0-quality-foundation",
+    "doc_type": "plan",
+    "page_id": "Plan-v0-4-0-quality-foundation",
+    "render_hash": "cdeab985dbc1",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/plans/2026-08-05-v0-4-0-quality-foundation.md",
+    "source_hash": "0a8962a7ea44",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Plan-v0-4-0-quality-foundation",
+    "wiki_key": "plan/2026-08-05-v0-4-0-quality-foundation"
+  },
+  "release/v0.4.0": {
+    "page_id": "Release-v0.4.0",
+    "render_hash": "f0017cfadbd4",
+    "rev": "29abadffbb74c2bcd7625716ebe1ba26be69b47d",
+    "source": "docs/.index/rendered/releases/v0.4.0.md",
+    "source_hash": "f0017cfadbd4",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Release-v0.4.0"
+  },
+  "roadmap": {
+    "canonical_key": "roadmap",
+    "doc_type": "roadmap",
+    "page_id": "Roadmap",
+    "render_hash": "3e0b3ddbae09",
+    "rev": "29abadffbb74c2bcd7625716ebe1ba26be69b47d",
+    "source": "docs/roadmap.md",
+    "source_hash": "65538697716e",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Roadmap",
+    "wiki_key": "roadmap"
+  },
+  "roadmap-snapshot/2026-08-06_v0.4.0-release": {
+    "canonical_key": "roadmap-snapshot/2026-08-06_v0.4.0-release",
+    "doc_type": "roadmap-snapshot",
+    "page_id": "Roadmap-2026-08-06_v0.4.0-release",
+    "render_hash": "3d7ad342c7c7",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/roadmap/2026-08-06_v0.4.0-release.md",
+    "source_hash": "5a3de0616b8f",
+    "truth_state": "snapshot",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Roadmap-2026-08-06_v0.4.0-release",
+    "wiki_key": "roadmap-snapshot/2026-08-06_v0.4.0-release"
+  },
+  "sidebar": {
+    "page_id": "_Sidebar",
+    "render_hash": "a20b8c636fd1",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/.index/rendered/_Sidebar.md",
+    "source_hash": "a20b8c636fd1",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/_Sidebar"
+  },
+  "spec": {
+    "canonical_key": "spec",
+    "doc_type": "guide",
+    "page_id": "AGER-Specification",
+    "render_hash": "324c27725079",
+    "rev": "9ec518f1c7f5ded77c064fe309ff94b7dbc77751",
+    "source": "docs/AGER_SPEC.md",
+    "source_hash": "e10951ae5d47",
+    "truth_state": "current",
+    "url": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/AGER-Specification",
+    "wiki_key": "spec"
+  }
+}

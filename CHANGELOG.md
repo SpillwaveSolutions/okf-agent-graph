@@ -6,6 +6,11 @@
   second-brain `okf-graph.py validate` recognizes them (fallback: shared
   BaseConcept, required `type` + `title` only). Field-depth validation stays
   in `ager-validate.py`.
+- Land the v0.4.0 post-release wiki ledger (`.work/published.json`), freeze the
+  dated design/code-walkthrough snapshots, ignore `.work/wiki-checkout/`, and
+  correct Codex dependency guidance (okf-plugin v0.3.2 has no Codex manifest).
+- Refresh `docs/.index/publish-manifest.json` so worklog `ia-render --check`
+  matches the current spec and user-guide bodies.
 
 ## 0.5.0 — 2026-08-09
 

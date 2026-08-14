@@ -2,28 +2,36 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Backfill v0.4.0 milestones on shipped feature items
+`01KZF848RZQBY5H0FH8JCKWKZT` · status: cancelled
+- targets: release/v0.4.0
+
+### Ignore the local GitHub wiki checkout cache
+`01KZEDXHGEJGRRE02PJBEPY2QQ` · status: done
+- targets: release/v0.4.0
+
 ### Add manual dispatch for release validation workflows
-`01KZC7HNR6X2DND7W2DM7SD643` · status: todo
+`01KZC7HNR6X2DND7W2DM7SD643` · status: done
 - targets: release/v0.4.0
 
 ### Make packaging test accept stamped v0.4.0 changelog
-`01KZC6FGY6PWF245YSZYCQDMCS` · status: todo
+`01KZC6FGY6PWF245YSZYCQDMCS` · status: done
 - targets: release/v0.4.0
 
 ### Correct AGER wiki reference navigation
-`01KZC6EBH099YR5FYVA6E8NJ06` · status: todo
+`01KZC6EBH099YR5FYVA6E8NJ06` · status: done
 - targets: release/v0.4.0
 
 ### Create and publish the AGER user guide
-`01KZC6CDDYZF5PX9DTS57TA1A5` · status: todo
+`01KZC6CDDYZF5PX9DTS57TA1A5` · status: done
 - targets: release/v0.4.0
 
 ### Create v0.4.0 design documentation and code walkthrough
-`01KZC6CD8NQGHNB6J5856E9XFV` · status: todo
+`01KZC6CD8NQGHNB6J5856E9XFV` · status: done
 - targets: release/v0.4.0
 
 ### Cut and publish v0.4.0 release
-`01KZC5SHYF36HDGMQHF3SK2QAB` · status: todo
+`01KZC5SHYF36HDGMQHF3SK2QAB` · status: done
 - targets: release/v0.4.0
 
 ### Add native Codex packaging and v0.4.0 documentation

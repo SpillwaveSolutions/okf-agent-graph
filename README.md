@@ -51,6 +51,10 @@ codex
 # /plugins
 ```
 
+The pinned `okf-plugin` v0.3.2 dependency does not ship a Codex manifest. Run
+full OKF validation through an `okf` executable, a sibling `../okf-plugin`
+checkout, or an explicitly supplied path to `okf-graph.py`.
+
 Grok Build loads Claude-compatible plugins with zero extra config.
 
 ### Dependency contract
