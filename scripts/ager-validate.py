@@ -161,7 +161,7 @@ def validate(bundle: Path, strict: bool = False) -> dict[str, object]:
             _issue(issues, "error", doc, "unresolved scaffold placeholder")
         concept_type = doc.values.get("type", "")
         version = doc.values.get("ager_version", "")
-        if version and concept_type not in AGER_TYPES | {"Reference"}:
+        if version and concept_type not in AGER_TYPES | {"Reference", "WriteEvent"}:
             _issue(issues, "error", doc, f"unknown AGER type: {concept_type or '<missing>'}")
         if concept_type in AGER_TYPES and version != SUPPORTED_VERSION:
             _issue(issues, "error", doc, f'{concept_type} requires ager_version: "{SUPPORTED_VERSION}"')

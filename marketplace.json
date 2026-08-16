@@ -10,7 +10,7 @@
       "name": "okf-agent-graph",
       "source": "./",
       "description": "OKF Agent Graph Engineering Runtime (AGER) Includes AGKC reverse engineering of agent codebases.",
-      "version": "0.6.0"
+      "version": "0.6.1"
     }
   ]
 }

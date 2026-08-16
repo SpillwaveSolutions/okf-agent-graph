@@ -96,13 +96,16 @@ class AgerInitTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix="ager-init-") as temp:
             destination = Path(temp) / "generated"
             proc, payload = run_json(
-                sys.executable, GENERATOR, destination, "--title", "Generated Test Graph"
+                sys.executable, GENERATOR, destination, "--title", "Generated Test Graph",
+                "--author", "claude-code/lumenfield-detector",
             )
             self.assertEqual(proc.returncode, 0, payload)
             self.assertTrue(payload["ager_validation"]["valid"])
             self.assertEqual(payload["ager_validation"]["bundle"], str(destination.resolve()))
-            self.assertEqual(payload["file_count"], 36)
+            self.assertGreaterEqual(payload["file_count"], 36)
             self.assertIn("title: \"Generated Test Graph\"", (destination / "index.md").read_text())
+            self.assertIn("author: claude-code/lumenfield-detector", (destination / "index.md").read_text())
+            self.assertTrue(any((destination / "write-events").glob("*.md")))
             self.assertFalse(any("{{" in path.read_text() for path in destination.rglob("*.md")))
             for required in (
                 "agents/synthesizer.md", "ops/retry-policy.md", "prompts/lead.txt",
@@ -129,5 +132,55 @@ class AgerInitTests(unittest.TestCase):
             self.assertEqual(sentinel.read_text(), "keep")
 
 
+class TestRequiredIdentity(unittest.TestCase):
+    def test_resolve_author_fail_closed(self) -> None:
+        sys.path.insert(0, str(REPO / "scripts"))
+        from ager_common import resolve_author
+
+        prev = os.environ.pop("SECOND_BRAIN_IDENTITY", None)
+        try:
+            with self.assertRaises(SystemExit):
+                resolve_author(None)
+            self.assertEqual(
+                resolve_author("grok-bot/northstar-console"),
+                "grok-bot/northstar-console",
+            )
+        finally:
+            if prev is not None:
+                os.environ["SECOND_BRAIN_IDENTITY"] = prev
+
+    def test_init_without_identity_fails(self) -> None:
+        env = os.environ.copy()
+        env.pop("SECOND_BRAIN_IDENTITY", None)
+        with tempfile.TemporaryDirectory(prefix="ager-noid-") as temp:
+            proc = subprocess.run(
+                [sys.executable, str(GENERATOR), str(Path(temp) / "new")],
+                capture_output=True,
+                text=True,
+                env=env,
+            )
+            self.assertNotEqual(proc.returncode, 0)
+            self.assertIn("identity", (proc.stdout + proc.stderr).lower())
+
+    def test_flag_beats_env(self) -> None:
+        sys.path.insert(0, str(REPO / "scripts"))
+        from ager_common import resolve_author
+
+        prev = os.environ.get("SECOND_BRAIN_IDENTITY")
+        os.environ["SECOND_BRAIN_IDENTITY"] = "grok-bot/northstar-console"
+        try:
+            self.assertEqual(resolve_author(None), "grok-bot/northstar-console")
+            self.assertEqual(
+                resolve_author("claude-code/lumenfield-detector"),
+                "claude-code/lumenfield-detector",
+            )
+        finally:
+            if prev is None:
+                os.environ.pop("SECOND_BRAIN_IDENTITY", None)
+            else:
+                os.environ["SECOND_BRAIN_IDENTITY"] = prev
+
+
 if __name__ == "__main__":
     unittest.main()
+

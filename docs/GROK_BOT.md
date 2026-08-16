@@ -43,9 +43,12 @@ export SECOND_BRAIN_IDENTITY="grok-bot/okf-agent-graph"
 The model proposes structure. Scripts materialize Markdown + YAML.
 
 ```bash
-python3 scripts/ager-validate.py --bundle "${SECOND_BRAIN_ROOT:-sample-ager}"
+python3 scripts/ager-init.py "${SECOND_BRAIN_ROOT:-sample-ager}-draft" --author "${SECOND_BRAIN_IDENTITY}"
+python3 scripts/ager-validate.py "${SECOND_BRAIN_ROOT:-sample-ager}"
 python3 scripts/ager_scan.py --help
 ```
+
+Writes fail closed without `--author` or `SECOND_BRAIN_IDENTITY`. Successful knowledge writes stamp `author` and emit a `WriteEvent`.
 
 **Forbidden:** silent raw dumps into the knowledge tree without type, provenance, or validation.
 
