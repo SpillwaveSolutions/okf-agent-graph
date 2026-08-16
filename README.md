@@ -1,15 +1,31 @@
 # okf-agent-graph
 
-**OKF Agent Graph Engineering Runtime (AGER)** — a Claude Code, Codex, and Grok Build plugin for authoring **multi-agent loop graphs** as OKF (Markdown + YAML).
+**OKF Agent Graph Engineering Runtime (AGER)** — a Claude Code, Codex, Grok Build, Grok Bot, and LangChain Deep Agents plugin for authoring **multi-agent loop graphs** as OKF (Markdown + YAML).
 
 | | |
 |---|---|
 | **Plugin name** | `okf-agent-graph` |
-| **Version** | 0.5.0 |
+| **Version** | 0.6.0 |
 | **Depends on** | [`okf-plugin`](https://github.com/SpillwaveSolutions/okf-plugin) → plugin **`okf-graph-eng`** |
 | **Related** | [`wiki_ticket_sdd`](https://github.com/SpillwaveSolutions/wiki_ticket_sdd) (ticket triggers / worklog) |
 | **Docs** | [User guide](./docs/user_guide/user-guide.md) · [AGER spec](./docs/AGER_SPEC.md) · [Reverse engineering](./docs/REVERSE_ENGINEERING.md) · [Design doc](./docs/designs/current_design_doc.md) · [Code walkthrough](./docs/designs/current_code_walkthrough.md) |
 | **License** | MIT |
+
+
+## Multi-host
+
+| Host | How it loads |
+|------|----------------|
+| Claude Code | Marketplace / local plugin (`.claude-plugin`) |
+| Grok Build | Claude-compatible, zero-config (`.grok-plugin` pins identity) |
+| Codex | `.codex-plugin` (skills; no extra Codex hooks — existing git hooks stay as-is) |
+| Agent Plugins 1.0 | Root `plugin.json` |
+| Grok Bot | Skills + [docs/GROK_BOT.md](docs/GROK_BOT.md) |
+| LangChain Deep Agents | `skills=` / SkillsMiddleware — [docs/LANG_CHAIN_DEEP_AGENTS.md](docs/LANG_CHAIN_DEEP_AGENTS.md) |
+
+Write isolation: [docs/ISOLATION.md](docs/ISOLATION.md). LoopPolicy / KnowledgeBind read `main` and write `brain/<actor>/<session-id>`. Public examples use fictional **lumenfield-detector** and **northstar-console** only.
+
+Also: [Onboarding](./docs/ONBOARDING.md) · skill `ager-session`.
 
 ## Why this plugin
 

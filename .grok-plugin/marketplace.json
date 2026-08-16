@@ -1,13 +1,13 @@
 {
   "name": "okf-agent-graph-marketplace",
   "description": "Optional native Grok marketplace metadata. Grok Build loads Claude plugins with zero config.",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "plugins": [
     {
       "name": "okf-agent-graph",
       "source": ".",
       "description": "AGER multi-agent loop schema. Depends on okf-graph-eng. Includes AGKC reverse engineering of agent codebases.",
-      "version": "0.5.0",
+      "version": "0.6.0",
       "compatibility": {
         "claude_plugin": true,
         "zero_config": true

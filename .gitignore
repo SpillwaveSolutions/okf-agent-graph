@@ -5,3 +5,7 @@ __pycache__/
 *.html
 .work/todo.local.jsonl
 .work/wiki-checkout/
+
+# Isolation session bookkeeping
+.brain-sessions/
+.brain-worktrees/
