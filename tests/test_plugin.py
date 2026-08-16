@@ -9,7 +9,7 @@ import unittest
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-VERSION = "0.5.0"
+VERSION = "0.6.0"
 
 
 class PluginPackagingTests(unittest.TestCase):
@@ -36,7 +36,7 @@ class PluginPackagingTests(unittest.TestCase):
 
     def test_codex_manifest_paths_resolve(self) -> None:
         manifest = json.loads((REPO / ".codex-plugin/plugin.json").read_text())
-        self.assertEqual(manifest["name"], REPO.name)
+        self.assertEqual(manifest["name"], "okf-agent-graph")
         self.assertTrue((REPO / manifest["skills"]).is_dir())
         self.assertNotIn("hooks", manifest)
 

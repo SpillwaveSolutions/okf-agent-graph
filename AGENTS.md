@@ -6,6 +6,8 @@ Grok Build / multi-agent host conventions (dual-host with Claude plugins).
 
 - Name: `okf-agent-graph`
 - Depends on: `okf-graph-eng` (SpillwaveSolutions/okf-plugin)
+- Hosts: Claude Code, Grok Build, Codex, Agent Plugins 1.0, Grok Bot, LangChain Deep Agents
+- Isolation: `docs/ISOLATION.md`. Open `/ager-session` before writing a shared second brain.
 
 ## When editing
 

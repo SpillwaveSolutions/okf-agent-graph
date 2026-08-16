@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.0 — 2026-08-15
+
+- **Multi-host bindings + write isolation.** Root Agent Plugins 1.0 `plugin.json`, Grok Bot / Deep Agents / isolation / onboarding docs, host wrappers, vendored `scripts/brain_session.py`, and `ager-session`.
+- Concurrent writers read `main` and write `brain/<actor>/<session-id>`. Isolation tests use fictional **lumenfield-detector** / **northstar-console** only.
+- LoopPolicy / KnowledgeBind: retrieve from `main`; persist loop/graph writes only in the session worktree.
+
 ## 0.5.1 — 2026-08-13
 
 - Register AGER types in `schemas/okf-concepts/registry.json` so a mixed

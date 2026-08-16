@@ -1,0 +1,24 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "okf-agent-graph",
+  "version": "0.6.0",
+  "description": "OKF Agent Graph Engineering Runtime (AGER): author multi-agent loop graphs as OKF and reverse-engineer existing agent stacks. Multi-host bindings and write isolation.",
+  "author": {
+    "name": "Rick Hightower",
+    "url": "https://github.com/RichardHightower"
+  },
+  "homepage": "https://github.com/SpillwaveSolutions/okf-agent-graph",
+  "repository": "https://github.com/SpillwaveSolutions/okf-agent-graph",
+  "license": "MIT",
+  "keywords": [
+    "okf-agent-graph",
+    "okf",
+    "isolation",
+    "agent-plugins",
+    "claude-code",
+    "grok-build",
+    "codex",
+    "deep-agents",
+    "grok-bot"
+  ]
+}
