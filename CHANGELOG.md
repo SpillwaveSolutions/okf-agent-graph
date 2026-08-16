@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.1 — 2026-08-16
+
+- Required identity on every knowledge write: `--author` or `SECOND_BRAIN_IDENTITY`.
+- `ager_common.resolve_author()` fail-closes without a claim. Capture, reverse-engineer, and init stamp `author` and emit a `WriteEvent`.
+- Scan / validate / print-only paths do not require identity.
+
 ## 0.6.0 — 2026-08-15
 
 - **Multi-host bindings + write isolation.** Root Agent Plugins 1.0 `plugin.json`, Grok Bot / Deep Agents / isolation / onboarding docs, host wrappers, vendored `scripts/brain_session.py`, and `ager-session`.

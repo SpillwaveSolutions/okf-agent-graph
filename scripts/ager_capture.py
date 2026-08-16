@@ -17,6 +17,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from ager_common import claimed_author, emit_write_event, resolve_author  # noqa: E402
 from ager_scan import scan_root, result_to_dict  # noqa: E402
 
 AGER_VERSION = "0.3.0"
@@ -75,7 +76,9 @@ def capture_from_scan(
     out_dir: Path,
     title: str,
     source_root: str,
+    author: str | None = None,
 ) -> dict:
+    author = claimed_author(author)
     out_dir = out_dir.resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
     groups = _group_findings(scan.get("findings", []))
@@ -94,6 +97,7 @@ def capture_from_scan(
                 ager_version=AGER_VERSION,
                 status="draft",
                 timestamp=timestamp,
+                author=author,
                 tags=["reverse-engineered", "ager", "agkc"],
                 source_root=source_root,
                 frameworks=frameworks,
@@ -142,6 +146,7 @@ def capture_from_scan(
             ager_version=AGER_VERSION,
             status="draft",
             timestamp=timestamp,
+            author=author,
             tags=["discovery"],
         ),
         "",
@@ -173,6 +178,7 @@ def capture_from_scan(
             ager_version=AGER_VERSION,
             status="draft",
             timestamp=timestamp,
+            author=author,
             tags=["framework"],
         ),
         "",
@@ -190,6 +196,7 @@ def capture_from_scan(
                 ager_version=AGER_VERSION,
                 status="draft",
                 timestamp=timestamp,
+                author=author,
                 tags=["framework", "reverse-engineered", fw],
                 framework=fw,
                 maps_to_ager=maps,
@@ -231,6 +238,7 @@ def capture_from_scan(
                 ager_version=AGER_VERSION,
                 status="draft",
                 timestamp=timestamp,
+                author=author,
                 tags=["reverse-engineered", kind],
             ),
             "",
@@ -256,6 +264,7 @@ def capture_from_scan(
                     ager_version=AGER_VERSION,
                     status="draft",
                     timestamp=timestamp,
+                    author=author,
                     tags=["reverse-engineered", kind],
                     framework=item.get("framework"),
                     confidence=item.get("confidence"),
@@ -318,6 +327,7 @@ def capture_from_scan(
                     ager_version=AGER_VERSION,
                     status="draft",
                     timestamp=timestamp,
+                    author=author,
                     tags=["runtime"],
                 ),
                 "",
@@ -343,6 +353,7 @@ def capture_from_scan(
                     ager_version=AGER_VERSION,
                     status="draft",
                     timestamp=timestamp,
+                    author=author,
                     tags=["prompt"],
                 ),
                 "",
@@ -381,7 +392,14 @@ def capture_from_scan(
     }
     _write(out_dir / "capture-report.json", json.dumps(report, indent=2))
     created.append("capture-report.json")
+    emit_write_event(
+        out_dir,
+        author=author,
+        typ="Reference",
+        dest=out_dir / "index.md",
+    )
     report["files_written"] = created
+    report["author"] = author
     return report
 
 
@@ -392,7 +410,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", required=True, help="Output draft AGER knowledge directory")
     parser.add_argument("--title", default="Reverse-engineered agent graph")
     parser.add_argument("--json", action="store_true")
+    parser.add_argument("--author", default="")
     args = parser.parse_args(argv)
+    author = resolve_author(args.author)
 
     if args.scan_json:
         scan = json.loads(args.scan_json.read_text(encoding="utf-8"))
@@ -407,6 +427,7 @@ def main(argv: list[str] | None = None) -> int:
         out_dir=Path(args.out),
         title=args.title,
         source_root=source_root,
+        author=author,
     )
     print(json.dumps(report, indent=2) if args.json else f"Wrote draft AGER bundle → {report['out_dir']} ({len(report['files_written'])} files)")
     return 0

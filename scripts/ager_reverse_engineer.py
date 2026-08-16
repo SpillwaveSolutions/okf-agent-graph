@@ -14,6 +14,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from ager_capture import capture_from_scan  # noqa: E402
+from ager_common import resolve_author  # noqa: E402
 from ager_scan import result_to_dict, scan_root  # noqa: E402
 
 
@@ -23,7 +24,9 @@ def reverse_engineer(
     out: Path,
     title: str,
     scan_json: Path | None = None,
+    author: str | None = None,
 ) -> dict:
+    author = resolve_author(author)
     root = root.resolve()
     scan = result_to_dict(scan_root(root))
     if scan_json:
@@ -35,6 +38,7 @@ def reverse_engineer(
         out_dir=out,
         title=title,
         source_root=str(root),
+        author=author,
     )
     return {
         "root": str(root),
@@ -68,7 +72,9 @@ def main(argv: list[str] | None = None) -> int:
         help="Optional path to write intermediate scan JSON",
     )
     parser.add_argument("--json", action="store_true")
+    parser.add_argument("--author", default="")
     args = parser.parse_args(argv)
+    author = resolve_author(args.author)
 
     root = Path(args.root).resolve()
     if not root.is_dir():
@@ -80,6 +86,7 @@ def main(argv: list[str] | None = None) -> int:
         out=Path(args.out),
         title=args.title,
         scan_json=args.scan_json,
+        author=author,
     )
 
     if args.json:

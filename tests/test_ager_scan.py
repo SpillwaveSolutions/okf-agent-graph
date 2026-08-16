@@ -67,6 +67,8 @@ class AgerScanTests(unittest.TestCase):
                 out,
                 "--title",
                 "Fixture Agent Graph",
+                "--author",
+                "claude-code/lumenfield-detector",
                 "--scan-json",
                 out / "scan.json",
                 "--json",
@@ -80,6 +82,7 @@ class AgerScanTests(unittest.TestCase):
             index = (out / "index.md").read_text(encoding="utf-8")
             self.assertIn('ager_version: "0.3.0"', index)
             self.assertIn("Fixture Agent Graph", index)
+            self.assertIn("author: \"claude-code/lumenfield-detector\"", index)
             self.assertIn("langgraph", index)
             self.assertGreaterEqual(len(payload["capture"]["files_written"]), 8)
 
@@ -98,6 +101,8 @@ class AgerScanTests(unittest.TestCase):
                 out,
                 "--title",
                 "From Scan",
+                "--author",
+                "claude-code/lumenfield-detector",
                 "--json",
             )
             self.assertEqual(proc2.returncode, 0, report)

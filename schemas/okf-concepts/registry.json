@@ -19,7 +19,8 @@
     "RetrievalBinding",
     "Tool",
     "Run",
-    "Trigger"
+    "Trigger",
+    "WriteEvent"
   ],
   "catalog_ownership": {
     "okf-agent-graph": ["runtime", "ops", "memory", "evaluation", "agents"]
