@@ -181,6 +181,119 @@ class TestRequiredIdentity(unittest.TestCase):
                 os.environ["SECOND_BRAIN_IDENTITY"] = prev
 
 
+class TestPackTokenBudget(unittest.TestCase):
+    def setUp(self) -> None:
+        sys.path.insert(0, str(REPO / "scripts"))
+        import ager_pack
+
+        self.ager_pack = ager_pack
+
+    def test_sample_tiny_pack_under_default_budget(self) -> None:
+        result = self.ager_pack.pack(SAMPLE, "agents/lead-researcher.md", tiny=True)
+        md, meta = self.ager_pack.finalize_markdown(result)
+        self.assertLessEqual(meta["tokens"], meta["budget"])
+        self.assertEqual(meta["budget"], 32_000)
+        self.assertIn("Lead researcher", md)
+        self.assertNotIn("/agents/index.md", [c["path"] for c in result["concepts"]])
+
+    def test_bodies_off_unless_root(self) -> None:
+        tmp = Path(tempfile.mkdtemp())
+        try:
+            agents = tmp / "agents"
+            agents.mkdir()
+            (tmp / "index.md").write_text(
+                '---\nokf_version: "0.2"\ntype: Reference\ntitle: t\n---\n',
+                encoding="utf-8",
+            )
+            (agents / "root.md").write_text(
+                "---\ntype: OrchestratorAgent\ntitle: Lumenfield Root\n"
+                "links:\n  - target: /agents/neighbor.md\n    rel: spawns\n"
+                "---\n# Lumenfield Root\n\nROOT_BODY_MARKER secret-of-root\n",
+                encoding="utf-8",
+            )
+            (agents / "neighbor.md").write_text(
+                "---\ntype: DoerAgent\ntitle: Neighbor\n"
+                "description: neighbor-frontmatter-only\n---\n"
+                "# Neighbor\n\nNEIGHBOR_BODY_MARKER must-not-pack\n",
+                encoding="utf-8",
+            )
+            result = self.ager_pack.pack(tmp, "agents/root.md", hops=1, max_nodes=8)
+            md, _meta = self.ager_pack.finalize_markdown(result)
+            self.assertIn("ROOT_BODY_MARKER", md)
+            self.assertNotIn("NEIGHBOR_BODY_MARKER", md)
+            self.assertIn("neighbor-frontmatter-only", md)
+        finally:
+            shutil.rmtree(tmp)
+
+    def test_inbound_edge_is_visible(self) -> None:
+        tmp = Path(tempfile.mkdtemp())
+        try:
+            agents = tmp / "agents"
+            agents.mkdir()
+            (tmp / "index.md").write_text(
+                '---\nokf_version: "0.2"\ntype: Reference\ntitle: t\n---\n',
+                encoding="utf-8",
+            )
+            (agents / "seed.md").write_text(
+                "---\ntype: DoerAgent\ntitle: Seed\n---\n# Seed\n",
+                encoding="utf-8",
+            )
+            (agents / "inbound.md").write_text(
+                "---\ntype: OrchestratorAgent\ntitle: Inbound\n"
+                "links:\n  - target: /agents/seed.md\n    rel: spawns\n"
+                "---\n# Inbound\n",
+                encoding="utf-8",
+            )
+            result = self.ager_pack.pack(tmp, "agents/seed.md", hops=1, max_nodes=8)
+            paths = [c["path"] for c in result["concepts"]]
+            self.assertIn("/agents/inbound.md", paths)
+        finally:
+            shutil.rmtree(tmp)
+
+    def test_over_budget_fails_closed(self) -> None:
+        tmp = Path(tempfile.mkdtemp())
+        try:
+            agents = tmp / "agents"
+            agents.mkdir()
+            (tmp / "index.md").write_text(
+                '---\nokf_version: "0.2"\ntype: Reference\ntitle: t\n---\n',
+                encoding="utf-8",
+            )
+            fat = "# Fat Root\n\n" + ("word " * 400)
+            (agents / "fat.md").write_text(
+                "---\ntype: OrchestratorAgent\ntitle: Fat Root\n---\n" + fat,
+                encoding="utf-8",
+            )
+            result = self.ager_pack.pack(tmp, "agents/fat.md", hops=0, max_nodes=1)
+            with self.assertRaises(self.ager_pack.PackBudgetError) as ctx:
+                self.ager_pack.finalize_markdown(result, max_tokens=20)
+            self.assertGreater(ctx.exception.tokens, ctx.exception.budget)
+            self.assertEqual(ctx.exception.budget, 20)
+            out = tmp / "should-not-exist.md"
+            rc = self.ager_pack.main(
+                [
+                    "agents/fat.md",
+                    "--repo",
+                    str(tmp),
+                    "--bundle",
+                    str(tmp),
+                    "--max-nodes",
+                    "1",
+                    "--hops",
+                    "0",
+                    "--max-tokens",
+                    "20",
+                    "--write",
+                    str(out),
+                    "--json",
+                ]
+            )
+            self.assertNotEqual(rc, 0)
+            self.assertFalse(out.exists())
+        finally:
+            shutil.rmtree(tmp)
+
+
 if __name__ == "__main__":
     unittest.main()
 

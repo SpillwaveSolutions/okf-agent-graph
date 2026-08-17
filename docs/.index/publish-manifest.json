@@ -254,9 +254,9 @@
    "frozen": false,
    "page_name": "CLI-Reference",
    "render": "doc+banner",
-   "render_hash": "7a8ca1d868bd",
+   "render_hash": "ff265849ea79",
    "source": "docs/user_guide/cli-reference.md",
-   "source_hash": "2be8786b0e80",
+   "source_hash": "5c6884fb20b2",
    "title": "CLI Reference",
    "truth_state": "current",
    "wiki_key": "guide/cli-reference"
@@ -266,9 +266,9 @@
    "frozen": false,
    "page_name": "Plugin-Guide",
    "render": "doc+banner",
-   "render_hash": "89ce82a07a1e",
+   "render_hash": "79fe9378feb8",
    "source": "docs/user_guide/plugin-guide.md",
-   "source_hash": "b26ab1998ce5",
+   "source_hash": "2656cff52a89",
    "title": "Plugin Guide",
    "truth_state": "current",
    "wiki_key": "guide/plugin-guide"

@@ -11,7 +11,8 @@ truth_state: current
 `okf-agent-graph` is the AGER domain plugin. It supplies the AGER specification,
 skills, canonical scaffold, generator, validator, and worked sample. The
 required `okf-graph-eng` plugin supplies general OKF link validation, typed-edge
-validation, impact analysis, packs, queries, and visualization.
+validation, impact analysis, queries, and visualization. ContextPacks are local
+(`ager_pack.py`): fail-closed 1/4-window budget, bodies off unless pack root.
 
 ## Install order
 
@@ -51,6 +52,7 @@ ships `.grok-plugin/marketplace.json` with the dependency relationship declared.
 | `skills/ager-init-graph/` | Atomic scaffold workflow |
 | `skills/ager-author/` | AGER concept and typed-edge authoring rules |
 | `skills/ager-validate/` | AGER checks plus delegation to OKF validation |
+| `skills/ager-pack/` | Fail-closed ContextPack (1/4 window, bodies off unless root) |
 | `skills/ager-compile/` | Framework crosswalk and adapter-stub guidance |
 | `skills/ager-scan/` | Detect agent frameworks in an existing repo |
 | `skills/ager-reverse-engineer/` | Capture a draft AGER bundle from code |
