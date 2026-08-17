@@ -8,7 +8,7 @@ truth_state: current
 
 # CLI reference
 
-AGER v0.4.0 ships two dependency-free Python entry points. Run them from the
+AGER ships dependency-free Python entry points. Run them from the
 plugin repository, or replace the script paths with the installed plugin root.
 
 ## Scaffold a bundle
@@ -58,6 +58,18 @@ The OKF command is supplied by the required `okf-graph-eng` plugin, not by this
 repository. See [[Plugin-Guide]] for installation and [[AGER-Specification]]
 for the data contract.
 
+## Pack a neighborhood
+
+```bash
+python3 scripts/ager_pack.py agents/lead-researcher.md --repo . --tiny
+python3 scripts/ager_pack.py agents/lead-researcher.md --repo . --hops 2 --max-tokens 8000
+```
+
+Default budget is 1/4 of `SECOND_BRAIN_WINDOW_TOKENS` (128000 → 32000). Over
+budget is a hard fail and `--write` is skipped. Neighbor bodies stay off unless
+that node is the pack root. Node clip (`--max-nodes` / `--tiny`) is not a token
+budget.
+
 ## Agent commands and skills
 
 | Task | Claude Code / Grok Build | Codex |
@@ -65,6 +77,7 @@ for the data contract.
 | Scaffold | `/ager-init` | `$ager-init-graph` |
 | Author concepts | `/ager-author` | `$ager-author` |
 | Validate | `/ager-validate` | `$ager-validate` |
+| Pack a neighborhood | `/ager-pack` | `$ager-pack` |
 | Map to a framework | `/ager-compile` | `$ager-compile` |
 
 The commands delegate to the corresponding skills. `ager-compile` emits
@@ -77,6 +90,7 @@ generator.
 |---|---|---|
 | `ager-init.py` | Bundle created and strict-valid | Destination exists or generated bundle is invalid |
 | `ager-validate.py` | No errors; and no warnings in strict mode | Structural error, or warning in strict mode |
+| `ager_pack.py` | Pack is under the token budget | Over budget (no `--write`) |
 | `okf-graph.py validate` | OKF graph satisfies selected checks | Broken links, invalid edges, or strict warnings |
 
 Next: [[User-Guide]] · [[AGER-Specification]] · [[Code-Walkthrough]]

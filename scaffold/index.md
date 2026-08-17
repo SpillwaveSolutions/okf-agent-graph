@@ -17,7 +17,7 @@ links:
 
 # {{TITLE}}
 
-Depends on **okf-graph-eng** for `validate` / `impact` / `pack`.
+Depends on **okf-graph-eng** for `validate` / `impact`. Pack with local `ager_pack.py`.
 
 ## Layout
 

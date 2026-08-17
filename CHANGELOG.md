@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.6.2 — 2026-08-16
+
+- Local ContextPack: `scripts/ager_pack.py`, `/ager-pack`, `$ager-pack`.
+- Default budget = 1/4 of `SECOND_BRAIN_WINDOW_TOKENS` (128000 → 32000).
+- Override: `--max-tokens` / `SECOND_BRAIN_PACK_MAX_TOKENS`.
+- **Fail-closed**: over-budget pack does not `--write`.
+- Bodies off unless that node is the pack root. Neighbors keep title / type / path / description.
+- Inbound typed edges are visible from the seed (same shape as PKC inbound index).
+- Catalog `index.md` files and `write-events/` are not concepts.
+- Node clip (`--max-nodes` / `--tiny`) is not a token budget.
+- Implements part of [okf-plugin#55](https://github.com/SpillwaveSolutions/okf-plugin/issues/55).
+
 ## 0.6.1 — 2026-08-16
 
 - Required identity on every knowledge write: `--author` or `SECOND_BRAIN_IDENTITY`.

@@ -9,7 +9,7 @@ import unittest
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-VERSION = "0.6.1"
+VERSION = "0.6.2"
 
 
 class PluginPackagingTests(unittest.TestCase):

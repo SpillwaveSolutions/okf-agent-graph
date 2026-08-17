@@ -5,7 +5,7 @@
 | | |
 |---|---|
 | **Plugin name** | `okf-agent-graph` |
-| **Version** | 0.6.1 |
+| **Version** | 0.6.2 |
 | **Depends on** | [`okf-plugin`](https://github.com/SpillwaveSolutions/okf-plugin) → plugin **`okf-graph-eng`** |
 | **Related** | [`wiki_ticket_sdd`](https://github.com/SpillwaveSolutions/wiki_ticket_sdd) (ticket triggers / worklog) |
 | **Docs** | [User guide](./docs/user_guide/user-guide.md) · [AGER spec](./docs/AGER_SPEC.md) · [Reverse engineering](./docs/REVERSE_ENGINEERING.md) · [Design doc](./docs/designs/current_design_doc.md) · [Code walkthrough](./docs/designs/current_code_walkthrough.md) |
@@ -78,7 +78,8 @@ Grok Build loads Claude-compatible plugins with zero extra config.
 | Capability | Provided by |
 |------------|-------------|
 | `okf validate` / `okf-graph.py validate` | **okf-graph-eng** |
-| Impact / pack / edges / visualize | **okf-graph-eng** |
+| Impact / edges / visualize | **okf-graph-eng** |
+| ContextPack (1/4-window, fail-closed) | **okf-agent-graph** (`ager_pack.py`) |
 | Authoring AgentNode basics | **okf-graph-eng** (`okf-author`) |
 | AGER types, loop policies, tools+rules, ops plane | **okf-agent-graph** (this repo) |
 | Validate AGER field rules | **okf-agent-graph** (`ager-validate`) + okf validate |
@@ -91,7 +92,8 @@ See [docs/DEPENDENCIES.md](./docs/DEPENDENCIES.md).
 2. `/ager-init` or `$ager-init-graph` — scaffold an AGER bundle
 3. `/ager-author` or `$ager-author` — add Orchestrator, Workers, Judge, LoopPolicy, Tools
 4. `/ager-validate` or `$ager-validate` — AGER rules + delegate to okf validate
-5. Optional: `/ager-compile` — emit adapter notes / stubs for a target framework  
+5. `/ager-pack` — tiny or 2-hop ContextPack. Fail-closed over the token budget.
+6. Optional: `/ager-compile` — emit adapter notes / stubs for a target framework  
 
 The scripts are also directly callable:
 
