@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.4
+
+- WikiTicket SDD (worklog) is the tracking system for this plugin.
+
+
 ## 0.6.3 — 2026-08-17
 
 - **Cursor host.** `.cursor-plugin/plugin.json` (Cursor Plugins) plus `.cursor/rules/second-brain.mdc`. Docs: `docs/CURSOR.md`. `docs/GROK_BOT.md` now covers Grok Bot spawning Cursor cloud agents.

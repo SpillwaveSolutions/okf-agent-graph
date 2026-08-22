@@ -1,6 +1,6 @@
 {
   "name": "okf-agent-graph",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "Author, scaffold, validate, map, and reverse-engineer portable multi-agent loop graphs using the OKF Agent Graph Engineering Runtime (AGER / AGKC).",
   "author": {
     "name": "Rick Hightower",
@@ -14,7 +14,9 @@
     "agent-graph",
     "multi-agent",
     "loop-engineering",
-    "ager"
+    "ager",
+    "worklog",
+    "wiki-ticket-sdd"
   ],
   "skills": "./skills/",
   "interface": {
