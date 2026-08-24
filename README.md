@@ -5,7 +5,7 @@
 | | |
 |---|---|
 | **Plugin name** | `okf-agent-graph` |
-| **Version** | 0.7.0 |
+| **Version** | 0.7.1 |
 | **Depends on** | [`okf-plugin`](https://github.com/SpillwaveSolutions/okf-plugin) → plugin **`okf-graph-eng`** |
 | **Related** | [`wiki_ticket_sdd`](https://github.com/SpillwaveSolutions/wiki_ticket_sdd) (ticket triggers / worklog) |
 | **Docs** | [Noun-ownership migration](./docs/user_guide/noun-ownership-migration.md) · [User guide](./docs/user_guide/user-guide.md) · [AGER spec](./docs/AGER_SPEC.md) · [Reverse engineering](./docs/REVERSE_ENGINEERING.md) · [Design doc](./docs/designs/current_design_doc.md) · [Code walkthrough](./docs/designs/current_code_walkthrough.md) |

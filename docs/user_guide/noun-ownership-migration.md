@@ -3,6 +3,7 @@ doc_type: guide
 slug: noun-ownership-migration
 title: Noun-ownership migration (AGER)
 truth_state: current
+wiki_key: guide/noun-ownership-migration
 ---
 
 # Noun-ownership migration (AGER 0.7.0)

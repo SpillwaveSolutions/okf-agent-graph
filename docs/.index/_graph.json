@@ -91,6 +91,11 @@
    "type": "targets"
   },
   {
+   "from": "item/01M0T3YW55CXRNSMNPRB4NXNR1",
+   "to": "release/v0.7.1",
+   "type": "targets"
+  },
+  {
    "from": "plan/2026-08-05-v0-4-0-quality-foundation",
    "to": "item/01KZ9N0WTCXZ9SVGDJBPA0TZ3K",
    "type": "produces"
@@ -160,6 +165,12 @@
    "doc_type": "guide",
    "source": "docs/user_guide/cli-reference.md",
    "title": "CLI Reference",
+   "truth_state": "current"
+  },
+  "guide/noun-ownership-migration": {
+   "doc_type": "guide",
+   "source": "docs/user_guide/noun-ownership-migration.md",
+   "title": "Noun-ownership migration (AGER)",
    "truth_state": "current"
   },
   "guide/plugin-guide": {
@@ -255,6 +266,11 @@
    "status": "todo",
    "title": "Own agent/harness nouns with x-impact schemas"
   },
+  "item/01M0T3YW55CXRNSMNPRB4NXNR1": {
+   "doc_type": "item",
+   "status": "done",
+   "title": "Noun-ownership migration guide for AGER graphs"
+  },
   "plan/2026-08-05-v0-4-0-quality-foundation": {
    "doc_type": "plan",
    "source": "docs/plans/2026-08-05-v0-4-0-quality-foundation.md",
@@ -265,6 +281,9 @@
    "doc_type": "release"
   },
   "release/v0.7.0": {
+   "doc_type": "release"
+  },
+  "release/v0.7.1": {
    "doc_type": "release"
   },
   "roadmap": {

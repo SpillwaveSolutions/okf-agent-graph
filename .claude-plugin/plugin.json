@@ -1,6 +1,6 @@
 {
   "name": "okf-agent-graph",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "OKF Agent Graph Engineering Runtime (AGER) \u2014 author multi-agent loop graphs as OKF and reverse-engineer existing Claude/OpenAI/LangChain/LangGraph/CrewAI/LlamaIndex/MCP/AgentCore codebases into AGER knowledge (AGKC). Depends on okf-plugin (okf-graph-eng).",
   "author": {
     "name": "Rick Hightower",

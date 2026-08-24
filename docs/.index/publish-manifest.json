@@ -1,5 +1,5 @@
 {
- "git_hash": "f6c2e5c",
+ "git_hash": "6118b4e",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "a3622366a651",
+   "render_hash": "6ad11fd7f217",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -70,6 +70,16 @@
    "title": "Release v0.7.0",
    "truth_state": "shipped",
    "wiki_key": "release/v0.7.0"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.7.1",
+   "render": "as-is",
+   "render_hash": "665be20de6e3",
+   "source": "docs/.index/rendered/releases/v0.7.1.md",
+   "title": "Release v0.7.1",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.7.1"
   },
   {
    "frozen": false,
@@ -222,6 +232,16 @@
    "wiki_key": "item/01M0SZFFRJ53QSTCHQQWGDW1K4"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M0T3YW55CXRNSMNPRB4NXNR1",
+   "render": "as-is",
+   "render_hash": "b9eeace759cd",
+   "source": "docs/.index/rendered/tickets/01M0T3YW55CXRNSMNPRB4NXNR1.md",
+   "title": "Noun-ownership migration guide for AGER graphs",
+   "truth_state": "done",
+   "wiki_key": "item/01M0T3YW55CXRNSMNPRB4NXNR1"
+  },
+  {
    "banner": "> **Snapshot** of release v0.4.0 (2026-08-06) \u2014 frozen record. The current version is [[Code-Walkthrough]].",
    "frozen": true,
    "page_name": "Code-Walkthrough-2026-08-06_v0.4.0-release",
@@ -284,6 +304,18 @@
   {
    "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
+   "page_name": "Noun-ownership-migration-(AGER)",
+   "render": "doc+banner",
+   "render_hash": "578ade9e1162",
+   "source": "docs/user_guide/noun-ownership-migration.md",
+   "source_hash": "32bfa8d94a86",
+   "title": "Noun-ownership migration (AGER)",
+   "truth_state": "current",
+   "wiki_key": "guide/noun-ownership-migration"
+  },
+  {
+   "banner": "> **Current** \u2014 this is the living version. Historical snapshots are linked from [[Index-Releases]].",
+   "frozen": false,
    "page_name": "Plugin-Guide",
    "render": "doc+banner",
    "render_hash": "79fe9378feb8",
@@ -298,9 +330,9 @@
    "frozen": false,
    "page_name": "User-Guide",
    "render": "doc+banner",
-   "render_hash": "ce223e137367",
+   "render_hash": "65a4f9bedfc8",
    "source": "docs/user_guide/user-guide.md",
-   "source_hash": "cf0b7a623322",
+   "source_hash": "0278be9a5344",
    "title": "User Guide",
    "truth_state": "current",
    "wiki_key": "guide/user-guide"
@@ -318,11 +350,11 @@
    "wiki_key": "plan/2026-08-05-v0-4-0-quality-foundation"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-24T13:31:09Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-24T15:55:50Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "ec484bea1b9c",
+   "render_hash": "766ca41545f3",
    "source": "docs/roadmap.md",
    "source_hash": "c668009525f1",
    "title": "Roadmap",
