@@ -20,6 +20,7 @@ record_output_to:
 failure_policy: /ops/failure-policy.md
 retry_policy: /ops/retry-policy.md
 status: active
+verified: true
 timestamp: 2026-08-04T00:00:00Z
 links:
   - target: /runtime/scratchpad.md

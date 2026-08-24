@@ -31,6 +31,7 @@ controls:
 on_exhaust: return_best
 on_goal: return
 status: active
+verified: true
 timestamp: {{TIMESTAMP}}
 ---
 

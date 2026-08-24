@@ -24,6 +24,7 @@ record_output_to:
   key: orchestrator_plans
   mode: append
 status: active
+verified: true
 timestamp: {{TIMESTAMP}}
 links:
   - target: /agents/worker.md

@@ -13,6 +13,7 @@ record_output_to:
   key: judgments
   mode: append
 status: active
+verified: true
 timestamp: {{TIMESTAMP}}
 links:
   - target: /evaluation/quality-rubric.md
