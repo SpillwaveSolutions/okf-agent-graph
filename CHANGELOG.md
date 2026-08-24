@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.7.0 — 2026-08-24
+
+### Added
+
+- **Noun ownership.** AGER now ships JSON schemas for the full agent/harness
+  set (51 types), including `AgentNode`, `Workflow`, `Harness`, `SharedState`,
+  `ToolCapability`, loop/runtime/ops/eval types, with `x-impact` for the graph
+  engine. `WriteEvent` stays in second-brain-core / the graph engine write
+  journal; AGER does not own it.
+- README lists every AGER noun.
+
+### Changed
+
+- Catalog / ContextPack stay in okf-plugin. Authoring AgentNode is no longer
+  an okf-graph-eng concern.
+
 ## 0.6.4
 
 - WikiTicket SDD (worklog) is the tracking system for this plugin.

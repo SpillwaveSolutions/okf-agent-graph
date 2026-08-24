@@ -5,7 +5,7 @@
 | | |
 |---|---|
 | **Plugin name** | `okf-agent-graph` |
-| **Version** | 0.6.2 |
+| **Version** | 0.7.0 |
 | **Depends on** | [`okf-plugin`](https://github.com/SpillwaveSolutions/okf-plugin) → plugin **`okf-graph-eng`** |
 | **Related** | [`wiki_ticket_sdd`](https://github.com/SpillwaveSolutions/wiki_ticket_sdd) (ticket triggers / worklog) |
 | **Docs** | [User guide](./docs/user_guide/user-guide.md) · [AGER spec](./docs/AGER_SPEC.md) · [Reverse engineering](./docs/REVERSE_ENGINEERING.md) · [Design doc](./docs/designs/current_design_doc.md) · [Code walkthrough](./docs/designs/current_code_walkthrough.md) |
@@ -41,6 +41,26 @@ Also: [Onboarding](./docs/ONBOARDING.md) · skill `ager-session`.
 - KnowledgeBind / RetrievalBinding (OKF / project knowledge)
 
 Use as a **spec** and as **runtime-loadable config** (adapters map to LangGraph, CrewAI, OpenAI Agents, Anthropic patterns).
+
+## Nouns (this plugin)
+
+AGER owns **agent / harness / loop / runtime / eval** types. Catalog and ContextPack live in okf-plugin.
+
+AgentNode, OrchestratorAgent, WorkerAgent, JudgeAgent, SynthesizerAgent, RouterAgent, GuardrailAgent, HumanGate, AgentGraph, AgentGraphModule, Workflow, FanOut, FanIn, ParallelGroup, ControlEdge, Harness, SharedState, ToolCapability, Tool, ToolRule, LoopPolicy, LoopControl, ScratchPad, LineageRecord, EpisodeStore, KnowledgeBind, RetrievalBinding, SharedChannel, MemoryArtifact, ContextIsolationPolicy, InputSchema, OutputSchema, Run, Trigger, FailurePolicy, RetryPolicy, Compensation, CircuitBreaker, DeadLetter, CheckpointPolicy, RunTrace, StreamPolicy, HandoffPolicy, Rubric, Criterion, Judgment, EvalSuite, SecretRef, RateLimit, ConcurrencyLimit, DataClassPolicy.
+
+| Plane | Nouns |
+|-------|-------|
+| Agents | AgentNode, OrchestratorAgent, WorkerAgent, JudgeAgent, SynthesizerAgent, RouterAgent, GuardrailAgent, HumanGate |
+| Graph | AgentGraph, AgentGraphModule, Workflow, FanOut, FanIn, ParallelGroup, ControlEdge, Harness |
+| Tools | ToolCapability, Tool, ToolRule |
+| Control | LoopPolicy, LoopControl, SharedState, ScratchPad |
+| Memory | LineageRecord, EpisodeStore, KnowledgeBind, RetrievalBinding, SharedChannel, MemoryArtifact, ContextIsolationPolicy |
+| Contracts | InputSchema, OutputSchema |
+| Ops | Run, Trigger, FailurePolicy, RetryPolicy, Compensation, CircuitBreaker, DeadLetter, CheckpointPolicy, RunTrace, StreamPolicy, HandoffPolicy |
+| Eval | Rubric, Criterion, Judgment, EvalSuite |
+| Quotas / secrets | SecretRef, RateLimit, ConcurrencyLimit, DataClassPolicy |
+
+`RateLimit` is also a SAC config/gateway noun. AGER `RateLimit` is runtime quota on a tool or loop.
 
 **Reverse engineering (AGKC):** point the plugin at an existing agent repo — Claude/ChatGPT API, LangChain, LangGraph, CrewAI, LlamaIndex, Claude Agent SDK, Deep Agents, MCP, Bedrock AgentCore, hardened microVMs/containers — and extract prompts, tools/JSON-RPC/MCP schemas, orchestration graphs, loop/harness policies, and runtime isolation into draft AGER knowledge. Same shape as [system-architecture-capture](https://github.com/SpillwaveSolutions/system-architecture-capture) and [data-engineering-knowledge-capture](https://github.com/SpillwaveSolutions/data-engineering-knowledge-capture), for the agent-graph domain.
 
@@ -80,7 +100,7 @@ Grok Build loads Claude-compatible plugins with zero extra config.
 | `okf validate` / `okf-graph.py validate` | **okf-graph-eng** |
 | Impact / edges / visualize | **okf-graph-eng** |
 | ContextPack (1/4-window, fail-closed) | **okf-agent-graph** (`ager_pack.py`) |
-| Authoring AgentNode basics | **okf-graph-eng** (`okf-author`) |
+| Authoring AgentNode / Workflow / Harness | **okf-agent-graph** (`ager-author`) |
 | AGER types, loop policies, tools+rules, ops plane | **okf-agent-graph** (this repo) |
 | Validate AGER field rules | **okf-agent-graph** (`ager-validate`) + okf validate |
 

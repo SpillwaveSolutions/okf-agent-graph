@@ -15,6 +15,7 @@ scratchpad: /runtime/scratchpad.md
 failure_policy: /ops/failure-policy.md
 concurrency: /ops/concurrency.md
 status: active
+verified: true
 timestamp: 2026-08-04T00:00:00Z
 links:
   - target: /runtime/loop-policy.md

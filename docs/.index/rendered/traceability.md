@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Own agent/harness nouns with x-impact schemas
+`01M0SZFFRJ53QSTCHQQWGDW1K4` · status: todo
+- targets: release/v0.7.0
+
 ### Backfill v0.4.0 milestones on shipped feature items
 `01KZF848RZQBY5H0FH8JCKWKZT` · status: cancelled
 - targets: release/v0.4.0

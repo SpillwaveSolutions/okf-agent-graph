@@ -11,6 +11,7 @@ record_output_to:
   key: best_draft
   mode: set
 status: active
+verified: true
 timestamp: 2026-08-04T00:00:00Z
 links:
   - target: /runtime/scratchpad.md

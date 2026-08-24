@@ -13,6 +13,7 @@ record_output_to:
   key: judgments
   mode: append
 status: active
+verified: true
 timestamp: 2026-08-04T00:00:00Z
 links:
   - target: /evaluation/quality-rubric.md
