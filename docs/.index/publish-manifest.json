@@ -1,5 +1,5 @@
 {
- "git_hash": "f86de18",
+ "git_hash": "f6c2e5c",
  "pages": [
   {
    "frozen": false,
@@ -45,7 +45,7 @@
    "frozen": false,
    "page_name": "Index-Traceability",
    "render": "as-is",
-   "render_hash": "9a00960513a3",
+   "render_hash": "a3622366a651",
    "source": "docs/.index/rendered/traceability.md",
    "title": "Traceability Index",
    "truth_state": "current",
@@ -60,6 +60,16 @@
    "title": "Release v0.4.0",
    "truth_state": "shipped",
    "wiki_key": "release/v0.4.0"
+  },
+  {
+   "frozen": false,
+   "page_name": "Release-v0.7.0",
+   "render": "as-is",
+   "render_hash": "a60e1751d315",
+   "source": "docs/.index/rendered/releases/v0.7.0.md",
+   "title": "Release v0.7.0",
+   "truth_state": "shipped",
+   "wiki_key": "release/v0.7.0"
   },
   {
    "frozen": false,
@@ -202,6 +212,16 @@
    "wiki_key": "item/01KZF848RZQBY5H0FH8JCKWKZT"
   },
   {
+   "frozen": false,
+   "page_name": "Ticket-01M0SZFFRJ53QSTCHQQWGDW1K4",
+   "render": "as-is",
+   "render_hash": "5ed692111fbd",
+   "source": "docs/.index/rendered/tickets/01M0SZFFRJ53QSTCHQQWGDW1K4.md",
+   "title": "Own agent/harness nouns with x-impact schemas",
+   "truth_state": "open",
+   "wiki_key": "item/01M0SZFFRJ53QSTCHQQWGDW1K4"
+  },
+  {
    "banner": "> **Snapshot** of release v0.4.0 (2026-08-06) \u2014 frozen record. The current version is [[Code-Walkthrough]].",
    "frozen": true,
    "page_name": "Code-Walkthrough-2026-08-06_v0.4.0-release",
@@ -298,13 +318,13 @@
    "wiki_key": "plan/2026-08-05-v0-4-0-quality-foundation"
   },
   {
-   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-07T23:15:24Z. Historical snapshots are linked from [[Index-Releases]].",
+   "banner": "> **Current** \u2014 this is the living version; regenerated at 2026-08-24T13:31:09Z. Historical snapshots are linked from [[Index-Releases]].",
    "frozen": false,
    "page_name": "Roadmap",
    "render": "doc+banner",
-   "render_hash": "3e0b3ddbae09",
+   "render_hash": "ec484bea1b9c",
    "source": "docs/roadmap.md",
-   "source_hash": "65538697716e",
+   "source_hash": "c668009525f1",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki_key": "roadmap"
