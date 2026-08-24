@@ -5,9 +5,10 @@
 ### Added
 
 - **Noun ownership.** AGER now ships JSON schemas for the full agent/harness
-  set (52 types), including `AgentNode`, `Workflow`, `Harness`, `SharedState`,
+  set (51 types), including `AgentNode`, `Workflow`, `Harness`, `SharedState`,
   `ToolCapability`, loop/runtime/ops/eval types, with `x-impact` for the graph
-  engine.
+  engine. `WriteEvent` stays in second-brain-core / the graph engine write
+  journal; AGER does not own it.
 - README lists every AGER noun.
 
 ### Changed

@@ -46,7 +46,7 @@ Use as a **spec** and as **runtime-loadable config** (adapters map to LangGraph,
 
 AGER owns **agent / harness / loop / runtime / eval** types. Catalog and ContextPack live in okf-plugin.
 
-AgentNode, OrchestratorAgent, WorkerAgent, JudgeAgent, SynthesizerAgent, RouterAgent, GuardrailAgent, HumanGate, AgentGraph, AgentGraphModule, Workflow, FanOut, FanIn, ParallelGroup, ControlEdge, Harness, SharedState, ToolCapability, Tool, ToolRule, LoopPolicy, LoopControl, ScratchPad, LineageRecord, EpisodeStore, KnowledgeBind, RetrievalBinding, SharedChannel, MemoryArtifact, ContextIsolationPolicy, InputSchema, OutputSchema, Run, Trigger, FailurePolicy, RetryPolicy, Compensation, CircuitBreaker, DeadLetter, CheckpointPolicy, RunTrace, StreamPolicy, HandoffPolicy, Rubric, Criterion, Judgment, EvalSuite, SecretRef, RateLimit, ConcurrencyLimit, DataClassPolicy, WriteEvent.
+AgentNode, OrchestratorAgent, WorkerAgent, JudgeAgent, SynthesizerAgent, RouterAgent, GuardrailAgent, HumanGate, AgentGraph, AgentGraphModule, Workflow, FanOut, FanIn, ParallelGroup, ControlEdge, Harness, SharedState, ToolCapability, Tool, ToolRule, LoopPolicy, LoopControl, ScratchPad, LineageRecord, EpisodeStore, KnowledgeBind, RetrievalBinding, SharedChannel, MemoryArtifact, ContextIsolationPolicy, InputSchema, OutputSchema, Run, Trigger, FailurePolicy, RetryPolicy, Compensation, CircuitBreaker, DeadLetter, CheckpointPolicy, RunTrace, StreamPolicy, HandoffPolicy, Rubric, Criterion, Judgment, EvalSuite, SecretRef, RateLimit, ConcurrencyLimit, DataClassPolicy.
 
 | Plane | Nouns |
 |-------|-------|
@@ -58,7 +58,7 @@ AgentNode, OrchestratorAgent, WorkerAgent, JudgeAgent, SynthesizerAgent, RouterA
 | Contracts | InputSchema, OutputSchema |
 | Ops | Run, Trigger, FailurePolicy, RetryPolicy, Compensation, CircuitBreaker, DeadLetter, CheckpointPolicy, RunTrace, StreamPolicy, HandoffPolicy |
 | Eval | Rubric, Criterion, Judgment, EvalSuite |
-| Quotas / secrets | SecretRef, RateLimit, ConcurrencyLimit, DataClassPolicy, WriteEvent |
+| Quotas / secrets | SecretRef, RateLimit, ConcurrencyLimit, DataClassPolicy |
 
 `RateLimit` is also a SAC config/gateway noun. AGER `RateLimit` is runtime quota on a tool or loop.
 

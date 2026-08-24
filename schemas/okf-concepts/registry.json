@@ -56,8 +56,7 @@
     "SecretRef",
     "RateLimit",
     "ConcurrencyLimit",
-    "DataClassPolicy",
-    "WriteEvent"
+    "DataClassPolicy"
   ],
   "catalog_ownership": {
     "okf-agent-graph": [
