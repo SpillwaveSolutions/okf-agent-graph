@@ -11,6 +11,8 @@ truth_state: current
 AGER (`okf-agent-graph`) helps you scaffold, author, validate, and map portable
 multi-agent graphs expressed as OKF Markdown and YAML.
 
+Existing graphs: [noun-ownership migration](./noun-ownership-migration.md) (v0.7.0 — `WriteEvent` is not an AGER noun; pin okf-plugin v0.8.0).
+
 Plugin release **0.5.0** implements AGER document schema **0.3.0**. These
 versions intentionally differ: upgrading the plugin does not change the
 document schema unless `ager_version` changes.

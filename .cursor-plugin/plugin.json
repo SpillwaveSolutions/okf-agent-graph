@@ -1,6 +1,6 @@
 {
   "name": "okf-agent-graph",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "OKF Agent Graph Engineering Runtime (AGER): author multi-agent loop graphs as OKF and reverse-engineer existing agent stacks. Multi-host bindings and write isolation.",
   "author": {
     "name": "Rick Hightower"

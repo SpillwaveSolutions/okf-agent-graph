@@ -73,6 +73,15 @@
    "wiki_key": "guide/cli-reference"
   },
   {
+   "canonical_key": "guide/noun-ownership-migration",
+   "doc_type": "guide",
+   "slug": "noun-ownership-migration",
+   "source": "docs/user_guide/noun-ownership-migration.md",
+   "title": "Noun-ownership migration (AGER)",
+   "truth_state": "current",
+   "wiki_key": "guide/noun-ownership-migration"
+  },
+  {
    "canonical_key": "guide/plugin-guide",
    "doc_type": "guide",
    "slug": "plugin-guide",
@@ -126,11 +135,11 @@
   {
    "canonical_key": "roadmap",
    "doc_type": "roadmap",
-   "generated_at": "2026-08-24T13:31:09Z",
-   "git_hash": "f6c2e5c",
+   "generated_at": "2026-08-24T15:55:50Z",
+   "git_hash": "6118b4e",
    "slug": "roadmap",
    "source": "docs/roadmap.md",
-   "source_hash": "291f8ecb",
+   "source_hash": "6b8794ab",
    "title": "Roadmap",
    "truth_state": "current",
    "wiki": "https://github.com/SpillwaveSolutions/okf-agent-graph/wiki/Roadmap",

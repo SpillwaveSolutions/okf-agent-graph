@@ -2,6 +2,10 @@
 
 _The evidence chain: plan → item → ticket → code → release, forward and backward. Generated from `docs/.index/_graph.json`; do not edit._
 
+### Noun-ownership migration guide for AGER graphs
+`01M0T3YW55CXRNSMNPRB4NXNR1` · status: done
+- targets: release/v0.7.1
+
 ### Own agent/harness nouns with x-impact schemas
 `01M0SZFFRJ53QSTCHQQWGDW1K4` · status: todo
 - targets: release/v0.7.0
