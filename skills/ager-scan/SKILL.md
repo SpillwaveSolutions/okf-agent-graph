@@ -54,3 +54,6 @@ python3 "${CLAUDE_PLUGIN_ROOT}/scripts/ager_scan.py" --root "$SOURCE_ROOT" --jso
 
 - Scan is best-effort and confidence-scored; it does not execute untrusted code.
 - Prefer promoting high-confidence findings via **ager-author** after human review.
+- Generic keyword hits (`Supervisor / orchestrator role`, container isolation, …)
+  collapse to one finding with multiple `evidence_paths` instead of one node per
+  file. Tool matches without a real identifier (`Tool: { json blob }`) are dropped.

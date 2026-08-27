@@ -42,6 +42,38 @@ def _slug(value: str) -> str:
     return value.strip("-")[:60] or "item"
 
 
+def resolve_link_prefix(
+    out_dir: Path,
+    *,
+    bundle_root: Path | str | None = None,
+    link_prefix: str | None = None,
+) -> str:
+    """Prefix for OKF root-relative links when --out sits under a shared bundle.
+
+    Empty string → `/tools/read.md` (out dir is the bundle root).
+    `agent-graph` → `/agent-graph/tools/read.md` (out is knowledge/agent-graph).
+    """
+    if link_prefix:
+        part = str(link_prefix).strip().strip("/")
+        return f"/{part}" if part else ""
+    if not bundle_root:
+        return ""
+    out = Path(out_dir).resolve()
+    root = Path(bundle_root).resolve()
+    try:
+        rel = out.relative_to(root)
+    except ValueError as exc:
+        raise ValueError(f"--out {out} is not inside --bundle-root {root}") from exc
+    if rel == Path("."):
+        return ""
+    return "/" + rel.as_posix()
+
+
+def href(prefix: str, rel: str) -> str:
+    rel = str(rel).lstrip("/")
+    return f"{prefix}/{rel}" if prefix else f"/{rel}"
+
+
 def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -89,10 +121,19 @@ def capture_from_scan(
     title: str,
     source_root: str,
     author: str | None = None,
+    bundle_root: Path | str | None = None,
+    link_prefix: str | None = None,
 ) -> dict:
     author = claimed_author(author)
     out_dir = out_dir.resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
+    prefix = resolve_link_prefix(
+        out_dir, bundle_root=bundle_root, link_prefix=link_prefix
+    )
+
+    def link(rel: str) -> str:
+        return href(prefix, rel)
+
     groups = _group_findings(scan.get("findings", []))
     frameworks = scan.get("frameworks", [])
     created: list[str] = []
@@ -134,18 +175,18 @@ def capture_from_scan(
             "",
             "## Catalog",
             "",
-            "- [Discoveries](/discoveries/index.md)",
-            "- [Frameworks](/frameworks/index.md)",
-            "- [Agents](/agents/index.md)",
-            "- [Skills](/skills/index.md)",
-            "- [Prompts](/prompts/index.md)",
-            "- [Tools](/tools/index.md)",
-            "- [MCP](/mcp/index.md)",
-            "- [Graphs](/graphs/index.md)",
-            "- [Loops](/runtime/index.md)",
-            "- [Sandboxes](/runtime/sandboxes/index.md)",
-            "- [Hyperscaler](/runtime/hyperscaler/index.md)",
-            "- [Orchestration](/patterns/index.md)",
+            "- [Discoveries](" + link("discoveries/index.md") + ")",
+            "- [Frameworks](" + link("frameworks/index.md") + ")",
+            "- [Agents](" + link("agents/index.md") + ")",
+            "- [Skills](" + link("skills/index.md") + ")",
+            "- [Prompts](" + link("prompts/index.md") + ")",
+            "- [Tools](" + link("tools/index.md") + ")",
+            "- [MCP](" + link("mcp/index.md") + ")",
+            "- [Graphs](" + link("graphs/index.md") + ")",
+            "- [Loops](" + link("runtime/index.md") + ")",
+            "- [Sandboxes](" + link("runtime/sandboxes/index.md") + ")",
+            "- [Hyperscaler](" + link("runtime/hyperscaler/index.md") + ")",
+            "- [Orchestration](" + link("patterns/index.md") + ")",
         ]
     )
     _write(out_dir / "index.md", index_body)
@@ -230,7 +271,7 @@ def capture_from_scan(
         rel = f"frameworks/{_slug(fw)}.md"
         _write(out_dir / rel, "\n".join(body))
         created.append(rel)
-        fw_index.append(f"- [{fw}](/{rel})")
+        fw_index.append(f"- [{fw}]({link(rel)})")
     if not frameworks:
         fw_index.append("- (none detected)")
     _write(out_dir / "frameworks/index.md", "\n".join(fw_index))
@@ -275,15 +316,18 @@ def capture_from_scan(
             created.append(f"{folder}/index.md")
             return
 
-        # Cap concept files to keep bundles reviewable
+        used_slugs: set[str] = set()
         for idx, item in enumerate(items[:40], start=1):
-            slug = _slug(f"{idx}-{item['title']}")
+            base = _slug(str(item.get("name") or item["title"]))
+            slug = base if base not in used_slugs else _slug(f"{idx}-{item['title']}")
+            used_slugs.add(slug)
             rel = f"{folder}/{slug}.md"
             loc = f"{item.get('path')}:{item.get('line')}" if item.get("path") else source_root
             item_type = _ager_type(item, concept_type)
             tags = ["reverse-engineered", kind]
             if item.get("host"):
                 tags.append(str(item["host"]))
+            evidence_paths = item.get("evidence_paths") or []
             body = [
                 _frontmatter(
                     type=item_type,
@@ -298,12 +342,13 @@ def capture_from_scan(
                     confidence=item.get("confidence"),
                     evidence_path=item.get("path"),
                     evidence_line=item.get("line"),
+                    evidence_paths=evidence_paths or None,
                     maps_to_ager=item.get("maps_to") or maps_default,
                     host=item.get("host"),
                     plugin=item.get("plugin"),
                     tools=item.get("tools") or None,
                     links=[
-                        {"target": "/discoveries/index.md", "rel": "derived_from"},
+                        {"target": link("discoveries/index.md"), "rel": "derived_from"},
                     ],
                 ),
                 "",
@@ -314,22 +359,30 @@ def capture_from_scan(
                 f"- **Confidence:** {item.get('confidence')}",
                 f"- **Evidence:** `{loc}`",
                 "",
-                "## Excerpt",
-                "",
-                "```text",
-                (item.get("excerpt") or "")[:500],
-                "```",
-                "",
-                "## Next authoring steps",
-                "",
-                "1. Promote this draft into a typed AGER concept under the main bundle.",
-                "2. Attach JSON Schema I/O where applicable.",
-                "3. Link with typed edges (`uses`, `delegates_to`, `controlled_by`, …).",
-                "4. Run `ager-validate` / `okf validate`.",
             ]
+            if evidence_paths:
+                body.extend(["## Evidence paths", ""])
+                body.extend(f"- `{path}`" for path in evidence_paths)
+                body.append("")
+            body.extend(
+                [
+                    "## Excerpt",
+                    "",
+                    "```text",
+                    (item.get("excerpt") or "")[:500],
+                    "```",
+                    "",
+                    "## Next authoring steps",
+                    "",
+                    "1. Promote this draft into a typed AGER concept under the main bundle.",
+                    "2. Attach JSON Schema I/O where applicable.",
+                    "3. Link with typed edges (`uses`, `delegates_to`, `controlled_by`, …).",
+                    "4. Run `ager-validate` / `okf validate`.",
+                ]
+            )
             _write(out_dir / rel, "\n".join(body))
             created.append(rel)
-            index_lines.append(f"- [{item['title'][:80]}](/{rel}) — `{loc}`")
+            index_lines.append(f"- [{item['title'][:80]}]({link(rel)}) — `{loc}`")
         if len(items) > 40:
             index_lines.append(f"- … {len(items) - 40} additional findings omitted; see discoveries")
         _write(out_dir / folder / "index.md", "\n".join(index_lines))
@@ -388,9 +441,9 @@ def capture_from_scan(
             concept = _ager_type(item, "WorkerAgent")
             loc = f"{item.get('path')}:{item.get('line')}" if item.get("path") else source_root
             tool_names = [t for t in (item.get("tools") or []) if t]
-            links = [{"target": "/discoveries/index.md", "rel": "derived_from"}]
+            links = [{"target": link("discoveries/index.md"), "rel": "derived_from"}]
             for tool_name in tool_names:
-                links.append({"target": f"/tools/{_slug(tool_name)}.md", "rel": "uses"})
+                links.append({"target": link(f"tools/{_slug(tool_name)}.md"), "rel": "uses"})
             body = [
                 _frontmatter(
                     type=concept,
@@ -428,8 +481,8 @@ def capture_from_scan(
             ]
             _write(out_dir / rel, "\n".join(body))
             created.append(rel)
-            agent_paths[name] = f"/{rel}"
-            agent_index.append(f"- [{name}](/{rel}) — `{concept}` (`{loc}`)")
+            agent_paths[name] = link(rel)
+            agent_index.append(f"- [{name}]({link(rel)}) — `{concept}` (`{loc}`)")
         _write(out_dir / "agents/index.md", "\n".join(agent_index))
         created.append("agents/index.md")
 
@@ -470,7 +523,7 @@ def capture_from_scan(
                     plugin=item.get("plugin"),
                     evidence_path=item.get("path"),
                     maps_to_ager=item.get("maps_to") or "Skill / Prompt",
-                    links=[{"target": "/discoveries/index.md", "rel": "derived_from"}],
+                    links=[{"target": link("discoveries/index.md"), "rel": "derived_from"}],
                 ),
                 "",
                 f"# {name}",
@@ -483,7 +536,7 @@ def capture_from_scan(
             ]
             _write(out_dir / rel, "\n".join(body))
             created.append(rel)
-            skill_index.append(f"- [{name}](/{rel}) — `{loc}`")
+            skill_index.append(f"- [{name}]({link(rel)}) — `{loc}`")
         _write(out_dir / "skills/index.md", "\n".join(skill_index))
         created.append("skills/index.md")
 
@@ -513,7 +566,7 @@ def capture_from_scan(
                     plugin=item.get("plugin"),
                     evidence_path=item.get("path"),
                     maps_to_ager="Tool",
-                    links=[{"target": "/discoveries/index.md", "rel": "derived_from"}],
+                    links=[{"target": link("discoveries/index.md"), "rel": "derived_from"}],
                 ),
                 "",
                 f"# {tool_name}",
@@ -525,7 +578,7 @@ def capture_from_scan(
             ]
             _write(out_dir / rel, "\n".join(body))
             created.append(rel)
-            tool_index_extra.append(f"- [{tool_name}](/{rel}) — `{loc}`")
+            tool_index_extra.append(f"- [{tool_name}]({link(rel)}) — `{loc}`")
 
         graph_index_extra: list[str] = []
         for item in graphs:
@@ -554,7 +607,7 @@ def capture_from_scan(
                 ),
                 nodes[0] if nodes else None,
             )
-            links = [{"target": "/discoveries/index.md", "rel": "derived_from"}]
+            links = [{"target": link("discoveries/index.md"), "rel": "derived_from"}]
             for node in nodes:
                 links.append({"target": node, "rel": "contains"})
             body = [
@@ -587,7 +640,7 @@ def capture_from_scan(
             ]
             _write(out_dir / rel, "\n".join(body))
             created.append(rel)
-            graph_index_extra.append(f"- [{plugin} agent graph](/{rel})")
+            graph_index_extra.append(f"- [{plugin} agent graph]({link(rel)})")
 
         return {
             "graph_index": "\n".join(graph_index_extra),
@@ -661,9 +714,9 @@ def capture_from_scan(
                 "",
                 "# Runtime & harness",
                 "",
-                "- [Loop controls](/runtime/loops/index.md)",
-                "- [Sandboxes / microVMs](/runtime/sandboxes/index.md)",
-                "- [Hyperscaler runtimes](/runtime/hyperscaler/index.md)",
+                "- [Loop controls](" + link("runtime/loops/index.md") + ")",
+                "- [Sandboxes / microVMs](" + link("runtime/sandboxes/index.md") + ")",
+                "- [Hyperscaler runtimes](" + link("runtime/hyperscaler/index.md") + ")",
             ]
         ),
     )
@@ -687,7 +740,7 @@ def capture_from_scan(
                 "",
                 "# Prompts",
                 "",
-                "- [System prompts](/prompts/system/index.md)",
+                "- [System prompts](" + link("prompts/system/index.md") + ")",
                 "- Task / template prompts are listed in this tree after capture.",
             ]
         ),
@@ -737,6 +790,17 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--scan-json", type=Path, help="Existing ager_scan JSON report")
     parser.add_argument("--out", required=True, help="Output draft AGER knowledge directory")
     parser.add_argument("--title", default="Reverse-engineered agent graph")
+    parser.add_argument(
+        "--bundle-root",
+        type=Path,
+        default=None,
+        help="OKF bundle root when --out is a nested subtree (prefixes links)",
+    )
+    parser.add_argument(
+        "--link-prefix",
+        default="",
+        help="Explicit link prefix (e.g. agent-graph). Overrides --bundle-root.",
+    )
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--author", default="")
     args = parser.parse_args(argv)
@@ -756,6 +820,8 @@ def main(argv: list[str] | None = None) -> int:
         title=args.title,
         source_root=source_root,
         author=author,
+        bundle_root=args.bundle_root,
+        link_prefix=args.link_prefix or None,
     )
     print(json.dumps(report, indent=2) if args.json else f"Wrote draft AGER bundle → {report['out_dir']} ({len(report['files_written'])} files)")
     return 0

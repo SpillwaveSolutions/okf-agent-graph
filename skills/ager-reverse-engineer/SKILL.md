@@ -29,6 +29,19 @@ python3 "${CLAUDE_PLUGIN_ROOT}/scripts/ager_reverse_engineer.py" \
   --json
 ```
 
+When `$DEST_BUNDLE` is a subtree of a shared OKF bundle (typical: `knowledge/agent-graph` next to PKC/SAC packs), pass the bundle root so links resolve from there, not from the subtree:
+
+```bash
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/ager_reverse_engineer.py" \
+  --root "$SOURCE_ROOT" \
+  --out knowledge/agent-graph \
+  --bundle-root knowledge \
+  --title "$TITLE" \
+  --json
+```
+
+That writes `/agent-graph/tools/read.md` instead of `/tools/read.md`. `--link-prefix agent-graph` does the same when the bundle root is implied.
+
 3. Review the draft tree:
 
 ```text

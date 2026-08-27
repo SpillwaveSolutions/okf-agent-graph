@@ -49,6 +49,14 @@ python3 scripts/ager_reverse_engineer.py \
   --scan-json discovered-ager/scan.json \
   --json
 
+# Nested under a shared OKF bundle (PKC + SAC + AGER in one knowledge/ tree)
+python3 scripts/ager_reverse_engineer.py \
+  --root /path/to/project \
+  --out knowledge/agent-graph \
+  --bundle-root knowledge \
+  --title "My agent system" \
+  --json
+
 # After promotion into a full AGER bundle
 python3 scripts/ager-validate.py agent-graph --strict
 ```
