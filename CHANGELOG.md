@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+## 0.8.0 — 2026-08-27
+
+- **Plugin discovery for AGKC** ([#14](https://github.com/SpillwaveSolutions/okf-agent-graph/issues/14)).
+  `ager_scan.py` now finds Claude Code, Grok Build, Codex, Cursor, and Agent
+  Plugins 1.0 surfaces *before* the keyword scan: `.claude-plugin/plugin.json`,
+  `.claude/agents/*.md`, `.claude/skills/*/SKILL.md`, plus the undotted
+  `claude/`, `grok/`, `codex/` twins, `.codex-plugin`, `.grok-plugin`, and
+  root `plugin.json`. Frontmatter `name` / `description` / `tools` map a
+  subagent to `WorkerAgent` or `JudgeAgent`, and a SKILL.md that is the
+  orchestrator to `OrchestratorAgent`. Capture emits those as typed concepts
+  under `agents/`, `tools/`, and `graphs/` instead of `patterns/` prose.
+
 ## 0.7.1 — 2026-08-24
 
 - Noun-ownership migration guide:

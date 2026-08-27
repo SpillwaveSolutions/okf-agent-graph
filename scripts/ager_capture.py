@@ -23,6 +23,18 @@ from ager_scan import scan_root, result_to_dict  # noqa: E402
 AGER_VERSION = "0.3.0"
 OKF_VERSION = "0.2"
 
+AGER_TYPES = {
+    "Tool",
+    "AgentGraph",
+    "WorkerAgent",
+    "JudgeAgent",
+    "OrchestratorAgent",
+    "SynthesizerAgent",
+    "RouterAgent",
+    "GuardrailAgent",
+    "AgentNode",
+}
+
 
 def _slug(value: str) -> str:
     value = value.lower().strip()
@@ -124,6 +136,8 @@ def capture_from_scan(
             "",
             "- [Discoveries](/discoveries/index.md)",
             "- [Frameworks](/frameworks/index.md)",
+            "- [Agents](/agents/index.md)",
+            "- [Skills](/skills/index.md)",
             "- [Prompts](/prompts/index.md)",
             "- [Tools](/tools/index.md)",
             "- [MCP](/mcp/index.md)",
@@ -222,14 +236,24 @@ def capture_from_scan(
     _write(out_dir / "frameworks/index.md", "\n".join(fw_index))
     created.append("frameworks/index.md")
 
+    def _ager_type(item: dict, default: str) -> str:
+        role = str(item.get("role") or "").strip()
+        if role in AGER_TYPES:
+            return role
+        maps = str(item.get("maps_to") or "").strip()
+        if maps in AGER_TYPES:
+            return maps
+        return default
+
     def _emit_kind(
         kind: str,
         folder: str,
         concept_type: str,
         maps_default: str,
         index_title: str,
+        skip=None,
     ) -> None:
-        items = groups.get(kind, [])
+        items = [i for i in groups.get(kind, []) if not (skip and skip(i))]
         index_lines = [
             _frontmatter(
                 type="Reference",
@@ -256,21 +280,28 @@ def capture_from_scan(
             slug = _slug(f"{idx}-{item['title']}")
             rel = f"{folder}/{slug}.md"
             loc = f"{item.get('path')}:{item.get('line')}" if item.get("path") else source_root
+            item_type = _ager_type(item, concept_type)
+            tags = ["reverse-engineered", kind]
+            if item.get("host"):
+                tags.append(str(item["host"]))
             body = [
                 _frontmatter(
-                    type=concept_type,
+                    type=item_type,
                     title=item["title"][:120],
                     description=item.get("excerpt", "")[:240] or item["title"],
                     ager_version=AGER_VERSION,
                     status="draft",
                     timestamp=timestamp,
                     author=author,
-                    tags=["reverse-engineered", kind],
+                    tags=tags,
                     framework=item.get("framework"),
                     confidence=item.get("confidence"),
                     evidence_path=item.get("path"),
                     evidence_line=item.get("line"),
                     maps_to_ager=item.get("maps_to") or maps_default,
+                    host=item.get("host"),
+                    plugin=item.get("plugin"),
+                    tools=item.get("tools") or None,
                     links=[
                         {"target": "/discoveries/index.md", "rel": "derived_from"},
                     ],
@@ -304,12 +335,309 @@ def capture_from_scan(
         _write(out_dir / folder / "index.md", "\n".join(index_lines))
         created.append(f"{folder}/index.md")
 
+    def _emit_plugin_roles() -> dict[str, str]:
+        """Write typed Agent / Tool / AgentGraph concepts for plugin surfaces."""
+        agent_paths: dict[str, str] = {}
+        findings = scan.get("findings", [])
+        role_items = [
+            item
+            for item in findings
+            if item.get("kind") in {"agent", "skill"}
+            and _ager_type(item, "") in AGER_TYPES
+        ]
+        skill_items = [
+            item
+            for item in findings
+            if item.get("kind") == "skill" and _ager_type(item, "Reference") not in AGER_TYPES
+        ]
+        plugin_tools = [
+            item for item in findings if item.get("kind") == "tool" and item.get("plugin")
+        ]
+        graphs = [
+            item
+            for item in findings
+            if item.get("kind") == "graph" and item.get("plugin") and _ager_type(item, "") == "AgentGraph"
+        ]
+
+        agent_index = [
+            _frontmatter(
+                type="Reference",
+                title="Agents",
+                description="Plugin subagents and skills mapped to AGER agent nouns",
+                ager_version=AGER_VERSION,
+                status="draft",
+                timestamp=timestamp,
+                author=author,
+                tags=["reverse-engineered", "agent", "plugin"],
+            ),
+            "",
+            "# Agents",
+            "",
+        ]
+        if not role_items:
+            agent_index.append("- (none)")
+        seen_names: set[str] = set()
+        for item in role_items:
+            name = str(item.get("name") or item["title"])
+            key = f"{item.get('plugin') or ''}:{name}".lower()
+            if key in seen_names:
+                continue
+            seen_names.add(key)
+            slug = _slug(name)
+            rel = f"agents/{slug}.md"
+            concept = _ager_type(item, "WorkerAgent")
+            loc = f"{item.get('path')}:{item.get('line')}" if item.get("path") else source_root
+            tool_names = [t for t in (item.get("tools") or []) if t]
+            links = [{"target": "/discoveries/index.md", "rel": "derived_from"}]
+            for tool_name in tool_names:
+                links.append({"target": f"/tools/{_slug(tool_name)}.md", "rel": "uses"})
+            body = [
+                _frontmatter(
+                    type=concept,
+                    title=name,
+                    description=item.get("excerpt", "")[:240] or name,
+                    ager_version=AGER_VERSION,
+                    status="draft",
+                    timestamp=timestamp,
+                    author=author,
+                    tags=["reverse-engineered", "plugin", concept, item.get("host") or "plugin"],
+                    framework=item.get("framework"),
+                    host=item.get("host"),
+                    plugin=item.get("plugin"),
+                    confidence=item.get("confidence"),
+                    evidence_path=item.get("path"),
+                    evidence_line=item.get("line"),
+                    maps_to_ager=concept,
+                    tools=tool_names or None,
+                    links=links,
+                ),
+                "",
+                f"# {name}",
+                "",
+                f"- **AGER type:** `{concept}`",
+                f"- **Host:** `{item.get('host') or 'plugin'}`",
+                f"- **Plugin:** `{item.get('plugin') or ''}`",
+                f"- **Tools:** {', '.join(f'`{t}`' for t in tool_names) or '(none declared)'}",
+                f"- **Evidence:** `{loc}`",
+                "",
+                "## Excerpt",
+                "",
+                "```text",
+                (item.get("excerpt") or "")[:500],
+                "```",
+            ]
+            _write(out_dir / rel, "\n".join(body))
+            created.append(rel)
+            agent_paths[name] = f"/{rel}"
+            agent_index.append(f"- [{name}](/{rel}) — `{concept}` (`{loc}`)")
+        _write(out_dir / "agents/index.md", "\n".join(agent_index))
+        created.append("agents/index.md")
+
+        skill_index = [
+            _frontmatter(
+                type="Reference",
+                title="Skills",
+                description="Plugin SKILL.md files that are not themselves AGER agent roles",
+                ager_version=AGER_VERSION,
+                status="draft",
+                timestamp=timestamp,
+                author=author,
+                tags=["reverse-engineered", "skill", "plugin"],
+            ),
+            "",
+            "# Skills",
+            "",
+        ]
+        if not skill_items:
+            skill_index.append("- (none)")
+        for item in skill_items:
+            name = str(item.get("name") or item["title"])
+            slug = _slug(name)
+            rel = f"skills/{slug}.md"
+            loc = f"{item.get('path')}:{item.get('line')}" if item.get("path") else source_root
+            body = [
+                _frontmatter(
+                    type="Reference",
+                    title=name,
+                    description=item.get("excerpt", "")[:240] or name,
+                    ager_version=AGER_VERSION,
+                    status="draft",
+                    timestamp=timestamp,
+                    author=author,
+                    tags=["reverse-engineered", "skill"],
+                    framework=item.get("framework"),
+                    host=item.get("host"),
+                    plugin=item.get("plugin"),
+                    evidence_path=item.get("path"),
+                    maps_to_ager=item.get("maps_to") or "Skill / Prompt",
+                    links=[{"target": "/discoveries/index.md", "rel": "derived_from"}],
+                ),
+                "",
+                f"# {name}",
+                "",
+                f"- **Evidence:** `{loc}`",
+                "",
+                "```text",
+                (item.get("excerpt") or "")[:500],
+                "```",
+            ]
+            _write(out_dir / rel, "\n".join(body))
+            created.append(rel)
+            skill_index.append(f"- [{name}](/{rel}) — `{loc}`")
+        _write(out_dir / "skills/index.md", "\n".join(skill_index))
+        created.append("skills/index.md")
+
+        # Unique plugin-declared tools under their real names.
+        seen_tools: set[str] = set()
+        tool_index_extra: list[str] = []
+        for item in plugin_tools:
+            tool_name = str(item.get("name") or item["title"]).strip()
+            slug = _slug(tool_name)
+            if not tool_name or slug in seen_tools:
+                continue
+            seen_tools.add(slug)
+            rel = f"tools/{slug}.md"
+            loc = f"{item.get('path')}:{item.get('line')}" if item.get("path") else source_root
+            body = [
+                _frontmatter(
+                    type="Tool",
+                    title=tool_name,
+                    description=item.get("excerpt", "")[:240] or tool_name,
+                    ager_version=AGER_VERSION,
+                    status="draft",
+                    timestamp=timestamp,
+                    author=author,
+                    tags=["reverse-engineered", "tool", "plugin"],
+                    framework=item.get("framework"),
+                    host=item.get("host"),
+                    plugin=item.get("plugin"),
+                    evidence_path=item.get("path"),
+                    maps_to_ager="Tool",
+                    links=[{"target": "/discoveries/index.md", "rel": "derived_from"}],
+                ),
+                "",
+                f"# {tool_name}",
+                "",
+                f"- **AGER type:** `Tool`",
+                f"- **Evidence:** `{loc}`",
+                "",
+                (item.get("excerpt") or tool_name),
+            ]
+            _write(out_dir / rel, "\n".join(body))
+            created.append(rel)
+            tool_index_extra.append(f"- [{tool_name}](/{rel}) — `{loc}`")
+
+        graph_index_extra: list[str] = []
+        for item in graphs:
+            plugin = str(item.get("plugin") or item.get("name") or "plugin")
+            slug = _slug(plugin)
+            rel = f"graphs/{slug}.md"
+            members = [
+                m
+                for m in role_items
+                if (m.get("plugin") or "") == (item.get("plugin") or "")
+                and _ager_type(m, "") in AGER_TYPES
+            ]
+            nodes = []
+            seen_nodes: set[str] = set()
+            for member in members:
+                name = str(member.get("name") or member["title"])
+                target = agent_paths.get(name)
+                if target and target not in seen_nodes:
+                    seen_nodes.add(target)
+                    nodes.append(target)
+            entry = next(
+                (
+                    agent_paths.get(str(m.get("name") or m["title"]))
+                    for m in members
+                    if _ager_type(m, "") == "OrchestratorAgent"
+                ),
+                nodes[0] if nodes else None,
+            )
+            links = [{"target": "/discoveries/index.md", "rel": "derived_from"}]
+            for node in nodes:
+                links.append({"target": node, "rel": "contains"})
+            body = [
+                _frontmatter(
+                    type="AgentGraph",
+                    title=f"{plugin} agent graph",
+                    description=item.get("excerpt", "")[:240] or plugin,
+                    ager_version=AGER_VERSION,
+                    status="draft",
+                    timestamp=timestamp,
+                    author=author,
+                    tags=["reverse-engineered", "plugin", "AgentGraph"],
+                    framework=item.get("framework"),
+                    host=item.get("host"),
+                    plugin=plugin,
+                    evidence_path=item.get("path"),
+                    maps_to_ager="AgentGraph",
+                    entry=entry,
+                    nodes=nodes or None,
+                    links=links,
+                ),
+                "",
+                f"# {plugin} agent graph",
+                "",
+                f"- **AGER type:** `AgentGraph`",
+                f"- **Entry:** `{entry or '(none)'}`",
+                f"- **Nodes:** {', '.join(f'`{n}`' for n in nodes) or '(none)'}",
+                "",
+                (item.get("excerpt") or ""),
+            ]
+            _write(out_dir / rel, "\n".join(body))
+            created.append(rel)
+            graph_index_extra.append(f"- [{plugin} agent graph](/{rel})")
+
+        return {
+            "graph_index": "\n".join(graph_index_extra),
+            "tool_index": "\n".join(tool_index_extra),
+        }
+
+    plugin_extra = _emit_plugin_roles()
+
     _emit_kind("system_prompt", "prompts/system", "Reference", "AgentNode.instructions", "System prompts")
     _emit_kind("prompt", "prompts", "Reference", "Prompt", "Prompts")
-    _emit_kind("tool", "tools", "Reference", "Tool", "Tools")
+    _emit_kind(
+        "tool",
+        "tools",
+        "Tool",
+        "Tool",
+        "Tools",
+        skip=lambda i: bool(i.get("plugin")),
+    )
+    if plugin_extra.get("tool_index"):
+        tools_index = out_dir / "tools/index.md"
+        if tools_index.is_file():
+            existing = tools_index.read_text(encoding="utf-8")
+            if "\n- (none)\n" in existing and existing.strip().endswith("- (none)"):
+                existing = existing.replace("- (none)", plugin_extra["tool_index"], 1)
+                tools_index.write_text(existing.rstrip() + "\n", encoding="utf-8")
+            else:
+                tools_index.write_text(
+                    existing.rstrip() + "\n" + plugin_extra["tool_index"] + "\n",
+                    encoding="utf-8",
+                )
     _emit_kind("mcp", "mcp", "Reference", "Tool + JsonRpcSchema", "MCP / JSON-RPC")
     _emit_kind("schema", "schemas", "Reference", "InputSchema / OutputSchema", "Schemas")
-    _emit_kind("graph", "graphs", "Reference", "AgentGraph", "Graphs")
+    _emit_kind(
+        "graph",
+        "graphs",
+        "AgentGraph",
+        "AgentGraph",
+        "Graphs",
+        skip=lambda i: bool(i.get("plugin") and _ager_type(i, "") == "AgentGraph"),
+    )
+    if plugin_extra.get("graph_index"):
+        graphs_index = out_dir / "graphs/index.md"
+        if graphs_index.is_file():
+            graphs_index.write_text(
+                graphs_index.read_text(encoding="utf-8").rstrip()
+                + "\n"
+                + plugin_extra["graph_index"]
+                + "\n",
+                encoding="utf-8",
+            )
     _emit_kind("loop", "runtime/loops", "Reference", "LoopPolicy + LoopControl", "Loop controls")
     _emit_kind("orchestration", "patterns", "Reference", "OrchestratorAgent / HandoffPolicy", "Orchestration patterns")
     _emit_kind("sandbox", "runtime/sandboxes", "Reference", "ContextIsolationPolicy", "Hardened sandboxes")

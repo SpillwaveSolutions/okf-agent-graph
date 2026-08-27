@@ -2,6 +2,10 @@
 
 | Detector id | Signals (examples) | Maps to AGER |
 |-------------|-------------------|--------------|
+| claude-code-plugin | `.claude-plugin/plugin.json`, `.claude/agents/*.md`, `.claude/skills/*/SKILL.md`, `claude/` | WorkerAgent, JudgeAgent, OrchestratorAgent, Tool, AgentGraph |
+| grok-plugin | `.grok-plugin/`, `.grok/agents`, `.grok/skills`, `grok/` | same |
+| codex-plugin | `.codex-plugin/plugin.json`, `.codex/agents`, `.codex/skills`, `codex/` | same |
+| agent-plugins | root `plugin.json` (`agent-plugins.org`), `agents/`, `skills/` | same |
 | langgraph | `StateGraph`, `add_conditional_edges` | AgentGraph, ControlEdge, LoopControl |
 | langchain | `ChatPromptTemplate`, `create_react_agent` | AgentNode, Tool, Prompt |
 | crewai | `Crew(`, `Process.hierarchical` | OrchestratorAgent, WorkerAgent |

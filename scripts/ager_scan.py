@@ -5,6 +5,9 @@ Reverse-engineering counterpart to forward authoring (ager-init / ager-author).
 Mirrors system-architecture-capture / data-engineering-knowledge-capture scanners,
 but for agent graphs: prompts, MCP/JSON-RPC tools, orchestration, loops, harnesses,
 hyperscaler runtimes, and hardened microVM/container sandboxes.
+
+Also discovers Claude Code, Grok Build, Codex, Cursor, and Agent Plugins 1.0
+surfaces (plugin.json, host agents/, host skills/) as first-class Agent/Tool nodes.
 """
 
 from __future__ import annotations
@@ -15,6 +18,8 @@ import re
 import sys
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
+
+from ager_plugins import PluginFinding, scan_plugin_surfaces
 
 SKIP_DIRS = {
     ".git",
@@ -65,6 +70,11 @@ class Finding:
     framework: str | None = None
     path: str | None = None
     line: int | None = None
+    name: str | None = None
+    role: str | None = None
+    tools: list[str] = field(default_factory=list)
+    host: str | None = None
+    plugin: str | None = None
 
 
 @dataclass
@@ -611,14 +621,41 @@ def _iter_files(root: Path) -> list[Path]:
     return files
 
 
+def _finding_from_plugin(item: PluginFinding) -> Finding:
+    return Finding(
+        kind=item.kind,
+        title=item.title,
+        evidence=item.evidence,
+        excerpt=item.excerpt,
+        confidence=item.confidence,
+        maps_to=item.maps_to,
+        framework=item.framework,
+        path=item.path,
+        line=item.line,
+        name=item.name,
+        role=item.role,
+        tools=list(item.tools),
+        host=item.host,
+        plugin=item.plugin,
+    )
+
+
 def scan_root(root: Path) -> ScanResult:
     root = root.resolve()
     result = ScanResult(root=str(root))
     frameworks: set[str] = set()
     findings: list[Finding] = []
 
+    plugin_scan = scan_plugin_surfaces(root)
+    frameworks |= plugin_scan.frameworks
+    consumed = set(plugin_scan.consumed_paths)
+    for item in plugin_scan.findings:
+        findings.append(_finding_from_plugin(item))
+
     for path in _iter_files(root):
         rel = path.relative_to(root).as_posix()
+        if rel in consumed:
+            continue
         try:
             text = path.read_text(encoding="utf-8", errors="ignore")
         except OSError:
@@ -630,6 +667,8 @@ def scan_root(root: Path) -> ScanResult:
         _scan_tools_and_mcp(text, rel, findings, file_frameworks or frameworks)
         _scan_orchestration(text, rel, findings, file_frameworks or frameworks)
         _scan_runtime_and_sandbox(text, rel, findings)
+
+    result.files_scanned += len(consumed)
 
     # Dedupe near-identical findings (same kind+title+path+line)
     seen: set[tuple] = set()
