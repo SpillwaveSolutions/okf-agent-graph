@@ -25,6 +25,8 @@ def reverse_engineer(
     title: str,
     scan_json: Path | None = None,
     author: str | None = None,
+    bundle_root: Path | None = None,
+    link_prefix: str | None = None,
 ) -> dict:
     author = resolve_author(author)
     root = root.resolve()
@@ -39,6 +41,8 @@ def reverse_engineer(
         title=title,
         source_root=str(root),
         author=author,
+        bundle_root=bundle_root,
+        link_prefix=link_prefix,
     )
     return {
         "root": str(root),
@@ -66,6 +70,17 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--title", default="Reverse-engineered agent graph")
     parser.add_argument(
+        "--bundle-root",
+        type=Path,
+        default=None,
+        help="OKF bundle root when --out is a nested subtree (prefixes links, e.g. knowledge/)",
+    )
+    parser.add_argument(
+        "--link-prefix",
+        default="",
+        help="Explicit link prefix (e.g. agent-graph). Overrides --bundle-root inference.",
+    )
+    parser.add_argument(
         "--scan-json",
         type=Path,
         default=None,
@@ -87,6 +102,8 @@ def main(argv: list[str] | None = None) -> int:
         title=args.title,
         scan_json=args.scan_json,
         author=author,
+        bundle_root=args.bundle_root,
+        link_prefix=args.link_prefix or None,
     )
 
     if args.json:

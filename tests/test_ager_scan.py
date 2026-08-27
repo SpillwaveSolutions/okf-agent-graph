@@ -323,5 +323,194 @@ class PluginDiscoveryTests(unittest.TestCase):
             )
 
 
+class NestedBundleLinkTests(unittest.TestCase):
+    """Issue #16: links must be bundle-root relative when --out is nested."""
+
+    def test_nested_out_without_prefix_is_wrong_for_shared_knowledge(self) -> None:
+        """Reproduce: default capture writes /tools/read.md even under knowledge/agent-graph."""
+        from ager_capture import capture_from_scan
+        from ager_scan import result_to_dict, scan_root
+
+        scan = result_to_dict(scan_root(PLUGIN_FIXTURE))
+        with tempfile.TemporaryDirectory(prefix="ager-nested-") as temp:
+            bundle = Path(temp) / "knowledge"
+            out = bundle / "agent-graph"
+            capture_from_scan(
+                scan,
+                out_dir=out,
+                title="Nested",
+                source_root=str(PLUGIN_FIXTURE),
+                author="claude-code/lumenfield-detector",
+            )
+            doer = (out / "agents/enhancer-doer.md").read_text(encoding="utf-8")
+            self.assertIn("target: /tools/read.md", doer)
+
+    def test_bundle_root_prefixes_links(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="ager-prefix-") as temp:
+            bundle = Path(temp) / "knowledge"
+            out = bundle / "agent-graph"
+            proc, payload = run_json(
+                sys.executable,
+                REVERSE,
+                "--root",
+                PLUGIN_FIXTURE,
+                "--out",
+                out,
+                "--bundle-root",
+                bundle,
+                "--title",
+                "Reliable Agentic Lab",
+                "--author",
+                "claude-code/lumenfield-detector",
+                "--json",
+            )
+            self.assertEqual(proc.returncode, 0, payload)
+            doer = (out / "agents/enhancer-doer.md").read_text(encoding="utf-8")
+            self.assertIn("target: /agent-graph/tools/read.md", doer)
+            self.assertIn("target: /agent-graph/tools/grep.md", doer)
+            self.assertIn("target: /agent-graph/tools/glob.md", doer)
+            self.assertNotIn("target: /tools/read.md\n", doer)
+            self.assertIn("target: /agent-graph/discoveries/index.md", doer)
+
+            graph_files = [
+                p for p in (out / "graphs").glob("*.md") if p.name != "index.md"
+            ]
+            graph_bodies = "\n".join(p.read_text(encoding="utf-8") for p in graph_files)
+            self.assertIn("target: /agent-graph/agents/enhancer-doer.md", graph_bodies)
+            self.assertIn("target: /agent-graph/agents/enhancer-judge.md", graph_bodies)
+            self.assertIn("target: /agent-graph/agents/enhancer-loop.md", graph_bodies)
+            self.assertIn('entry: "/agent-graph/agents/enhancer-loop.md"', graph_bodies)
+
+            index = (out / "index.md").read_text(encoding="utf-8")
+            self.assertIn("](/agent-graph/agents/index.md)", index)
+            self.assertIn("](/agent-graph/tools/index.md)", index)
+
+    def test_link_prefix_flag_overrides_bundle_root(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="ager-lp-") as temp:
+            out = Path(temp) / "discovered"
+            proc, payload = run_json(
+                sys.executable,
+                REVERSE,
+                "--root",
+                PLUGIN_FIXTURE,
+                "--out",
+                out,
+                "--link-prefix",
+                "packs/ager",
+                "--author",
+                "claude-code/lumenfield-detector",
+                "--json",
+            )
+            self.assertEqual(proc.returncode, 0, payload)
+            doer = (out / "agents/enhancer-doer.md").read_text(encoding="utf-8")
+            self.assertIn("target: /packs/ager/tools/read.md", doer)
+
+
+class ScanNoiseTests(unittest.TestCase):
+    """Issue #17: collapse generic patterns; drop unnamed Tool: ... nodes."""
+
+    def test_orchestrator_keyword_collapses_to_one_pattern(self) -> None:
+        proc, payload = run_json(sys.executable, SCAN, "--root", PLUGIN_FIXTURE, "--json")
+        self.assertEqual(proc.returncode, 0, payload)
+        orch = [
+            f
+            for f in payload["findings"]
+            if f["kind"] == "orchestration"
+            and f["title"] == "Supervisor / orchestrator role"
+        ]
+        self.assertEqual(
+            len(orch),
+            1,
+            f"expected one collapsed orchestrator pattern, got {len(orch)}: "
+            f"{[(f.get('path'), f.get('evidence_paths')) for f in orch]}",
+        )
+        paths = orch[0].get("evidence_paths") or []
+        joined = " ".join(paths)
+        self.assertIn("labs/INSTRUCTIONS.md", joined)
+        self.assertIn("docs/workshop.md", joined)
+        self.assertIn("notes/runbook.md", joined)
+
+    def test_capture_writes_one_pattern_file_with_citations(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="ager-pat-") as temp:
+            out = Path(temp) / "out"
+            proc, payload = run_json(
+                sys.executable,
+                REVERSE,
+                "--root",
+                PLUGIN_FIXTURE,
+                "--out",
+                out,
+                "--author",
+                "claude-code/lumenfield-detector",
+                "--json",
+            )
+            self.assertEqual(proc.returncode, 0, payload)
+            pattern_files = [
+                p for p in (out / "patterns").glob("*.md") if p.name != "index.md"
+            ]
+            orch = [
+                p
+                for p in pattern_files
+                if "orchestrator" in p.read_text(encoding="utf-8").lower()
+            ]
+            self.assertEqual(
+                len(orch),
+                1,
+                f"expected one orchestrator pattern file, got {orch}",
+            )
+            body = orch[0].read_text(encoding="utf-8")
+            self.assertIn("labs/INSTRUCTIONS.md", body)
+            self.assertIn("docs/workshop.md", body)
+            self.assertIn("notes/runbook.md", body)
+
+    def test_unnamed_tool_findings_are_dropped(self) -> None:
+        proc, payload = run_json(sys.executable, SCAN, "--root", FIXTURE, "--json")
+        self.assertEqual(proc.returncode, 0, payload)
+        tools = [f for f in payload["findings"] if f["kind"] == "tool"]
+        titles = [f["title"] for f in tools]
+        for title in titles:
+            self.assertFalse(
+                title.startswith("Tool:"),
+                f"unnamed/prefixed tool survived: {title!r}",
+            )
+            self.assertNotIn("{", title)
+            self.assertNotIn("\n", title)
+            self.assertRegex(title, r"^[A-Za-z_][A-Za-z0-9_.-]*$")
+        names = {f.get("name") or f["title"] for f in tools}
+        self.assertIn("web_search", names)
+        self.assertEqual(
+            [t for t in titles if t.lower() == "web_search"].__len__(),
+            1,
+            f"web_search should collapse to one node, got {titles}",
+        )
+
+    def test_capture_does_not_write_tool_ellipsis_files(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="ager-tools-") as temp:
+            out = Path(temp) / "out"
+            proc, payload = run_json(
+                sys.executable,
+                REVERSE,
+                "--root",
+                FIXTURE,
+                "--out",
+                out,
+                "--author",
+                "claude-code/lumenfield-detector",
+                "--json",
+            )
+            self.assertEqual(proc.returncode, 0, payload)
+            tool_files = [
+                p for p in (out / "tools").glob("*.md") if p.name != "index.md"
+            ]
+            self.assertTrue(tool_files, "expected named tool files")
+            for path in tool_files:
+                text = path.read_text(encoding="utf-8")
+                self.assertNotRegex(path.name, r"^(\d+-)?tool-")
+                self.assertNotIn("title: \"Tool:", text)
+                self.assertNotIn("title: \"Tool: {", text)
+            names = {p.stem for p in tool_files}
+            self.assertIn("web-search", names)
+
+
 if __name__ == "__main__":
     unittest.main()

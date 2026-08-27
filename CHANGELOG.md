@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+## 0.8.1 — 2026-08-27
+
+- **Nested `--out` links** ([#16](https://github.com/SpillwaveSolutions/okf-agent-graph/issues/16)).
+  `ager_capture.py` / `ager_reverse_engineer.py` accept `--bundle-root` (or
+  `--link-prefix`) so a draft written to `knowledge/agent-graph` emits
+  `/agent-graph/tools/read.md` instead of `/tools/read.md`. PKC/OKF doctors
+  that validate the shared `knowledge/` tree no longer see broken edges.
+- **Scan noise floor** ([#17](https://github.com/SpillwaveSolutions/okf-agent-graph/issues/17)).
+  Generic keyword hits on the same phrase (`Supervisor / orchestrator role`)
+  collapse to one `patterns/` node with multiple `evidence_paths`. Tool
+  findings without a real identifier (`Tool: { ... }`, `tools = [blob]`) are
+  dropped; named tools (`web_search`) collapse to a single node.
+
 ## 0.8.0 — 2026-08-27
 
 - **Plugin discovery for AGKC** ([#14](https://github.com/SpillwaveSolutions/okf-agent-graph/issues/14)).

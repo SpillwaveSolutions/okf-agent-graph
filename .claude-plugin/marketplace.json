@@ -11,7 +11,7 @@
       "name": "okf-agent-graph",
       "source": "./",
       "description": "AGER multi-agent loop schema + skills. Requires okf-graph-eng from SpillwaveSolutions/okf-plugin. Includes AGKC reverse engineering of agent codebases.",
-      "version": "0.8.0",
+      "version": "0.8.1",
       "author": {
         "name": "Rick Hightower"
       },

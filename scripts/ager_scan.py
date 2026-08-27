@@ -58,6 +58,10 @@ SCAN_SUFFIXES = {
 
 MAX_FILE_BYTES = 512_000
 
+# A captured tool name is only signal if it is a single identifier.
+_IDENT_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_.-]*$")
+_COLLAPSE_KINDS = frozenset({"orchestration", "sandbox", "hyperscaler", "loop"})
+
 
 @dataclass
 class Finding:
@@ -75,6 +79,7 @@ class Finding:
     tools: list[str] = field(default_factory=list)
     host: str | None = None
     plugin: str | None = None
+    evidence_paths: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -318,6 +323,7 @@ def _add(
     framework: str | None = None,
     path: str | None = None,
     line: int | None = None,
+    name: str | None = None,
 ) -> None:
     findings.append(
         Finding(
@@ -330,8 +336,74 @@ def _add(
             framework=framework,
             path=path,
             line=line,
+            name=name,
         )
     )
+
+
+def _captured_identifier(match: re.Match[str]) -> str | None:
+    """Return a real tool/node identifier, or None if the group is a blob."""
+    if not match.lastindex:
+        return None
+    raw = match.group(1).strip().strip("'\"")
+    if _IDENT_RE.match(raw):
+        return raw
+    return None
+
+
+def _loc(finding: Finding) -> str | None:
+    if not finding.path:
+        return None
+    return f"{finding.path}:{finding.line}" if finding.line else finding.path
+
+
+def _append_evidence(canonical: Finding, extra: Finding) -> None:
+    loc = _loc(extra)
+    if loc and loc not in canonical.evidence_paths:
+        canonical.evidence_paths.append(loc)
+    if extra.confidence > canonical.confidence:
+        canonical.confidence = extra.confidence
+
+
+def _collapse_findings(findings: list[Finding]) -> list[Finding]:
+    """Drop unnamed tools; collapse generic keyword hits by (kind, title)."""
+    kept: list[Finding] = []
+    tools: dict[str, Finding] = {}
+    generic: dict[tuple[str, str], Finding] = {}
+
+    for finding in findings:
+        if finding.kind == "tool":
+            ident = (finding.name or "").strip()
+            if not ident and finding.title:
+                candidate = finding.title[6:].strip() if finding.title.startswith("Tool:") else finding.title
+                ident = candidate if _IDENT_RE.match(candidate) else ""
+            if not ident or not _IDENT_RE.match(ident):
+                continue
+            finding.name = ident
+            finding.title = ident
+            key = ident.lower()
+            existing = tools.get(key)
+            if existing:
+                _append_evidence(existing, finding)
+                continue
+            _append_evidence(finding, finding)
+            tools[key] = finding
+            kept.append(finding)
+            continue
+
+        if finding.kind in _COLLAPSE_KINDS:
+            key = (finding.kind, finding.title)
+            existing = generic.get(key)
+            if existing:
+                _append_evidence(existing, finding)
+                continue
+            _append_evidence(finding, finding)
+            generic[key] = finding
+            kept.append(finding)
+            continue
+
+        kept.append(finding)
+    return kept
 
 
 def _scan_frameworks(text: str, rel: str, findings: list[Finding]) -> set[str]:
@@ -419,11 +491,14 @@ def _scan_tools_and_mcp(text: str, rel: str, findings: list[Finding], frameworks
     ]
     for pattern, title in tool_patterns:
         for match in re.finditer(pattern, text, re.I | re.M):
-            name = match.group(1) if match.lastindex else title
+            ident = _captured_identifier(match)
+            if ident is None:
+                # Unnamed "Tool: …" hits (JSON blobs, tools=[...]) are noise.
+                continue
             _add(
                 findings,
                 kind="tool",
-                title=f"Tool: {name}" if match.lastindex else title,
+                title=ident,
                 evidence=pattern,
                 excerpt=_excerpt(text, match.start()),
                 confidence=0.82,
@@ -431,6 +506,7 @@ def _scan_tools_and_mcp(text: str, rel: str, findings: list[Finding], frameworks
                 framework=next(iter(frameworks), None),
                 path=rel,
                 line=_line_of(text, match.start()),
+                name=ident,
             )
 
     mcp_patterns = [
@@ -681,14 +757,15 @@ def scan_root(root: Path) -> ScanResult:
         unique.append(finding)
 
     result.frameworks = sorted(frameworks)
-    result.findings = unique
+    collapsed = _collapse_findings(unique)
+    result.findings = collapsed
     counts: dict[str, int] = {}
-    for finding in unique:
+    for finding in collapsed:
         counts[finding.kind] = counts.get(finding.kind, 0) + 1
     result.summary = {
         "files_scanned": result.files_scanned,
         "frameworks": len(result.frameworks),
-        "findings": len(unique),
+        "findings": len(collapsed),
         **counts,
     }
     return result
