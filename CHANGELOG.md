@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.8.0 — 2026-08-27
+
 - **Plugin discovery for AGKC** ([#14](https://github.com/SpillwaveSolutions/okf-agent-graph/issues/14)).
   `ager_scan.py` now finds Claude Code, Grok Build, Codex, Cursor, and Agent
   Plugins 1.0 surfaces *before* the keyword scan: `.claude-plugin/plugin.json`,
