@@ -1,0 +1,6 @@
+{
+  "name": "codex-review-loop",
+  "version": "0.0.1",
+  "description": "Codex plugin with a reviewer subagent and review-loop skill.",
+  "skills": "./skills/"
+}

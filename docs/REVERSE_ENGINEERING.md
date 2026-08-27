@@ -12,7 +12,10 @@ wiki_key: reverse-engineering
 `okf-agent-graph`. Forward skills (`ager-init`, `ager-author`) define agentic flows;
 AGKC **reads codebases that already use** Claude/ChatGPT APIs, LangChain, LangGraph,
 CrewAI, LlamaIndex, Claude Agent SDK, Deep Agents, MCP, and related runtimes, then
-emits draft AGER knowledge.
+emits draft AGER knowledge. It also reads **plugin** layouts — Claude Code,
+Grok Build, Codex, Cursor, and Agent Plugins 1.0 — so a repo whose agents are
+subagent markdown and `SKILL.md` files still becomes real Agent/Tool/AgentGraph
+nodes instead of keyword hits on the word "orchestrator".
 
 ## Why
 
@@ -65,7 +68,7 @@ Codex: `$ager-scan`, `$ager-reverse-engineer`.
 Source tree
    │ ager_scan.py
    ▼
-Findings JSON (frameworks, prompts, tools, mcp, schemas, graphs, loops, …)
+Findings JSON (frameworks, plugins, agents, skills, prompts, tools, mcp, schemas, graphs, loops, …)
    │ ager_capture.py
    ▼
 Draft AGER knowledge (Markdown + provenance)
@@ -78,11 +81,11 @@ Validated AGER bundle (ager-validate + okf validate)
 
 | Plane | Reverse signals |
 |-------|-----------------|
-| Core | Agents, graphs, edges, schemas |
+| Core | Agents, graphs, edges, schemas; plugin subagents + SKILL.md frontmatter |
 | Control | max turns, recursion limits, deadlines, stop heuristics |
 | Memory | scratchpad / state keys, retrieval hooks |
-| Ops | tools, MCP, JSON-RPC, secrets placeholders, failure cues |
-| Runtime | harness loops, sandboxes, hyperscaler agent runtimes |
+| Ops | tools (including declared plugin `tools:`), MCP, JSON-RPC, secrets placeholders, failure cues |
+| Runtime | harness loops, sandboxes, hyperscaler agent runtimes, Claude/Grok/Codex/universal plugins |
 
 ## Safety
 

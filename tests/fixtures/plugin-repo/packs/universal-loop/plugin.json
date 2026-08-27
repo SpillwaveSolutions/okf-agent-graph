@@ -1,0 +1,6 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "universal-ticket-loop",
+  "version": "1.0.0",
+  "description": "Portable Agent Plugins 1.0 maker/checker loop."
+}

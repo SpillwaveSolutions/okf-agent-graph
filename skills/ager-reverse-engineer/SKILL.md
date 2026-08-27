@@ -36,10 +36,12 @@ discovered-ager/
 ├── index.md
 ├── discoveries/
 ├── frameworks/
+├── agents/            # typed WorkerAgent / JudgeAgent / OrchestratorAgent from plugins
+├── skills/
 ├── prompts/ (+ system/)
-├── tools/
+├── tools/             # real tool names from frontmatter, not "Tool: …"
 ├── mcp/
-├── graphs/
+├── graphs/            # AgentGraph nodes wiring plugin agents
 ├── patterns/
 ├── schemas/
 ├── runtime/ (loops, sandboxes, hyperscaler)
