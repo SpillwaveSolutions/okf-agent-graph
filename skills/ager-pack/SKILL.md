@@ -7,10 +7,14 @@ description: Build a progressive-disclosure ContextPack from an AGER bundle. Def
 
 Local packer. Do not fall back to okf-graph-eng for auto-inject.
 
+Walks outbound `links[]` from the seed plus inbound/backlinks. Inbound uses
+ripgrep when `rg` is on PATH; otherwise a full scan. Same graph either way.
+
 ```bash
 python3 "${CLAUDE_PLUGIN_ROOT}/scripts/ager_pack.py" agents/lead-researcher.md --repo . --hops 2
 python3 "${CLAUDE_PLUGIN_ROOT}/scripts/ager_pack.py" agents/lead-researcher.md --repo . --tiny
 python3 "${CLAUDE_PLUGIN_ROOT}/scripts/ager_pack.py" agents/lead-researcher.md --repo . --mermaid
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/ager_pack.py" agents/lead-researcher.md --repo . --no-rg --json
 ```
 
 - Default budget = 1/4 of `SECOND_BRAIN_WINDOW_TOKENS` (128000 → 32000)

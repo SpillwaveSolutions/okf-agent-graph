@@ -14,6 +14,8 @@ import argparse
 import json
 import os
 import re
+import shutil
+import subprocess
 import sys
 from collections import defaultdict, deque
 from pathlib import Path
@@ -159,6 +161,170 @@ def concept_ref(start: str, default_dir: str = "agents") -> str:
     return start
 
 
+RG_ENV_VARS = ("AGER_RG_PATH", "SAC_RG_PATH", "PKC_RG_PATH", "OKF_RG_PATH", "SECOND_BRAIN_RG_PATH")
+
+
+def find_rg(*, env_vars: tuple[str, ...] = RG_ENV_VARS) -> str | None:
+    for var in env_vars:
+        override = (os.environ.get(var) or "").strip()
+        if not override:
+            continue
+        p = Path(override)
+        if p.is_file() and os.access(p, os.X_OK):
+            return str(p.resolve())
+        found = shutil.which(override)
+        if found:
+            return found
+    return shutil.which("rg")
+
+
+def rg_list_files(
+    root: Path,
+    patterns: list[str],
+    *,
+    ignore_case: bool = True,
+    fixed_string: bool = False,
+    timeout: float = 30.0,
+) -> list[Path] | None:
+    rg = find_rg()
+    if not rg:
+        return None
+    terms = [p for p in patterns if p]
+    if not terms:
+        return None
+    root = root.resolve()
+    matched: set[Path] | None = None
+    for pat in terms:
+        cmd = [rg, "-l", "--no-messages", "--color", "never"]
+        if ignore_case:
+            cmd.append("-i")
+        if fixed_string:
+            cmd.append("-F")
+        cmd.extend(["--glob", "*.md", "--", pat, str(root)])
+        try:
+            proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, check=False)
+        except (OSError, subprocess.TimeoutExpired):
+            return None
+        if proc.returncode not in (0, 1):
+            return None
+        files: set[Path] = set()
+        for line in proc.stdout.splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            p = Path(line)
+            files.add(p.resolve() if p.is_absolute() else (root / p).resolve())
+        matched = files if matched is None else (matched & files)
+        if not matched:
+            return []
+    return sorted(matched or [])
+
+
+def extract_links(fm: dict) -> list[tuple[str, str]]:
+    """(target, rel) from frontmatter links[]."""
+    out: list[tuple[str, str]] = []
+    for link in fm.get("links") or []:
+        target = str(link.get("target") or "").strip()
+        if not target:
+            continue
+        if not target.startswith("/"):
+            target = "/" + target.lstrip("./")
+        out.append((target, str(link.get("rel") or "related_to")))
+    return out
+
+
+def _inbound_via_rg(bundle: Path, target: str, catalog: dict) -> list[tuple[str, str]] | None:
+    """(src, rel) files that mention `target` and actually link to it. None = fall back."""
+    needles = [target]
+    if target.startswith("/"):
+        needles.append(target.lstrip("/"))
+    hits = rg_list_files(bundle, needles[:1], fixed_string=True, ignore_case=False)
+    if hits is None:
+        return None
+    inbound: list[tuple[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    for path in hits:
+        if not is_concept(bundle, path):
+            continue
+        try:
+            src = "/" + path.relative_to(bundle).as_posix()
+        except ValueError:
+            continue
+        if src == target:
+            continue
+        rec = _load(bundle, src, catalog)
+        if rec is None:
+            continue
+        fm, _body = rec
+        for tgt, rel_name in extract_links(fm):
+            if tgt != target:
+                continue
+            key = (src, rel_name)
+            if key in seen:
+                continue
+            seen.add(key)
+            inbound.append((src, rel_name))
+    return inbound
+
+
+def _load(bundle: Path, rel: str, catalog: dict) -> tuple[dict, str] | None:
+    if rel in catalog:
+        return catalog[rel]
+    path = bundle / rel.lstrip("/")
+    if not path.is_file() or not is_concept(bundle, path):
+        catalog[rel] = None
+        return None
+    try:
+        fm, body = parse_frontmatter(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError):
+        catalog[rel] = None
+        return None
+    catalog[rel] = (fm, body)
+    return catalog[rel]
+
+
+def build_reverse_index(bundle: Path, catalog: dict) -> dict[str, list[tuple[str, str]]]:
+    index: dict[str, list[tuple[str, str]]] = defaultdict(list)
+    for rel, fm, body in iter_concepts(bundle):
+        catalog[rel] = (fm, body)
+        for tgt, rel_name in extract_links(fm):
+            index[tgt].append((rel, rel_name))
+    return index
+
+
+class ReverseIndex:
+    """Inbound edges: rg → full scan."""
+
+    def __init__(self, bundle: Path, catalog: dict, *, use_rg: bool | None = None):
+        self.bundle = bundle
+        self.catalog = catalog
+        self._full: dict[str, list[tuple[str, str]]] | None = None
+        self._memo: dict[str, list[tuple[str, str]]] = {}
+        if use_rg is False:
+            self._rg = False
+        else:
+            self._rg = bool(find_rg())
+
+    @property
+    def engine(self) -> str:
+        return "rg" if self._rg else "scan"
+
+    def get(self, target: str) -> list[tuple[str, str]]:
+        if target in self._memo:
+            return self._memo[target]
+        if self._rg:
+            found = _inbound_via_rg(self.bundle, target, self.catalog)
+            if found is not None:
+                self._memo[target] = found
+                return found
+            self._rg = False
+        if self._full is None:
+            self._full = build_reverse_index(self.bundle, self.catalog)
+        edges = self._full.get(target, [])
+        self._memo[target] = edges
+        return edges
+
+
 def mermaid(nodes: list[dict], edges: list[dict], max_nodes: int = 20) -> str:
     shown = nodes[:max_nodes]
     ids = {n["id"] for n in shown}
@@ -186,30 +352,23 @@ def pack(
     hops: int = 2,
     max_nodes: int = 20,
     tiny: bool = False,
+    use_rg: bool | None = None,
 ) -> dict:
     if tiny:
         hops = 1
         max_nodes = 8
     start = concept_ref(start)
-    catalog: dict[str, tuple[dict, str]] = {}
-    outbound: dict[str, list[tuple[str, str]]] = defaultdict(list)
-    inbound: dict[str, list[tuple[str, str]]] = defaultdict(list)
-    for rel, fm, body in iter_concepts(bundle):
-        catalog[rel] = (fm, body)
-        for link in fm.get("links") or []:
-            target = str(link.get("target") or "").strip()
-            if not target:
-                continue
-            if not target.startswith("/"):
-                target = "/" + target.lstrip("./")
-            rel_name = str(link.get("rel") or "related_to")
-            outbound[rel].append((target, rel_name))
-            inbound[target].append((rel, rel_name))
+    catalog: dict[str, tuple[dict, str] | None] = {}
+    inbound = ReverseIndex(bundle, catalog, use_rg=use_rg)
 
-    if start not in catalog:
+    if _load(bundle, start, catalog) is None:
         stem = Path(start).stem
-        for rel in catalog:
-            if Path(rel).stem == stem or start.rstrip(".md") in rel:
+        needle = start.rstrip(".md")
+        for path in sorted(bundle.rglob("*.md")):
+            if not is_concept(bundle, path):
+                continue
+            rel = "/" + path.relative_to(bundle).as_posix()
+            if path.stem == stem or needle in rel:
                 start = rel
                 break
 
@@ -220,7 +379,11 @@ def pack(
         cur, depth = q.popleft()
         if depth >= hops:
             continue
-        neighbors = outbound.get(cur, []) + inbound.get(cur, [])
+        rec = _load(bundle, cur, catalog)
+        neighbors: list[tuple[str, str]] = []
+        if rec is not None:
+            neighbors.extend(extract_links(rec[0]))
+        neighbors.extend(inbound.get(cur))
         for nxt, _rel in neighbors:
             if nxt not in seen:
                 seen.add(nxt)
@@ -233,7 +396,7 @@ def pack(
     nodes = []
     edges = []
     for path in ordered:
-        rec = catalog.get(path)
+        rec = _load(bundle, path, catalog)
         if rec is None:
             concepts.append({"path": path, "missing": True})
             continue
@@ -251,7 +414,7 @@ def pack(
             }
         )
         nodes.append({"id": path, "title": fm.get("title"), "type": fm.get("type")})
-        for target, rel_name in outbound.get(path, []):
+        for target, rel_name in extract_links(fm):
             if target in seen:
                 edges.append({"from": path, "to": target, "rel": rel_name})
 
@@ -262,6 +425,7 @@ def pack(
         "node_count": len(concepts),
         "concepts": concepts,
         "mermaid": mermaid(nodes, edges, max_nodes=max_nodes),
+        "reverse_index": inbound.engine,
         "excluded_note": (
             "Nodes beyond hops/max_nodes omitted for progressive disclosure. "
             "Node clip is not a token budget."
@@ -346,9 +510,42 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--mermaid", action="store_true")
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--write", default=None, help="Directory or file to write pack markdown")
+    parser.add_argument(
+        "--rg",
+        action="store_true",
+        help="Use ripgrep to find inbound edges (default when rg is on PATH)",
+    )
+    parser.add_argument(
+        "--no-rg",
+        action="store_true",
+        help="Disable ripgrep; full-scan inbound (same graph, slower)",
+    )
     args = parser.parse_args(argv)
+    if args.rg and args.no_rg:
+        print("error: --rg and --no-rg are mutually exclusive", file=sys.stderr)
+        return 2
+    use_rg: bool | None
+    if args.no_rg:
+        use_rg = False
+    elif args.rg:
+        use_rg = True
+        if not find_rg():
+            print(
+                "ager_pack: rg not found; falling back to scan. "
+                "Install ripgrep or pass --no-rg.",
+                file=sys.stderr,
+            )
+    else:
+        use_rg = None
     bundle = resolve_knowledge_root(Path(args.repo).resolve(), args.bundle)
-    data = pack(bundle, args.concept, hops=args.hops, max_nodes=args.max_nodes, tiny=args.tiny)
+    data = pack(
+        bundle,
+        args.concept,
+        hops=args.hops,
+        max_nodes=args.max_nodes,
+        tiny=args.tiny,
+        use_rg=use_rg,
+    )
     try:
         if args.mermaid:
             window, budget = resolve_pack_budget(args.max_tokens, args.window_tokens)

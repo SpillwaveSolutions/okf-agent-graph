@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 0.8.2 — 2026-08-30
+
+- **rg-backed pack inbound.** `ager_pack.py` used to rglob the whole bundle to
+  build the reverse index. Inbound/backlinks now use ripgrep when `rg` is on
+  PATH (`AGER_RG_PATH` / `SAC_RG_PATH` / `PKC_RG_PATH` / `OKF_RG_PATH`);
+  otherwise the previous full scan. Outbound is parsed from the current file.
+  `--rg` / `--no-rg`. JSON includes `reverse_index`. Never installed from a hook.
+
 ## 0.8.1 — 2026-08-27
 
 - **Nested `--out` links** ([#16](https://github.com/SpillwaveSolutions/okf-agent-graph/issues/16)).

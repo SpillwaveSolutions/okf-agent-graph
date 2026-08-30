@@ -9,18 +9,20 @@ import unittest
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-VERSION = "0.8.1"
+VERSION = "0.8.2"
 
 
 class PluginPackagingTests(unittest.TestCase):
     def test_manifest_versions_stay_in_lockstep(self) -> None:
+        root = json.loads((REPO / "plugin.json").read_text())
         claude = json.loads((REPO / ".claude-plugin/plugin.json").read_text())
         codex = json.loads((REPO / ".codex-plugin/plugin.json").read_text())
+        cursor = json.loads((REPO / ".cursor-plugin/plugin.json").read_text())
         claude_market = json.loads((REPO / ".claude-plugin/marketplace.json").read_text())
         grok = json.loads((REPO / ".grok-plugin/marketplace.json").read_text())
         root_market = json.loads((REPO / "marketplace.json").read_text())
         found = {
-            claude["version"], codex["version"],
+            root["version"], claude["version"], codex["version"], cursor["version"],
             claude_market["plugins"][0]["version"], grok["version"],
             grok["plugins"][0]["version"], root_market["plugins"][0]["version"],
         }

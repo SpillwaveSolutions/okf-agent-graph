@@ -250,6 +250,31 @@ class TestPackTokenBudget(unittest.TestCase):
         finally:
             shutil.rmtree(tmp)
 
+    def test_pack_rg_matches_scan(self) -> None:
+        fake = REPO / "tests/fixtures/fake_rg.py"
+        fake.chmod(0o755)
+        prev = os.environ.get("AGER_RG_PATH")
+        os.environ["AGER_RG_PATH"] = str(fake)
+        try:
+            scan = self.ager_pack.pack(
+                SAMPLE, "agents/lead-researcher.md", hops=2, max_nodes=40, use_rg=False
+            )
+            accel = self.ager_pack.pack(
+                SAMPLE, "agents/lead-researcher.md", hops=2, max_nodes=40, use_rg=True
+            )
+            self.assertEqual(scan["node_count"], accel["node_count"])
+            self.assertEqual(
+                sorted(c["path"] for c in scan["concepts"]),
+                sorted(c["path"] for c in accel["concepts"]),
+            )
+            self.assertEqual(accel["reverse_index"], "rg")
+            self.assertEqual(scan["reverse_index"], "scan")
+        finally:
+            if prev is None:
+                os.environ.pop("AGER_RG_PATH", None)
+            else:
+                os.environ["AGER_RG_PATH"] = prev
+
     def test_over_budget_fails_closed(self) -> None:
         tmp = Path(tempfile.mkdtemp())
         try:
